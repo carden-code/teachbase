@@ -9,14 +9,16 @@ b = gets.chomp.to_i
 puts 'Third coefficient:'
 c = gets.chomp.to_i
 dis = b**2 - (4 * a * c)
+first = - b + Math.sqrt(dis) / 2 * a
+second = - b - Math.sqrt(dis) / 2 * a
 if dis.negative?
   puts "Discriminant: #{dis}"
   puts 'No roots.'
 elsif dis.positive?
   puts "Diskriminant: #{dis}"
-  puts "First root of the equation: #{- b + Math.sqrt(dis) / 2 * a}"
-  puts "Second root of the equation: #{- b - Math.sqrt(dis) / 2 * a}"
+  puts "First root of the equation: #{first}"
+  puts "Second root of the equation: #{second}"
 elsif dis.zero?
   puts "Diskriminant: #{dis}"
-  puts "Single root of the equation: #{- b + Math.sqrt(dis) / 2 * a}"
+  puts "Single root of the equation: #{first}"
 end
