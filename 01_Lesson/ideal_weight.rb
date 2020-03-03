@@ -9,5 +9,5 @@ ideal_weight = (height - 110) * 1.15
 if ideal_weight.negative?
   puts 'Your weight is already optimal'
 else
-  puts "#{name}, your ideal weight - #{ideal_weight}"
+  puts "#{name}, your ideal weight - #{ideal_weight} kg."
 end
