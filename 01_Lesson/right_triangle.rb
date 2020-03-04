@@ -8,13 +8,13 @@ puts 'Second side:'
 arr << gets.chomp.to_f
 puts 'Third side:'
 arr << gets.chomp.to_f
-arr.sort
-gipotenuza = arr.last
-if arr[0] == arr[1] && arr[1] == arr[2] && arr[2] == arr[0]
+first, second = arr.min(2)
+hyp = arr.max
+if first == second && first == hyp
   puts 'Triangle isosceles and equilateral.'
-elsif arr[0] == arr[1] || arr[1] == arr[2] || arr[2] == arr[0]
+elsif first == second || first == hyp || second == hyp
   puts 'Isosceles triangle.'
-elsif gipotenuza**2 == arr.first**2 + arr[1]**2
+elsif hyp**2 == first**2 + second**2
   puts 'Right triangle.'
 else
   puts 'Triangle versatile.'
