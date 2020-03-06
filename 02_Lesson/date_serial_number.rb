@@ -1,16 +1,21 @@
+# The program requests the date month and year and displays the serial number.
 puts 'Please enter date, month, year.'
 puts 'Date:'
-date = 22#gets.chomp.to_i
+date = gets.chomp.to_i
 puts 'Month:'
-month = 8#gets.chomp.to_i
+month = gets.chomp.to_i
 puts 'Year:'
-year = 2020#gets.chomp.to_i
-sum_day = []
-hash = { January: 31, February: 28, March: 31,
-         April: 30, May: 31, June: 30,
-         July: 31, August: 31, September: 30,
-         October: 31, November: 30, December: 31 }
-hash[:February] = 29 if (year % 4).zero? || (year % 400).zero?
-sum_day = hash.each_value { |value| value += value }
-#puts hash
-puts sum_day
+year = gets.chomp.to_i
+hash = { 1 => 31, 2 => 28, 3 => 31, 4 => 30, 5 => 31, 6 => 30,
+         7 => 31, 8 => 31, 9 => 30, 10 => 31, 11 => 30, 12 => 31 }
+hash[2] = 29 if ((year % 4).zero? && year % 100 != 0) || (year % 400).zero?
+sum = 0
+if month > 0
+  hash.each do |kay, value|
+    sum += value
+    break if kay == month - 1
+  end
+  date + sum
+end
+puts "Date entered: #{date}.#{month}.#{year}"
+puts "Date serial number: #{date + sum}"
