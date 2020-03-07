@@ -2,7 +2,6 @@
 # of products in the basket, the total value of each product and
 # the total value of all products in the basket.
 basket = {}
-total = {}
 grand_total = 0
 loop do
   puts 'Please enter the name of the product, price and quantity.'
@@ -10,14 +9,15 @@ loop do
   name = gets.chomp
   puts 'Сost of goods:'
   price = gets.chomp.to_f
-  puts 'Quantity:'
-  quantity = gets.chomp.to_i
-  basket[name] = { price => quantity }
-  total[name] = price * quantity
+  puts 'Amount:'
+  amount = gets.chomp.to_i
+  basket[name] = { price: price, amount: amount }
   puts 'If there are no more products, enter “stop”, if there is, press “Enter”'
   break if gets.chomp == 'stop'
 end
-total.each_value { |value| grand_total += value }
 puts "Your items in the basket: #{basket}"
-puts "Total cost of goods: #{total}"
+basket.each do |name, value|
+  puts "Total product cost: #{name} - #{total = value[:price] * value[:amount]}"
+  grand_total += total
+end
 puts "The total amount of all purchases in the basket: #{grand_total}"
