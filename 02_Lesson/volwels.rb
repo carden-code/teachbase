@@ -3,5 +3,5 @@
 hash = {}
 alphabet = ('a'..'z').to_a
 volwes = %w[a e i o u]
-alphabet.each_with_index { |e, i| hash[e] = (i + 1) if volwes.include? e }
+alphabet.each.with_index(1) { |e, i| hash[e] = i if volwes.include? e }
 puts hash
