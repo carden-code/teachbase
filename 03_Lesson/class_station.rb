@@ -15,7 +15,8 @@ class Station
     @passenger = []
   end
 
-  def arrive(type, train = 1)
+  def arrive(train = 1)
+    @trains << train
   end
 
   def train
