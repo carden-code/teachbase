@@ -15,7 +15,8 @@ class Station
     @passenger = []
   end
 
-  def arrive(train = 1)
+  def arrive(train)
+    return if trains.include?(train)
     @trains << train
   end
 
