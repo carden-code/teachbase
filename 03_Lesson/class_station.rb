@@ -15,18 +15,15 @@ class Station
     @passenger = []
   end
 
+  def arrive
+  end
+
   def train(type, train = 1)
-    @trains << train
-    if type == 'freight'
-      @freight << train
-    else
-      @passenger << train
-    end
+
   end
 
   def return_type
-    @freight.size
-    @passenger.size
+
   end
 
   def send
