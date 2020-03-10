@@ -31,3 +31,10 @@ class Station
     @trains = @trains.size - 1
   end
 end
+
+class Train
+  attr_reader :number
+  def initialize(number)
+    @number = number
+  end
+end
