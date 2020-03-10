@@ -24,7 +24,7 @@ class Station
     end
   end
 
-  def retern_type
+  def return_type
     @freight.size
     @passenger.size
   end
