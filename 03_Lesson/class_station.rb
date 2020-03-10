@@ -15,10 +15,10 @@ class Station
     @passenger = []
   end
 
-  def arrive
+  def arrive(type, train = 1)
   end
 
-  def train(type, train = 1)
+  def train
 
   end
 
