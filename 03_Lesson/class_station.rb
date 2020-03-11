@@ -15,13 +15,17 @@ class Station
     @passenger = []
   end
 
+# Метод arrive принимает  параметр в виде объекта train.
+# Метод проверяет есть ли в массиве @trains переданный в метод объект (train)
+# если есть то метод возвращает nil, если нет
+# происходит добавление в массив @trains полученного параметра (Объект train).
   def arrive(train)
     return if trains.include?(train)
     @trains << train
   end
 
   def train
-
+  
   end
 
   def return_type
