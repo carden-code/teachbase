@@ -45,6 +45,7 @@ end
 # Может удалять промежуточную станцию из списка
 # Может выводить список всех станций по-порядку от начальной до конечной
 class Route
+  attr_reader :first, :last
   def initialize(first, last)
     @first = first
     @last = last
@@ -53,7 +54,7 @@ class Route
 
   # Метод intermediate может добавлять промежуточную станцию в список
   def intermediate(station)
-    @intermediate.insert(1, station)
+    @intermediate.insert(-2, station)
   end
 
   # Может удалять промежуточную станцию из списка
@@ -94,6 +95,8 @@ class Train
     @type = type
     @wagons = wagons
     @speed = 0
+    @station = []
+    @marshrut = []
   end
 
   # Может набирать скорость
@@ -125,17 +128,17 @@ class Train
 
   # Может принимать маршрут следования (объект класса Route).
   def route(route)
-    @route = [route]
-    @first
+    @route = route
+    @station = route.first
   end
 
   # Может перемещаться между станциями, указанными в маршруте.
   # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
   def move(nazadvpered)
     if nazadvpered == 'nazad'
-      @intermediate.rotate(-1).first
+      @intermediate.rotate!(-1).first
     elsif nazadvpered == 'vpered'
-      @intermediate.rotate(1).first
+      @intermediate.rotate!(1).first
     end
   end
 end
