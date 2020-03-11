@@ -7,6 +7,7 @@
 #  Может отправлять поезда (по одному за раз, при этом, поезд удаляется из
 # списка поездов, находящихся на станции).
 class Station
+  # Метод trains возвращает значение переменной @trains
   attr_reader :trains
   def initialize(name)
     @name = name
@@ -25,7 +26,7 @@ class Station
   end
 
   def train
-  
+
   end
 
   def return_type
