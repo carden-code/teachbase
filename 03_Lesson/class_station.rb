@@ -83,15 +83,16 @@ class Train
   # метод просто увеличивает или уменьшает количество вагонов)
   # прицепка/отцепка вагонов может осуществляться только если поезд не движется.
   def hitch_wagon(minusplus)
-    if minusplus == minus
-      train.wagons - 1
-    else
-      train.wagons + 1
+    if minusplus == 'minus' && @speed.zero?
+      @wagons -= 1
+    elsif minusplus == 'plus' && @speed.zero?
+      @wagons += 1
     end
   end
 
   # Может принимать маршрут следования (объект класса Route).
   def rout(rout)
+    
   end
 
 
