@@ -48,12 +48,12 @@ class Route
   def initialize(first, last)
     @first = first
     @last = last
-    @intermediate = [@first.first, @last.last]
+    @intermediate = [@first, @last]
   end
 
   # Метод intermediate может добавлять промежуточную станцию в список
   def intermediate(station)
-    @intermediate << station
+    @intermediate.insert(1, station)
   end
 
   # Может удалять промежуточную станцию из списка
@@ -124,9 +124,12 @@ class Train
   end
 
   # Может принимать маршрут следования (объект класса Route).
-  def rout(rout)
-
+  def route(route)
+    @route = route
+    @first
   end
 
+  def move(station)
 
+  end
 end
