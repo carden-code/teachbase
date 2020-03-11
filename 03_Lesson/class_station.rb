@@ -61,5 +61,38 @@ class Train
     @number = number
     @type = type
     @wagons = wagons
+    @speed = 0
   end
+
+  # Может набирать скорость
+  def speed_gain(speed)
+    @speed = speed
+  end
+
+  # Может возвращать текущую скорость
+  def current_speed
+    @speed
+  end
+
+  # Может тормозить (сбрасывать скорость до нуля)
+  def stop
+    @speed = 0
+  end
+
+  # Может прицеплять/отцеплять вагоны (по одному вагону за операцию,
+  # метод просто увеличивает или уменьшает количество вагонов)
+  # прицепка/отцепка вагонов может осуществляться только если поезд не движется.
+  def hitch_wagon(minusplus)
+    if minusplus == minus
+      train.wagons - 1
+    else
+      train.wagons + 1
+    end
+  end
+
+  # Может принимать маршрут следования (объект класса Route).
+  def rout(rout)
+  end
+
+
 end
