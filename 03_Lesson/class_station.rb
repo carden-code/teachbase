@@ -13,8 +13,6 @@ class Station
   def initialize(name)
     @name = name
     @trains = []
-    @freight = []
-    @passenger = []
   end
 
   # Метод arrive принимает  параметр в виде объекта train.
@@ -26,18 +24,16 @@ class Station
     @trains << train
   end
 
-  def train
-
-  end
-
   # Может возвращать список поездов на станции по типу:
   # кол-во (cargo, passengers)
   def return_type(type)
     @trains.select { |train| train.type == type }
   end
 
+  # Метод send может отправлять поезда (по одному за раз,при этом,
+  # поезд удаляется из списка поездов(@trains), находящихся на станции).
   def send
-    @trains = @trains.size - 1
+    @trains.shift
   end
 end
 # Класс Train (Поезд):
@@ -62,8 +58,8 @@ class Train
   # Метод wagons возвращает колличество вагоно поезда.
   attr_reader :number, :type, :wagons
   def initialize(number, type, wagons)
-    @wagons = wagons
     @number = number
     @type = type
+    @wagons = wagons
   end
 end
