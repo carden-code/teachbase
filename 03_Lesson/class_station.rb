@@ -94,7 +94,6 @@ class Train
     @type = type
     @wagons = wagons
     @speed = 0
-    @route = []
   end
 
   # Может набирать скорость
@@ -126,7 +125,7 @@ class Train
 
   # Может принимать маршрут следования (объект класса Route).
   def route(route)
-    @route = route
+    @route = [route]
     @first
   end
 
@@ -134,10 +133,9 @@ class Train
   # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
   def move(nazadvpered)
     if nazadvpered == 'nazad'
-      @route.rotate!(-1).first
+      @intermediate.rotate(-1).first
     elsif nazadvpered == 'vpered'
-      @route.rotate!(1).first
+      @intermediate.rotate(1).first
     end
-    
   end
 end
