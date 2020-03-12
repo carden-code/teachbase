@@ -33,7 +33,11 @@ class Station
   # Метод send может отправлять поезда (по одному за раз,при этом,
   # поезд удаляется из списка поездов(@trains), находящихся на станции).
   def send(train)
-    @trains.delete(train)
+    if @trains.include? train
+      @trains.delete(train)
+    else
+      return
+    end
   end
 end
 
@@ -45,11 +49,9 @@ end
 # Может удалять промежуточную станцию из списка
 # Может выводить список всех станций по-порядку от начальной до конечной
 class Route
-  attr_reader :stations, :first, :last
+  attr_reader :stations
   def initialize(first, last)
-    @first = first
-    @last = last
-    @stations = [@first, @last]
+    @stations = [first, last]
   end
 
   # Метод intermediate может добавлять промежуточную станцию в список
@@ -63,7 +65,9 @@ class Route
 
   # Может удалять промежуточную станцию из списка
   def delet_intermediate(station)
-    @stations.delete(station)
+    if station != @stations.first && station != @stations.last
+      @stations.delete(station)
+    end
   end
 
   # Может выводить список всех станций по-порядку от начальной до конечной
@@ -99,8 +103,7 @@ class Train
     @type = type
     @wagons = wagons
     @speed = 0
-    @station = []
-    @marshrut = []
+    @station = station
   end
 
   # Может набирать скорость
@@ -131,18 +134,24 @@ class Train
   end
 
   # Может принимать маршрут следования (объект класса Route).
+  # При назначении маршрута поезду, поезд автоматически помещается
+  # на первую станцию в маршруте.
   def route(route)
     @route = route
-    @station << @first
+    @station = @route.stations.first
   end
 
   # Может перемещаться между станциями, указанными в маршруте.
   # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
   def move(nazadvpered)
     if nazadvpered == 'nazad'
-      @stations.rotate!(-1).first
+      @station = @route.stations.rotate!(-1).first
     elsif nazadvpered == 'vpered'
-      @stations.rotate!(1).first
+      @station = @route.stations.rotate!(1).first
+    end
+
+    def return_station
+      
     end
   end
 end
