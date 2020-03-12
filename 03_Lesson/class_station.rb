@@ -32,8 +32,8 @@ class Station
 
   # Метод send может отправлять поезда (по одному за раз,при этом,
   # поезд удаляется из списка поездов(@trains), находящихся на станции).
-  def send
-    @trains.shift
+  def send(train)
+    @trains.delete(train)
   end
 end
 
@@ -45,26 +45,30 @@ end
 # Может удалять промежуточную станцию из списка
 # Может выводить список всех станций по-порядку от начальной до конечной
 class Route
-  attr_reader :first, :last
+  attr_reader :stations, :first, :last
   def initialize(first, last)
     @first = first
     @last = last
-    @intermediate = [@first, @last]
+    @stations = [@first, @last]
   end
 
   # Метод intermediate может добавлять промежуточную станцию в список
   def intermediate(station)
-    @intermediate.insert(-2, station)
+    if @stations.include? station
+      return
+    else
+      @stations.insert(-2, station)
+    end
   end
 
   # Может удалять промежуточную станцию из списка
   def delet_intermediate(station)
-    @intermediate.delete(station)
+    @stations.delete(station)
   end
 
   # Может выводить список всех станций по-порядку от начальной до конечной
   def puts_station
-    @intermediate.each { |station| puts station }
+    @stations.each { |station| puts station }
   end
 end
 
@@ -89,7 +93,7 @@ class Train
   # Метод number возвращает номер поезда.
   # Метод type возвращает тип поезда (cargo, passengers).
   # Метод wagons возвращает колличество вагоно поезда.
-  attr_reader :number, :type, :wagons
+  attr_reader :number, :type, :wagons, :station
   def initialize(number, type, wagons)
     @number = number
     @type = type
@@ -129,16 +133,16 @@ class Train
   # Может принимать маршрут следования (объект класса Route).
   def route(route)
     @route = route
-    @station = route.first
+    @station << @first
   end
 
   # Может перемещаться между станциями, указанными в маршруте.
   # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
   def move(nazadvpered)
     if nazadvpered == 'nazad'
-      @intermediate.rotate!(-1).first
+      @stations.rotate!(-1).first
     elsif nazadvpered == 'vpered'
-      @intermediate.rotate!(1).first
+      @stations.rotate!(1).first
     end
   end
 end
