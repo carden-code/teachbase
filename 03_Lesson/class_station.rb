@@ -30,7 +30,7 @@ class Station
     @trains.select { |train| train.type == type }
   end
 
-  # Метод send может отправлять поезда (по одному за раз,при этом,
+  # Метод delete может отправлять поезда (по одному за раз,при этом,
   # поезд удаляется из списка поездов(@trains), находящихся на станции).
   def delete(train)
     @trains.delete(train)
@@ -106,7 +106,9 @@ class Train
 
   # Может набирать скорость
   def speed_gain(speed)
-    @current_speed = speed
+    if speed > 0 && speed != @current_speed && speed > @speed
+      @current_speed = speed
+    end
   end
 
   # Может тормозить (сбрасывать скорость до нуля)
@@ -139,15 +141,21 @@ class Train
   # Может перемещаться между станциями, указанными в маршруте.
   # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
   def move(nazadvpered)
-    if nazadvpered == 'nazad'
+    if nazadvpered == 'nazad' && @current_speed > 0
       @station = @route.stations.rotate!(-1).first
-    elsif nazadvpered == 'vpered'
+    elsif nazadvpered == 'vpered' && @current_speed > 0
       @station = @route.stations.rotate!(1).first
     end
   end
 
  # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
-  def return_station()
-
+  def return_station(predteksled)
+    if pns == 'tek'
+      @station
+    elsif pns == 'pred'
+      @route.stations.rotate(-1).first
+    elsif pns == 'sled'
+      @route.stations.rotate(1).first
+    end
   end
 end
