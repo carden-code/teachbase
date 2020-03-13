@@ -24,8 +24,8 @@ class Station
     @trains << train
   end
 
-  # Может возвращать список поездов на станции по типу:
-  # кол-во (cargo, passengers)
+  # Метод return_type может возвращать список поездов на станции по типу:
+  # кол-во (cargo, pass).
   def return_type(type)
     @trains.select { |train| train.type == type }
   end
@@ -59,14 +59,15 @@ class Route
     end
   end
 
-  # Может удалять промежуточную станцию из списка
+  # Метод delet_intermediate может удалять промежуточную станцию из списка.
   def delet_intermediate(station)
     if station != @stations.first && station != @stations.last
       @stations.delete(station)
     end
   end
 
-  # Может выводить список всех станций по-порядку от начальной до конечной
+  # Метод puts_station Может выводить список всех станций по-порядку
+  # от начальной до конечной.
   def puts_station
     @stations.each { |station| puts station }
   end
@@ -91,7 +92,7 @@ end
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class Train
   # Метод number возвращает номер поезда.
-  # Метод type возвращает тип поезда (cargo, passengers).
+  # Метод type возвращает тип поезда (cargo, pass).
   # Метод wagons возвращает колличество вагоно поезда.
   # Метод station может возвращать текущую станцию.
   # Метод current_speed может возвращать текущую скорость.
@@ -104,20 +105,20 @@ class Train
     @station = station
   end
 
-  # Может набирать скорость
+  # Метод speed_gain может набирать скорость.
   def speed_gain(speed)
     @current_speed += speed if speed.positive?
   end
 
-  # Может тормозить (сбрасывать скорость до нуля)
+  # Метод stop может тормозить (сбрасывать скорость до нуля).
   def stop(speed)
     @current_speed -= speed if speed <= @current_speed && speed.positive?
   end
 
-  # Может прицеплять/отцеплять вагоны (по одному вагону за операцию,
-  # метод просто увеличивает или уменьшает количество вагонов)
+  # Метод hitch_wagon может прицеплять/отцеплять вагоны (по одному вагону
+  # за операцию, метод просто увеличивает или уменьшает количество вагонов)
   # прицепка/отцепка вагонов может осуществляться только если поезд не движется.
-  # параметры ('minus' - удаляет вагон, 'plus' - прибавляет вагон)
+  # параметры ('minus' - удаляет вагон, 'plus' - прибавляет вагон).
   def hitch_wagon(minusplus)
     if minusplus == 'minus' && @current_speed.zero? && @wagons.positive?
       @wagons -= 1
@@ -126,7 +127,7 @@ class Train
     end
   end
 
-  # Может принимать маршрут следования (объект класса Route).
+  # Метод route может принимать маршрут следования (объект класса Route).
   # При назначении маршрута поезду, поезд автоматически помещается
   # на первую станцию в маршруте.
   def route(route)
@@ -134,8 +135,9 @@ class Train
     @station = @route.stations.first
   end
 
-  # Может перемещаться между станциями, указанными в маршруте.
-  # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
+  # Метод move может перемещаться между станциями, указанными в маршруте.
+  # Перемещение возможно вперед - 'vpered' и назад - 'nazad',
+  # но только на 1 станцию за раз.
   def move(nazadvpered)
     if nazadvpered == 'nazad' && @current_speed > 0
       @station = @route.stations.rotate!(-1).first
@@ -144,7 +146,8 @@ class Train
     end
   end
 
-  # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
+  # Метод return_station может возвращать предыдущую станцию - 'pred',
+  # текущую - 'tek', следующую -'sled', на основе маршрута.
   def return_station(predteksled)
     if predteksled == 'tek'
       @station
