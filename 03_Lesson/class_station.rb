@@ -93,28 +93,27 @@ class Train
   # Метод number возвращает номер поезда.
   # Метод type возвращает тип поезда (cargo, passengers).
   # Метод wagons возвращает колличество вагоно поезда.
-  attr_reader :number, :type, :wagons, :station
+  # Метод station может возвращать текущую станцию.
+  # Метод current_speed может возвращать текущую скорость.
+  attr_reader :number, :type, :wagons, :station, :current_speed
   def initialize(number, type, wagons)
     @number = number
     @type = type
     @wagons = wagons
-    @speed = 0
+    @current_speed = 0
     @station = station
   end
 
   # Может набирать скорость
   def speed_gain(speed)
-    @speed = speed
-  end
-
-  # Может возвращать текущую скорость
-  def current_speed
-    @speed
+    @current_speed = speed
   end
 
   # Может тормозить (сбрасывать скорость до нуля)
-  def stop
-    @speed = 0
+  def stop(speed)
+    if speed < @current_speed && speed >= 0
+      @current_speed = speed
+    end
   end
 
   # Может прицеплять/отцеплять вагоны (по одному вагону за операцию,
@@ -122,9 +121,9 @@ class Train
   # прицепка/отцепка вагонов может осуществляться только если поезд не движется.
   # параметры ('minus' - удаляет вагон, 'plus' - прибавляет вагон)
   def hitch_wagon(minusplus)
-    if minusplus == 'minus' && @speed.zero?
+    if minusplus == 'minus' && @current_speed.zero?
       @wagons -= 1
-    elsif minusplus == 'plus' && @speed.zero?
+    elsif minusplus == 'plus' && @current_speed.zero?
       @wagons += 1
     end
   end
