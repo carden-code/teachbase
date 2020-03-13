@@ -106,8 +106,8 @@ class Train
 
   # Может набирать скорость
   def speed_gain(speed)
-    if speed > 0 && speed != @current_speed && speed > @speed
-      @current_speed = speed
+    if speed > 0
+      @current_speed += speed
     end
   end
 
