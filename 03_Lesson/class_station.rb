@@ -106,9 +106,7 @@ class Train
 
   # Может набирать скорость
   def speed_gain(speed)
-    if speed > 0
-      @current_speed += speed
-    end
+    @current_speed += speed if speed.positive?
   end
 
   # Может тормозить (сбрасывать скорость до нуля)
