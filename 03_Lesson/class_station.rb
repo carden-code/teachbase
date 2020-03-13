@@ -32,12 +32,8 @@ class Station
 
   # Метод send может отправлять поезда (по одному за раз,при этом,
   # поезд удаляется из списка поездов(@trains), находящихся на станции).
-  def send(train)
-    if @trains.include? train
-      @trains.delete(train)
-    else
-      return
-    end
+  def delete(train)
+    @trains.delete(train)
   end
 end
 
@@ -151,7 +147,7 @@ class Train
     end
 
     def return_station
-      
+
     end
   end
 end
