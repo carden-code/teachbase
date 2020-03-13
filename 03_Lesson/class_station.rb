@@ -146,11 +146,11 @@ class Train
 
  # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
   def return_station(predteksled)
-    if pns == 'tek'
+    if predteksled == 'tek'
       @station
-    elsif pns == 'pred'
+    elsif predteksled == 'pred'
       @route.stations.rotate(-1).first
-    elsif pns == 'sled'
+    elsif predteksled == 'sled'
       @route.stations.rotate(1).first
     end
   end
