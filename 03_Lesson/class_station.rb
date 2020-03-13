@@ -119,7 +119,7 @@ class Train
   # прицепка/отцепка вагонов может осуществляться только если поезд не движется.
   # параметры ('minus' - удаляет вагон, 'plus' - прибавляет вагон)
   def hitch_wagon(minusplus)
-    if minusplus == 'minus' && @current_speed.zero?
+    if minusplus == 'minus' && @current_speed.zero? && @wagons.positive?
       @wagons -= 1
     elsif minusplus == 'plus' && @current_speed.zero?
       @wagons += 1
