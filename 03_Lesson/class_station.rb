@@ -111,9 +111,7 @@ class Train
 
   # Может тормозить (сбрасывать скорость до нуля)
   def stop(speed)
-    if speed < @current_speed && speed >= 0
-      @current_speed = speed
-    end
+    @current_speed -= speed if speed <= @current_speed && speed.positive?
   end
 
   # Может прицеплять/отцеплять вагоны (по одному вагону за операцию,
