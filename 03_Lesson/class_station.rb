@@ -145,9 +145,10 @@ class Train
     elsif nazadvpered == 'vpered'
       @station = @route.stations.rotate!(1).first
     end
+  end
 
-    def return_station
+ # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
+  def return_station()
 
-    end
   end
 end
