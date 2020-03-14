@@ -52,11 +52,7 @@ class Route
 
   # Метод intermediate может добавлять промежуточную станцию в список
   def intermediate(station)
-    if @stations.include? station
-      return
-    else
-      @stations.insert(-2, station)
-    end
+    @stations.insert(-2, station) unless @station.include? station
   end
 
   # Метод delet_intermediate может удалять промежуточную станцию из списка.
