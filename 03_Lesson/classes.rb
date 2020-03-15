@@ -135,10 +135,10 @@ class Train
   # Метод move может перемещаться между станциями, указанными в маршруте.
   # Перемещение возможно вперед - 'vpered' и назад - 'nazad',
   # но только на 1 станцию за раз.
-  def move(nazadvpered)
-    if nazadvpered == 'nazad' && @current_speed > 0
+  def move(backandforth)
+    if backandforth == 'back' && @current_speed > 0
       @station = @route.stations.rotate!(-1).first
-    elsif nazadvpered == 'vpered' && @current_speed > 0
+    elsif backandforth == 'forth' && @current_speed > 0
       @station = @route.stations.rotate!(1).first
     end
   end
