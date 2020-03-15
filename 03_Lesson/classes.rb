@@ -110,16 +110,18 @@ class Train
     @current_speed -= value if value <= @current_speed && value.positive?
   end
 
-  # Метод hitch_wagon может прицеплять/отцеплять вагоны (по одному вагону
-  # за операцию, метод просто увеличивает или уменьшает количество вагонов)
-  # прицепка/отцепка вагонов может осуществляться только если поезд не движется.
-  # параметры ('minus' - удаляет вагон, 'plus' - прибавляет вагон).
-  def hitch_wagon(minusplus)
-    if minusplus == 'minus' && @current_speed.zero? && @wagons.positive?
-      @wagons -= 1
-    elsif minusplus == 'plus' && @current_speed.zero?
-      @wagons += 1
-    end
+  # Метод uncouple_wagon может отцеплять вагоны (по одному вагону
+  # за операцию, метод просто уменьшает количество вагонов)
+  # отцепка вагонов может осуществляться только если поезд не движется.
+  def uncouple_wagon
+    @wagons -= 1 if @current_speed.zero? && @wagons.positive?
+  end
+
+  # Метод hitch_wagon может прицеплять вагоны (по одному вагону
+  # за операцию, метод просто увеличивает количество вагонов)
+  # прицепка вагонов может осуществляться только если поезд не движется.
+  def hitch_wagon
+    @wagons += 1 if @current_speed.zero?
   end
 
   # Метод route может принимать маршрут следования (объект класса Route).
