@@ -44,6 +44,7 @@ end
 # Может удалять промежуточную станцию из списка
 # Может выводить список всех станций по-порядку от начальной до конечной
 class Route
+  # Метод stations возвращает все станции в маршруте
   attr_reader :stations
   def initialize(first, last)
     @stations = [first, last]
