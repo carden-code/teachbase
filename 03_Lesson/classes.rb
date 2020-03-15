@@ -91,9 +91,9 @@ class Train
   # Метод number возвращает номер поезда.
   # Метод type возвращает тип поезда (cargo, pass).
   # Метод wagons возвращает колличество вагоно поезда.
-  # Метод station может возвращать текущую станцию.
+  # Метод current_station может возвращать текущую станцию.
   # Метод current_speed может возвращать текущую скорость.
-  attr_reader :number, :type, :wagons, :station, :current_speed
+  attr_reader :number, :type, :wagons, :current_station, :current_speed
   def initialize(number, type, wagons)
     @number = number
     @type = type
