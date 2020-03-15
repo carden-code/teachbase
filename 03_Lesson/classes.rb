@@ -138,7 +138,7 @@ class Train
   # маршруте. Перемещение возможно вперед, но только на 1 станцию за раз.
   def move_forwards
     return if @current_station == @route.stations.last
-    @current_station = @route.stations.rotate!(1).first
+    @route.stations.each_with_index { |_, index| @route.stations[index + 1] }
   end
 
   # Метод move_byckwards может перемещаться между станциями, указанными в
