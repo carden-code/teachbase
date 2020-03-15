@@ -113,14 +113,14 @@ class Train
   # Метод uncouple_wagon может отцеплять вагоны (по одному вагону
   # за операцию, метод просто уменьшает количество вагонов)
   # отцепка вагонов может осуществляться только если поезд не движется.
-  def uncouple_wagon
+  def detach_wagon
     @wagons -= 1 if @current_speed.zero? && @wagons.positive?
   end
 
   # Метод hitch_wagon может прицеплять вагоны (по одному вагону
   # за операцию, метод просто увеличивает количество вагонов)
   # прицепка вагонов может осуществляться только если поезд не движется.
-  def hitch_wagon
+  def attach_wagon
     @wagons += 1 if @current_speed.zero?
   end
 
