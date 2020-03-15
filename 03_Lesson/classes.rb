@@ -65,7 +65,7 @@ class Route
   # Метод list_stations Может выводить список всех станций по-порядку
   # от начальной до конечной.
   def list_stations
-    @stations.each { |station| puts station }
+    @stations.each { |name| puts name }
   end
 end
 
