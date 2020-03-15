@@ -50,21 +50,21 @@ class Route
     @stations = [first, last]
   end
 
-  # Метод intermediate может добавлять промежуточную станцию в список
-  def intermediate(station)
+  # Метод midway может добавлять промежуточную станцию в список
+  def midway(station)
     @stations.insert(-2, station) unless @station.include? station
   end
 
-  # Метод delet_intermediate может удалять промежуточную станцию из списка.
-  def delet_intermediate(station)
+  # Метод delete_midway может удалять промежуточную станцию из списка.
+  def delete_midway(station)
     if station != @stations.first && station != @stations.last
       @stations.delete(station)
     end
   end
 
-  # Метод puts_station Может выводить список всех станций по-порядку
+  # Метод list_stations Может выводить список всех станций по-порядку
   # от начальной до конечной.
-  def puts_station
+  def list_stations
     @stations.each { |station| puts station }
   end
 end
