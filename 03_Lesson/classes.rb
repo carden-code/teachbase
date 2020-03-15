@@ -9,7 +9,7 @@
 class Station
   # Метод trains может возвращать список всех поездов на станции, находящиеся в
   # текущий момент.
-  attr_reader :trains
+  attr_reader :trains, :name
   def initialize(name)
     @name = name
     @trains = []
@@ -65,7 +65,7 @@ class Route
   # Метод list_stations Может выводить список всех станций по-порядку
   # от начальной до конечной.
   def list_stations
-    @stations.each { |name| puts name }
+    @stations.each { |item| puts item.name }
   end
 end
 
