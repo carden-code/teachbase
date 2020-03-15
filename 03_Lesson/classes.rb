@@ -20,8 +20,7 @@ class Station
   # если есть то метод возвращает nil, если нет
   # происходит добавление в массив @trains полученного параметра (Объект train).
   def arrive(train)
-    return if trains.include?(train)
-    @trains << train
+    @trains << train unless trains.include?(train)
   end
 
   # Метод return_type может возвращать список поездов на станции по типу:
@@ -102,13 +101,13 @@ class Train
   end
 
   # Метод speed_gain может набирать скорость.
-  def speed_gain(speed)
-    @current_speed += speed if speed.positive?
+  def accelerate(value)
+    @current_speed += value if value.positive?
   end
 
   # Метод stop может тормозить (сбрасывать скорость до нуля).
-  def stop(speed)
-    @current_speed -= speed if speed <= @current_speed && speed.positive?
+  def decelerate(value)
+    @current_speed -= value if value <= @current_speed && value.positive?
   end
 
   # Метод hitch_wagon может прицеплять/отцеплять вагоны (по одному вагону
