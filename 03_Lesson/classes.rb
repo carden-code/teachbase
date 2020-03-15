@@ -54,21 +54,9 @@ class Route
     @stations.insert(-2, station) unless @stations.include? station
   end
 
-  # Метод first_station? проверяет является ли сатнция первой.
-  def first_station?(station)
-    station == @stations.first
-  end
-
-  # Метод last_station? проверяет является ли сатнция последней.
-  def last_station?(station)
-    station == @stations.last
-  end
-
   # Метод delete_midway может удалять промежуточную станцию из списка.
   def delete_midway(station)
-    unless first_station?(station) || last_station?(station)
-      @stations.delete(station)
-    end
+    @stations.delete(station) if station != @stations.first && @stations.last
   end
 
   # Метод list_stations Может выводить список всех станций по-порядку
@@ -142,26 +130,25 @@ class Train
     @station = @route.stations.first
   end
 
-  # Метод move может перемещаться между станциями, указанными в маршруте.
-  # Перемещение возможно вперед - 'forth' и назад - 'back',
-  # но только на 1 станцию за раз.
-  def move(backforth)
-    if backforth == 'back' && @current_speed > 0
-      @station = @route.stations.rotate!(-1).first
-    elsif backforth == 'forth' && @current_speed > 0
-      @station = @route.stations.rotate!(1).first
-    end
+  # Метод moving_forward может перемещаться между станциями, указанными в
+  # маршруте. Перемещение возможно вперед, но только на 1 станцию за раз.
+  def moving_forward
+    @station = @route.stations.rotate!(1).first if @current_speed > 0
   end
 
-  # Метод return_station может возвращать предыдущую станцию - 'previous',
-  # текущую - 'current', следующую -'next', на основе маршрута.
-  def return_station(previouscurrentnext)
-    if previouscurrentnext == 'current'
-      @station
-    elsif previouscurrentnext == 'previous'
-      @route.stations.rotate(-1).first
-    elsif previouscurrentnext == 'next'
-      @route.stations.rotate(1).first
-    end
+  # Метод moving_back может перемещаться между станциями, указанными в
+  # маршруте. Перемещение возможно назад, но только на 1 станцию за раз.
+  def moving_back
+    @station = @route.stations.rotate!(-1).first if @current_speed > 0
+  end
+
+  # Метод previous_station может возвращать предыдущую станцию маршрута.
+  def previous_station
+    @route.stations.rotate(-1).first
+  end
+
+  # Метод next_station может возвращать предыдущую станцию маршрута.
+  def next_station
+    @route.stations.rotate(1).first
   end
 end
