@@ -9,6 +9,7 @@
 class Station
   # Метод trains может возвращать список всех поездов на станции, находящиеся в
   # текущий момент.
+  # Метод name может возвращать название станции.
   attr_reader :trains, :name
   def initialize(name)
     @name = name
