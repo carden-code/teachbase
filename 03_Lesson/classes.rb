@@ -51,12 +51,22 @@ class Route
 
   # Метод midway может добавлять промежуточную станцию в список
   def midway(station)
-    @stations.insert(-2, station) unless @station.include? station
+    @stations.insert(-2, station) unless @stations.include? station
+  end
+
+  # Метод first_station? проверяет является ли сатнция первой.
+  def first_station?(station)
+    station == @stations.first
+  end
+
+  # Метод last_station? проверяет является ли сатнция последней.
+  def last_station?(station)
+    station == @stations.last
   end
 
   # Метод delete_midway может удалять промежуточную станцию из списка.
   def delete_midway(station)
-    if station != @stations.first && station != @stations.last
+    unless first_station?(station) || last_station?(station)
       @stations.delete(station)
     end
   end
@@ -133,24 +143,24 @@ class Train
   end
 
   # Метод move может перемещаться между станциями, указанными в маршруте.
-  # Перемещение возможно вперед - 'vpered' и назад - 'nazad',
+  # Перемещение возможно вперед - 'forth' и назад - 'back',
   # но только на 1 станцию за раз.
-  def move(backandforth)
-    if backandforth == 'back' && @current_speed > 0
+  def move(backforth)
+    if backforth == 'back' && @current_speed > 0
       @station = @route.stations.rotate!(-1).first
-    elsif backandforth == 'forth' && @current_speed > 0
+    elsif backforth == 'forth' && @current_speed > 0
       @station = @route.stations.rotate!(1).first
     end
   end
 
-  # Метод return_station может возвращать предыдущую станцию - 'pred',
-  # текущую - 'tek', следующую -'sled', на основе маршрута.
-  def return_station(predteksled)
-    if predteksled == 'tek'
+  # Метод return_station может возвращать предыдущую станцию - 'previous',
+  # текущую - 'current', следующую -'next', на основе маршрута.
+  def return_station(previouscurrentnext)
+    if previouscurrentnext == 'current'
       @station
-    elsif predteksled == 'pred'
+    elsif previouscurrentnext == 'previous'
       @route.stations.rotate(-1).first
-    elsif predteksled == 'sled'
+    elsif previouscurrentnext == 'next'
       @route.stations.rotate(1).first
     end
   end
