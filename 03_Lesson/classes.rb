@@ -9,7 +9,7 @@
 class Station
   # Метод trains может возвращать список всех поездов на станции, находящиеся в
   # текущий момент.
-  # Метод name может возвращать название станции.
+  # Метод name может возвращать название станции
   attr_reader :trains, :name
   def initialize(name)
     @name = name
@@ -99,7 +99,7 @@ class Train
     @type = type
     @wagons = wagons
     @current_speed = 0
-    @station = station
+    @current_station = current_station
   end
 
   # Метод speed_gain может набирать скорость.
@@ -131,19 +131,19 @@ class Train
   # на первую станцию в маршруте.
   def route(route)
     @route = route
-    @station = @route.stations.first
+    @current_station = @route.stations.first
   end
 
   # Метод moving_forward может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно вперед, но только на 1 станцию за раз.
   def moving_forward
-    @station = @route.stations.rotate!(1).first if @current_speed > 0
+    @current_station = @route.stations.rotate!(1).first
   end
 
   # Метод moving_back может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно назад, но только на 1 станцию за раз.
   def moving_back
-    @station = @route.stations.rotate!(-1).first if @current_speed > 0
+    @current_station = @route.stations.rotate!(-1).first
   end
 
   # Метод previous_station может возвращать предыдущую станцию маршрута.
