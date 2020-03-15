@@ -134,13 +134,14 @@ class Train
     @current_station = @route.stations.first
   end
 
-  # Метод moving_forward может перемещаться между станциями, указанными в
+  # Метод move_forwards может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно вперед, но только на 1 станцию за раз.
   def move_forwards
+    return if @current_station == @route.stations.last
     @current_station = @route.stations.rotate!(1).first
   end
 
-  # Метод moving_back может перемещаться между станциями, указанными в
+  # Метод move_byckwards может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно назад, но только на 1 станцию за раз.
   def move_byckwards
     @current_station = @route.stations.rotate!(-1).first
