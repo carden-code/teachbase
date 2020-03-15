@@ -56,7 +56,9 @@ class Route
 
   # Метод delete_midway может удалять промежуточную станцию из списка.
   def delete_midway(station)
-    @stations.delete(station) if station != @stations.first && @stations.last
+    if station != @stations.first && station != @stations.last
+      @stations.delete(station)
+    end
   end
 
   # Метод list_stations Может выводить список всех станций по-порядку
