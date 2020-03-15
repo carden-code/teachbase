@@ -136,23 +136,23 @@ class Train
 
   # Метод moving_forward может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно вперед, но только на 1 станцию за раз.
-  def moving_forward
+  def move_forwards
     @current_station = @route.stations.rotate!(1).first
   end
 
   # Метод moving_back может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно назад, но только на 1 станцию за раз.
-  def moving_back
+  def move_bycwards
     @current_station = @route.stations.rotate!(-1).first
   end
 
   # Метод previous_station может возвращать предыдущую станцию маршрута.
   def previous_station
-    @route.stations.rotate(-1).first
+    @route.stations.rotate(-1).first if @current_station != @route.stations.first
   end
 
   # Метод next_station может возвращать предыдущую станцию маршрута.
   def next_station
-    @route.stations.rotate(1).first
+    @route.stations.rotate(1).first if @current_station != @route.stations.last
   end
 end
