@@ -142,7 +142,7 @@ class Train
 
   # Метод moving_back может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно назад, но только на 1 станцию за раз.
-  def move_bycwards
+  def move_byckwards
     @current_station = @route.stations.rotate!(-1).first
   end
 
