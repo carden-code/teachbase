@@ -158,7 +158,6 @@ class Train
     current_index = @route.stations.find_index(@current_station)
     return if @current_station == @route.stations.last
     @route.stations[current_index + 1]
-    #@route.stations.rotate(-1).first if @current_station != @route.stations.first
   end
 
   # Метод previous_station может возвращать предыдущую станцию маршрута.
