@@ -99,7 +99,6 @@ class Train
     @type = type
     @wagons = wagons
     @current_speed = 0
-    @current_station = current_station
   end
 
   # Метод speed_gain может набирать скорость.
