@@ -152,13 +152,20 @@ class Train
     @current_station = @route.stations[current_index - 1]
   end
 
-  # Метод previous_station может возвращать предыдущую станцию маршрута.
-  def previous_station
-    @route.stations.rotate(-1).first if @current_station != @route.stations.first
-  end
-
   # Метод next_station может возвращать предыдущую станцию маршрута.
   def next_station
-    @route.stations.rotate(1).first if @current_station != @route.stations.last
+    return unless @current_station
+    current_index = @route.stations.find_index(@current_station)
+    return if @current_station == @route.stations.last
+    @route.stations[current_index + 1]
+    #@route.stations.rotate(-1).first if @current_station != @route.stations.first
+  end
+
+  # Метод previous_station может возвращать предыдущую станцию маршрута.
+  def previous_station
+    return unless @current_station
+    current_index = @route.stations.find_index(@current_station)
+    return if @current_station == @route.stations.first
+    @route.stations[current_index - 1]
   end
 end
