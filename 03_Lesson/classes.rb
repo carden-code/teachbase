@@ -143,16 +143,16 @@ class Train
     @current_station = @route.stations[current_index + 1]
   end
 
-  # Метод move_byckwards может перемещаться между станциями, указанными в
+  # Метод byckwards может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно назад, но только на 1 станцию за раз.
-  def move_byckwards
+  def move_backwards
     return unless @current_station
     current_index = @route.stations.find_index(@current_station)
     return if @current_station == @route.stations.first
     @current_station = @route.stations[current_index - 1]
   end
 
-  # Метод next_station может возвращать предыдущую станцию маршрута.
+  # Метод next_station может возвращать следующую станцию маршрута.
   def next_station
     return unless @current_station
     current_index = @route.stations.find_index(@current_station)
