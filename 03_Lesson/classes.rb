@@ -58,15 +58,16 @@ class Route
 
   # Метод delete_midway может удалять промежуточную станцию из списка.
   def delete_midway(station)
-    if station != @stations.first && station != @stations.last
-      @stations.delete(station)
-    end
+    # Защита (guard clause) от стирания первой и последней станции.
+    return unless (@stations.first || @stations.last) != station
+
+    @stations.delete(station)
   end
 
   # Метод list_stations Может выводить список всех станций по-порядку
   # от начальной до конечной.
   def list_stations
-    @stations.each { |item| puts item.name }
+    @stations.each { |item| puts "#{item.name}, #{item}" }
   end
 end
 
@@ -111,18 +112,18 @@ class Train
     @current_speed -= value if value <= @current_speed && value.positive?
   end
 
-  # Метод detach_wagon может отцеплять вагоны (по одному вагону
-  # за операцию, метод просто уменьшает количество вагонов)
-  # отцепка вагонов может осуществляться только если поезд не движется.
-  def detach_wagon
-    @wagons -= 1 if @current_speed.zero? && @wagons.positive?
-  end
-
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
   # за операцию, метод просто увеличивает количество вагонов)
   # прицепка вагонов может осуществляться только если поезд не движется.
   def attach_wagon
     @wagons += 1 if @current_speed.zero?
+  end
+
+  # Метод detach_wagon может отцеплять вагоны (по одному вагону
+  # за операцию, метод просто уменьшает количество вагонов)
+  # отцепка вагонов может осуществляться только если поезд не движется.
+  def detach_wagon
+    @wagons -= 1 if @current_speed.zero? && @wagons.positive?
   end
 
   # Метод route может принимать маршрут следования (объект класса Route).
@@ -137,38 +138,80 @@ class Train
   # Метод move_forwards может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно вперед, но только на 1 станцию за раз.
   def move_forwards
+    # Защита (guard clause) от отсутствия route.
     return unless @current_station
+
+    # Получаем значение индекса актуальной станции из массива stations.
     current_index = @route.stations.find_index(@current_station)
+
+    # Защита (guard clause) от перехода на следующую станцию
+    # если текущая станция последняя.
     return unless @current_station != @route.stations.last
+
+    # Убытие поезда с актуальной станции, где self это текущий экземпляр
+    # класса Train.
     @current_station.delete(self)
+
+    # Смена актуальной станции на следующую станцию.
     @current_station = @route.stations[current_index + 1]
+    # Прибытие поезда на следующую станцию, где self это текущий экземпляр
+    # класса Train.
     @current_station.arrive(self)
   end
 
   # Метод move_backwards может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно назад, но только на 1 станцию за раз.
   def move_backwards
+    # Защита (guard clause) от отсутствия route.
     return unless @current_station
+
+    # Получаем значение индекса актуальной станции из массива stations.
     current_index = @route.stations.find_index(@current_station)
+
+    # Защита (guard clause) от перехода на следующую станцию
+    # если текущая станция первая.
     return unless @current_station != @route.stations.first
+
+    # Убытие поезда с актуальной станции, где self это текущий экземпляр
+    # класса Train.
     @current_station.delete(self)
+
+    # Смена актуальной станции на следующую станцию.
     @current_station = @route.stations[current_index - 1]
+    # Прибытие поезда на следующую станцию, где self это текущий экземпляр
+    # класса Train.
     @current_station.arrive(self)
   end
 
   # Метод next_station может возвращать следующую станцию маршрута.
   def next_station
+    # Защита (guard clause) от отсутствия route.
     return unless @current_station
+
+    # Получаем значение индекса актуальной станции из массива stations.
     current_index = @route.stations.find_index(@current_station)
+
+    # Защита (guard clause) от перехода на следующую станцию
+    # если текущая станция последняя.
     return unless @current_station != @route.stations.last
+
+    # Возвращает следующую станцию маршрута.
     @route.stations[current_index + 1]
   end
 
   # Метод previous_station может возвращать предыдущую станцию маршрута.
   def previous_station
+    # Защита (guard clause) от отсутствия route.
     return unless @current_station
+
+    # Получаем значение индекса актуальной станции из массива stations.
     current_index = @route.stations.find_index(@current_station)
+
+    # Защита (guard clause) от перехода на предыдущую станцию
+    # если текущая станция первая.
     return unless @current_station != @route.stations.first
+
+    # Возвращает предыдущую станцию маршрута.
     @route.stations[current_index - 1]
   end
 end
