@@ -60,7 +60,8 @@ class Route
   def delete_midway(station)
     # Защита (guard clause) от стирания первой и последней станции.
     return unless (@stations.first || @stations.last) != station
-
+    
+    # Удаление промежуточной станции из списка.
     @stations.delete(station)
   end
 
