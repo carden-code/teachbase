@@ -131,6 +131,7 @@ class Train
   def route(route)
     @route = route
     @current_station = @route.stations.first
+    @current_station.arrive(self)
   end
 
   # Метод move_forwards может перемещаться между станциями, указанными в
@@ -138,8 +139,10 @@ class Train
   def move_forwards
     return unless @current_station
     current_index = @route.stations.find_index(@current_station)
-    return if @current_station == @route.stations.last
+    return unless @current_station != @route.stations.last
+    @current_station.delete(self)
     @current_station = @route.stations[current_index + 1]
+    @current_station.arrive(self)
   end
 
   # Метод move_backwards может перемещаться между станциями, указанными в
@@ -147,15 +150,17 @@ class Train
   def move_backwards
     return unless @current_station
     current_index = @route.stations.find_index(@current_station)
-    return if @current_station == @route.stations.first
+    return unless @current_station != @route.stations.first
+    @current_station.delete(self)
     @current_station = @route.stations[current_index - 1]
+    @current_station.arrive(self)
   end
 
   # Метод next_station может возвращать следующую станцию маршрута.
   def next_station
     return unless @current_station
     current_index = @route.stations.find_index(@current_station)
-    return if @current_station == @route.stations.last
+    return unless @current_station != @route.stations.last
     @route.stations[current_index + 1]
   end
 
@@ -163,7 +168,7 @@ class Train
   def previous_station
     return unless @current_station
     current_index = @route.stations.find_index(@current_station)
-    return if @current_station == @route.stations.first
+    return unless @current_station != @route.stations.first
     @route.stations[current_index - 1]
   end
 end
