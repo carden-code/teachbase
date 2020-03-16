@@ -101,24 +101,24 @@ class Train
     @current_speed = 0
   end
 
-  # Метод speed_gain может набирать скорость.
+  # Метод accelerate может набирать скорость.
   def accelerate(value)
     @current_speed += value if value.positive?
   end
 
-  # Метод stop может тормозить (сбрасывать скорость до нуля).
+  # Метод decelerate может тормозить (сбрасывать скорость до нуля).
   def decelerate(value)
     @current_speed -= value if value <= @current_speed && value.positive?
   end
 
-  # Метод uncouple_wagon может отцеплять вагоны (по одному вагону
+  # Метод detach_wagon может отцеплять вагоны (по одному вагону
   # за операцию, метод просто уменьшает количество вагонов)
   # отцепка вагонов может осуществляться только если поезд не движется.
   def detach_wagon
     @wagons -= 1 if @current_speed.zero? && @wagons.positive?
   end
 
-  # Метод hitch_wagon может прицеплять вагоны (по одному вагону
+  # Метод attach_wagon может прицеплять вагоны (по одному вагону
   # за операцию, метод просто увеличивает количество вагонов)
   # прицепка вагонов может осуществляться только если поезд не движется.
   def attach_wagon
@@ -142,7 +142,7 @@ class Train
     @current_station = @route.stations[current_index + 1]
   end
 
-  # Метод byckwards может перемещаться между станциями, указанными в
+  # Метод move_backwards может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно назад, но только на 1 станцию за раз.
   def move_backwards
     return unless @current_station
