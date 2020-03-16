@@ -170,7 +170,7 @@ class Train
 
     # Защита (guard clause) от перехода на следующую станцию
     # если текущая станция первая.
-    return unless @current_station != @route.stations.first
+    return unless current_index - 1 != 0
 
     # Убытие поезда с актуальной станции, где self это текущий экземпляр
     # класса Train.
