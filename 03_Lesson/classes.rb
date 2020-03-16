@@ -139,21 +139,20 @@ class Train
   # Метод move_forwards может перемещаться между станциями, указанными в
   # маршруте. Перемещение возможно вперед, но только на 1 станцию за раз.
   def move_forwards
-    # Защита (guard clause) от отсутствия route.
+    # Защита (guard clause) от отсутствия route
     return unless @current_station
 
     # Получаем значение индекса актуальной станции из массива stations.
     current_index = @route.stations.find_index(@current_station)
 
-    # Защита (guard clause) от перехода на следующую станцию
-    # если текущая станция последняя.
-    return unless @current_station != @route.stations.last
+    # Защита (guard clause) от переполнения значения индекса массива stations.
+    return unless current_index + 1 < @route.stations.count
 
     # Убытие поезда с актуальной станции, где self это текущий экземпляр
     # класса Train.
     @current_station.delete(self)
 
-    # Смена актуальной станции на следующую станцию.
+    # Смена актуальной станции на следующую становящуюся актуальной.
     @current_station = @route.stations[current_index + 1]
     # Прибытие поезда на следующую станцию, где self это текущий экземпляр
     # класса Train.
