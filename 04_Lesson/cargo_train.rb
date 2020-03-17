@@ -7,13 +7,6 @@ class CargoTrain < Train
   # прицепка вагонов может осуществляться только если поезд не движется.
   def attach_wagon(cargowagon)
     return unless cargowagon.type != 'pass'
-    @wagons << cargowagon if @current_speed.zero?
-  end
-
-  # Метод detach_wagon может отцеплять вагоны (по одному вагону
-  # за операцию)
-  # отцепка вагонов может осуществляться только если поезд не движется.
-  def detach_wagon
-    @wagons.pop if @current_speed.zero?
+    super
   end
 end
