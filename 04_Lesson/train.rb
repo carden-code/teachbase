@@ -39,17 +39,17 @@ class Train
   end
 
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
-  # за операцию, метод просто увеличивает количество вагонов)
+  # за операцию)
   # прицепка вагонов может осуществляться только если поезд не движется.
-  def attach_wagon
-    @wagons += 1 if @current_speed.zero?
+  def attach_wagon(wagon)
+    @wagons << wagon if @current_speed.zero?
   end
 
-  # Метод detach_wagon может отцеплять вагоны (по одному вагону
-  # за операцию, метод просто уменьшает количество вагонов)
+  # Метод detach_wagon может отцеплять вагоны (Удалять вагоны из массива
+  # по одному вагону за операцию)
   # отцепка вагонов может осуществляться только если поезд не движется.
   def detach_wagon
-    @wagons -= 1 if @current_speed.zero? && @wagons.positive?
+    @wagons.pop if @current_speed.zero?
   end
 
   # Метод route может принимать маршрут следования (объект класса Route).
