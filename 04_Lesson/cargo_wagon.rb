@@ -6,6 +6,6 @@
 class CargoWagon < Wagon
   super
   def initialize
-    @type = 'cargow'
+    @type = 'cargo'
   end
 end
