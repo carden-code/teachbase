@@ -25,7 +25,7 @@ class CargoTrain < Train
   # за операцию, метод добавляет экземпляр класса CargoWagon в массив)
   # прицепка вагонов может осуществляться только если поезд не движется.
   def attach_wagon(cargowagon)
-    return if cargowagon.type != 'cargow'
+    return if cargowagon.type != 'cargo'
     super
   end
 end
