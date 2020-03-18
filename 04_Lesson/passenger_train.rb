@@ -25,7 +25,7 @@ class PassengerTrain < Train
   # за операцию, метод добавляет экземпляр класса PassengerWagon в массив)
   # прицепка вагонов может осуществляться только если поезд не движется.
   def attach_wagon(passengerwagon)
-    return if passengerwagon.type != 'passw'
+    return if passengerwagon.type != 'pass'
     super
   end
 end
