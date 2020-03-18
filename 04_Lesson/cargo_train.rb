@@ -16,14 +16,14 @@
 # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class CargoTrain < Train
-  def initialize(train_number)
-    super train_number, 'cargo'
+  def initialize(number)
+    super number, 'cargo'
   end
 
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
   # за операцию, метод добавляет экземпляр класса CargoWagon в массив)
   # прицепка вагонов может осуществляться только если поезд не движется.
   def attach_wagon(wagon)
-    super if @type != wagon.type
+    super if @type == wagon.type
   end
 end
