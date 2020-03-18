@@ -1,11 +1,11 @@
 # Класс PassengerWagon (Пассажирский Вагон):
-# Имеет номер (number - указывается при создании экземпляра)
-# и тип (passw - пасажирский вагон).
+# Класс PassengerWagon наследуется от класса Wagon.
+# Имеет номер (number - указывается при создании экземпляра).
+# Имеет тип при создании экземпляра (passw - пасажирский вагон).
 # Может возвращать тип (type).
-class PassengerWagon
-  attr_reader :type
-  def initialize(number, type = 'passw')
-    @number = number
-    @type = type
+class PassengerWagon < Wagon
+  super
+  def initialize
+    @type = 'passw'
   end
 end
