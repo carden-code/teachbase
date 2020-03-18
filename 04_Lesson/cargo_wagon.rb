@@ -4,7 +4,6 @@
 # Имеет тип при создании экземпляра (cargow - грузовой вагон).
 # Может возвращать тип (type).
 class CargoWagon < Wagon
-  super
   def initialize
     @type = 'cargo'
   end
