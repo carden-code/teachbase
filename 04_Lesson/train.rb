@@ -28,16 +28,6 @@ class Train
     @current_speed = 0
   end
 
-  # Метод accelerate может набирать скорость.
-  def accelerate(value)
-    @current_speed += value if value.positive?
-  end
-
-  # Метод decelerate может тормозить (сбрасывать скорость до нуля).
-  def decelerate(value)
-    @current_speed -= value if value <= @current_speed && value.positive?
-  end
-
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
   # за операцию) В качестве параметра принимает объекты класса (PassengerWagon и
   # CargoWagon).
@@ -108,6 +98,18 @@ class Train
     # Прибытие поезда на следующую станцию, где self это текущий экземпляр
     # класса Train.
     @current_station.arrive(self)
+  end
+
+  protected
+
+  # Метод accelerate может набирать скорость.
+  def accelerate(value)
+    @current_speed += value if value.positive?
+  end
+
+  # Метод decelerate может тормозить (сбрасывать скорость до нуля).
+  def decelerate(value)
+    @current_speed -= value if value <= @current_speed && value.positive?
   end
 
   # Метод next_station может возвращать следующую станцию маршрута.
