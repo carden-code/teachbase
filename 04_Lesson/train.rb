@@ -43,6 +43,7 @@ class Train
   # CargoWagon).
   # Прицепка вагонов может осуществляться только если поезд не движется.
   def attach_wagon(wagon)
+    return if @wagons.include? wagon
     @wagons << wagon if @current_speed.zero?
   end
 
