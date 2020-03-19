@@ -8,7 +8,10 @@ require_relative 'cargo_wagon'
 require_relative 'passenger_train'
 require_relative 'passenger_wagon'
 
+railway = Railway.new
+puts "Добро пожаловать в программу 'Железная дорога'"
 loop do
-  railway1 = Railway.new
-  railway1.menu
+  railway.menu
+  input = gets.chomp
+  break if input == '0'
 end
