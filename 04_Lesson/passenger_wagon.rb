@@ -5,6 +5,6 @@
 # Может возвращать тип (type).
 class PassengerWagon < Wagon
   def initialize
-    @type = 'pass'
+    super 'pass'
   end
 end
