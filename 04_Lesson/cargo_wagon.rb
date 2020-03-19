@@ -5,6 +5,6 @@
 # Может возвращать тип (type).
 class CargoWagon < Wagon
   def initialize
-    @type = 'cargo'
+    super 'cargo'
   end
 end
