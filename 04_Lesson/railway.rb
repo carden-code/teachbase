@@ -47,14 +47,14 @@ class Railway
   end
 
   def create_train_pass
-    puts 'Введите номер поезда:'
-    number = gets.chomp
+    message = 'Введите номер поезда:'
+    number = data_input(message)
     @trains[number.to_sym] = PassengerTrain.new(number)
   end
 
   def create_train_cargo
-    puts 'Введите номер поезда:'
-    number = gets.chomp
+    message = 'Введите номер поезда:'
+    number = data_input(message)
     @trains[number.to_sym] = CargoTrain.new(number)
   end
 
