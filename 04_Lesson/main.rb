@@ -26,5 +26,5 @@ loop do
   railway.selected(menu_item)
 end
 puts railway.stations
-puts railway.trains
-puts railway.wagons
+#puts railway.trains
+#puts railway.wagons
