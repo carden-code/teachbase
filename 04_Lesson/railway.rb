@@ -35,8 +35,9 @@ class Railway
   end
 
   def data_input(message)
-    print message
-    gets.chomp
+    args = []
+    message.each { |mess| print mess }
+    args << gets.chomp
   end
 
   def create_station
@@ -70,6 +71,8 @@ class Railway
   end
 
   def attach_wagon
+    message = @trains
+    message.each_with_index { |mess, index| puts index + 1, mess }
 
   end
 
