@@ -2,38 +2,77 @@ class Railway
   attr_reader :routes, :trains, :wagons, :stations
   def initialize
     @routes = []
-    @trains = []
+    @trains = {}
     @wagons = []
-    @stations = []
+    @stations = {}
   end
 
   def menu_items
-    p 'Введите: 1, что бы создать станцию.'
-    p 'Введите: 2, что бы создать пассажирский поезд.'
-    p 'Введите: 3, что бы создать грузовой поезд.'
-    p 'Введите: 4, что бы создать маршрут.'
-    p 'Введите: 5, что бы добавить промежуточную станцию.'
-    p 'Введите: 6, что бы  удалить промежуточную станцию.'
-    p 'Введите: 7, что бы назначить маршрут поезду.'
-    p 'Введите: 8, что бы добавить вагон к поезду.'
-    p 'Введите: 9, что бы отцепить вагон от поезда.'
-    p 'Введите: 10, что бы переместить поезд по маршруту вперед.'
-    p 'Введите: 11, что бы переместить поезд по маршруту назад.'
-    p 'Введите: 12, что бы посмотреть список станций.'
-    p 'Введите: 13, что бы посмотреть список поездов на станции.'
+    messages = ['Выберите действие, введя номер из списка: ',
+                ' 1 - Создать станцию.',
+                ' 2 - Создать пассажирский поезд.',
+                ' 3 - Создать грузовой поезда.',
+                ' 4 - Создать пассажирский вагон.',
+                ' 5 - Создать грузовой вагон.',
+                #' 3 - Создать вагон.',
+                #' 4 - Посмотреть список вагонов.',
+                #' 5 - Прицепить к поезду вагон из пула вагонов.',
+                #' 6 - Отцепить вагон от поезда в пул вагонов.',
+                #' 7 - Поместить поезд на станцию.',
+                #' 8 - Посмотреть список станций.',
+                #' 9 - Посмотреть список поездов на станции.',
+                #' 10 - Создать маршрут.',
+                #' 11 - Добавитъ станцию в маршрут.',
+                #' 12 - Удалитъ станцию в маршруте.',
+                #' 13 - Удалить маршрут.',
+                #' 14 - Назначать маршрут поезду.',
+                #' 15 - Переместить поезд по маршруту вперед.',
+                #' 16 - Переместить поезд по маршруту назад.',
+                #' 17 - Посмотреть список созданных маршрутов.',
+                BORDERLINE,
+                ' 0 - Для выхода из программы.']
+    messages.each { |item| puts item }
+  end
+
+  def create_station
+    puts 'Введите название станции:'
+    name = gets.chomp
+    @stations[name.to_sym] = Station.new(name)
+  end
+
+  def create_train_pass
+    puts 'Введите номер поезда:'
+    number = gets.chomp
+    @trains[number.to_sym] = PassengerTrain.new(number)
+  end
+
+  def create_train_cargo
+    puts 'Введите номер поезда:'
+    number = gets.chomp
+    @trains[number.to_sym] = CargoTrain.new(number)
+  end
+
+  def create_wagon_pass
+    puts "#{@wagons << PassengerWagon.new} - Пассажирский вагон создан."
+  end
+
+  def create_wagon_cargo
+    puts "#{@wagons << CargoWagon.new} - Грузовой вагон создан"
   end
 
   def selected(menu_item)
+    puts "Your choice: #{menu_item}" if menu_item != ''
     case menu_item
     when '1'
-      p 'Введите название станции:'
-      p "#{@stations << Station.new(gets.chomp)} - Станция успешно создана."
+      create_station
     when '2'
-      p 'Введите номер пассажирского поезда:'
-      p @trains << PassengerTrain.new(gets.chomp)
+      create_train_pass
     when '3'
-      p 'Введите номер грузового поезда:'
-      p @trains << CargoTrain.new(gets.chomp)
+      create_train_cargo
+    when '4'
+      create_wagon_pass
+    when '5'
+      create_wagon_cargo
     end
   end
 end
