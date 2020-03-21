@@ -2,9 +2,9 @@ class Railway
   attr_reader :routes, :trains, :wagons, :stations
   def initialize
     @routes = []
-    @trains = {}
+    @trains = []
     @wagons = []
-    @stations = {}
+    @stations = []
   end
 
   def menu_items
@@ -15,7 +15,7 @@ class Railway
                 ' 4 - Создать пассажирский вагон.',
                 ' 5 - Создать грузовой вагон.',
                 ' 6 - Посмотреть список вагонов.',
-                #' 4 - Посмотреть список вагонов.',
+                ' 7 - Прицепить к поезду вагон из пула вагонов.',
                 #' 5 - Прицепить к поезду вагон из пула вагонов.',
                 #' 6 - Отцепить вагон от поезда в пул вагонов.',
                 #' 7 - Поместить поезд на станцию.',
@@ -35,27 +35,26 @@ class Railway
   end
 
   def data_input(message)
-    args = []
     print message
-    args << gets.chomp
+    gets.chomp
   end
 
   def create_station
     message = 'Введите название станции:'
     name = data_input(message)
-    @stations[name.to_sym] = Station.new(name)
+    @stations << Station.new(name)
   end
 
   def create_train_pass
     message = 'Введите номер поезда:'
     number = data_input(message)
-    @trains[number.to_sym] = PassengerTrain.new(number)
+    @trains << PassengerTrain.new(number)
   end
 
   def create_train_cargo
     message = 'Введите номер поезда:'
     number = data_input(message)
-    @trains[number.to_sym] = CargoTrain.new(number)
+    @trains << CargoTrain.new(number)
   end
 
   def create_wagon_pass
@@ -64,6 +63,14 @@ class Railway
 
   def create_wagon_cargo
     @wagons << CargoWagon.new
+  end
+
+  def list_wagons
+    puts @wagons
+  end
+
+  def attach_wagon
+
   end
 
   def selected(menu_item)
@@ -79,6 +86,8 @@ class Railway
       create_wagon_pass
     when '5'
       create_wagon_cargo
+    when '6'
+      list_wagons
     end
   end
 end
