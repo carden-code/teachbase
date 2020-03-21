@@ -35,8 +35,8 @@ class Railway
   end
 
   def create_station
-    puts 'Введите название станции:'
-    name = gets.chomp
+    message = 'Введите название станции:'
+    name = data_input(message)
     @stations[name.to_sym] = Station.new(name)
   end
 
