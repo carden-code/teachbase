@@ -41,20 +41,20 @@ class Railway
   end
 
   def create_station
-    message = 'Введите название станции:'
-    name = data_input(message)
+    message = ['Введите название станции:']
+    name = data_input(message).first
     @stations << Station.new(name)
   end
 
   def create_train_pass
-    message = 'Введите номер поезда:'
-    number = data_input(message)
+    message = ['Введите номер поезда:']
+    number = data_input(message).first
     @trains << PassengerTrain.new(number)
   end
 
   def create_train_cargo
-    message = 'Введите номер поезда:'
-    number = data_input(message)
+    message = ['Введите номер поезда:']
+    number = data_input(message).first
     @trains << CargoTrain.new(number)
   end
 
@@ -91,6 +91,8 @@ class Railway
       create_wagon_cargo
     when '6'
       list_wagons
+    when '7'
+      attach_wagon
     end
   end
 end
