@@ -59,11 +59,11 @@ class Railway
   end
 
   def create_wagon_pass
-    puts "#{@wagons << PassengerWagon.new} - Пассажирский вагон создан."
+    @wagons << PassengerWagon.new
   end
 
   def create_wagon_cargo
-    puts "#{@wagons << CargoWagon.new} - Грузовой вагон создан."
+    @wagons << CargoWagon.new
   end
 
   def selected(menu_item)
