@@ -34,6 +34,12 @@ class Railway
     messages.each { |item| puts item }
   end
 
+  def data_input(message)
+    args = []
+    message.each { |mess| print mess }
+    args << gets.chomp
+  end
+
   def create_station
     message = 'Введите название станции:'
     name = data_input(message)
@@ -57,7 +63,7 @@ class Railway
   end
 
   def create_wagon_cargo
-    puts "#{@wagons << CargoWagon.new} - Грузовой вагон создан"
+    puts "#{@wagons << CargoWagon.new} - Грузовой вагон создан."
   end
 
   def selected(menu_item)
