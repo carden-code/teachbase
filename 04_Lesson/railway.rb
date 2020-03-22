@@ -36,7 +36,7 @@ class Railway
 
   def data_input(message)
     @args = []
-    message.each { |mess| print mess }
+    message.each { |mess| puts mess }
     @args << gets.chomp
   end
 
@@ -72,9 +72,19 @@ class Railway
 
   def attach_wagon
     message = @trains
-    message.each_with_index { |mess, index| puts index + 1, mess }
-    train = data_input(message).first
-    puts train
+    message.each_with_index do |mess, index|
+      puts "Введите: #{index + 1}, #{mess}"
+    end
+    train = data_input(message)
+    if @args.include? '1'
+      train = @trains[0]
+    elsif @args.include? '2'
+      train = @trains[1]
+    elsif @args.include? '3'
+      train = @trains[2]
+    end
+    wagon =
+    train.attach_wagon(@wagons.)
   end
 
   def selected(menu_item)
