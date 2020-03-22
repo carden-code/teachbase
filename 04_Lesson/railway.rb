@@ -7,88 +7,99 @@ class Railway
     @stations = []
   end
 
+  #
   def menu_items
     messages = ['Выберите действие, введя номер из списка: ',
+                BORDERLINE,
                 ' 1 - Создать станцию.',
                 ' 2 - Создать пассажирский поезд.',
-                ' 3 - Создать грузовой поезда.',
+                ' 3 - Создать грузовой поезд.',
                 ' 4 - Создать пассажирский вагон.',
                 ' 5 - Создать грузовой вагон.',
                 ' 6 - Посмотреть список вагонов.',
-                ' 7 - Прицепить к поезду вагон из пула вагонов.',
-                #' 5 - Прицепить к поезду вагон из пула вагонов.',
-                #' 6 - Отцепить вагон от поезда в пул вагонов.',
-                #' 7 - Поместить поезд на станцию.',
-                #' 8 - Посмотреть список станций.',
-                #' 9 - Посмотреть список поездов на станции.',
-                #' 10 - Создать маршрут.',
-                #' 11 - Добавитъ станцию в маршрут.',
-                #' 12 - Удалитъ станцию в маршруте.',
-                #' 13 - Удалить маршрут.',
-                #' 14 - Назначать маршрут поезду.',
-                #' 15 - Переместить поезд по маршруту вперед.',
-                #' 16 - Переместить поезд по маршруту назад.',
-                #' 17 - Посмотреть список созданных маршрутов.',
+                ' 7 - attach_wagon.',
                 BORDERLINE,
-                ' 0 - Для выхода из программы.']
+                '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
   end
 
+  #
+
   def data_input(message)
     @args = []
-    message.each { |mess| puts mess }
+    message.each { |mess| print mess }
     @args << gets.chomp
   end
 
+  #
+  def dublicate_name?(arr, name)
+    arr.each { |elem| return true if elem.name == name.to_s }
+    false
+  end
+
+  #
   def create_station
     message = ['Введите название станции:']
     name = data_input(message).first
+
+    return unless name != '' && !dublicate_name?(@stations, name)
+
     @stations << Station.new(name)
   end
 
+  #
+  def dublicate_number?(arr, number)
+    arr.each { |elem| return true if elem.number == number.to_s }
+    false
+  end
+
+  #
   def create_train_pass
     message = ['Введите номер поезда:']
     number = data_input(message).first
+
+    return unless number != '' && !dublicate_number?(@trains, number)
+
     @trains << PassengerTrain.new(number)
   end
 
+  #
   def create_train_cargo
     message = ['Введите номер поезда:']
     number = data_input(message).first
+
+    return unless number != '' && !dublicate_number?(@trains, number)
+
     @trains << CargoTrain.new(number)
   end
 
+  #
   def create_wagon_pass
     @wagons << PassengerWagon.new
   end
 
+  #
   def create_wagon_cargo
     @wagons << CargoWagon.new
   end
 
+  #
   def list_wagons
-    puts @wagons
+    @wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
   end
 
   def attach_wagon
     message = @trains
-    message.each_with_index do |mess, index|
-      puts "Введите: #{index + 1}, #{mess}"
-    end
-    train = data_input(message)
-    if @args.include? '1'
-      train = @trains[0]
-    elsif @args.include? '2'
-      train = @trains[1]
-    elsif @args.include? '3'
-      train = @trains[2]
-    end
-    wagon =
-    train.attach_wagon(@wagons.)
+    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    index = data_input(message).first.to_i - 1
+    puts "\n\nindex: #{index}"
+    selected_train = @trains[index]
+    puts "Selected train: #{selected_train}"
   end
 
   def selected(menu_item)
     puts "Your choice: #{menu_item}" if menu_item != ''
+
     case menu_item
     when '1'
       create_station
@@ -104,6 +115,8 @@ class Railway
       list_wagons
     when '7'
       attach_wagon
+    else
+      puts 'Повторите ввод!'
     end
   end
 end
