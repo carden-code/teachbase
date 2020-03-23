@@ -222,6 +222,12 @@ class Railway
     @selected_train.move_forwards
   end
 
+  # Метод move_backwards может перемещать поезд назад на одну станцию.
+  def move_backwards
+    p 'Введите номер поезда который нужно переместить на станцию назад:'
+    selected_train
+    @selected_train.move_backwards
+  end
 
 
   # Метод selected принимает параметр из пользовательского ввода
