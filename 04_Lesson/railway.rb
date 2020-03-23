@@ -38,7 +38,7 @@ class Railway
   # и запрашивает ввод пользователя, результат сохранят в @args.
   def data_input(message)
     @args = []
-    message.each { |mess| print mess }
+    message.each { |mess| puts mess }
     @args << gets.chomp
   end
 
@@ -115,25 +115,27 @@ class Railway
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
     index = data_input(message).first.to_i - 1
     puts "\n\nindex: #{index}"
-    selected_train = @trains[index]
-    puts "Selected train: #{selected_train}"
+    @selected_train = @trains[index]
+    puts "Selected train: #{@selected_train}"
   end
-  
+
   # Метод selected_wagon может выбирать вагон из списка.
   def selected_wagon
     message = @wagons
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
     index = data_input(message).first.to_i - 1
     puts "\n\nindex: #{index}"
-    selected_wagon = @wagons[index]
-    puts "Selected wagon: #{selected_wagon}"
+    @selected_wagon = @wagons[index]
+    puts "Selected wagon: #{@selected_wagon}"
   end
 
   # Метод attach_wagon добавляет выбранный вагон к выбранному поезду.
-  def attach_wag
+  def attach_wagon
+    p 'Выберите поезд из списка. Введите соответствующий номер:'
     selected_train
+    p 'Выберете вагон из списка для прицепки к поезду (Должен совпадать Type ):'
     selected_wagon
-    selected_train.attach_wagon(selected_wagon)
+    @selected_train.attach_wagon(@selected_wagon)
   end
 
   # Метод selected принимает параметр из пользовательского ввода
@@ -155,7 +157,7 @@ class Railway
     when '6'
       list_wagons
     when '7'
-      attach_wag
+      attach_wagon
     else
       puts 'Повторите ввод!'
     end
