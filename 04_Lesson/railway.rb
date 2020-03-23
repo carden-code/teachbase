@@ -174,6 +174,7 @@ class Railway
     @routes << Route.new(first, last) if first != last
   end
 
+  # Метод selected_route может выбирать из списка маршрут.
   def selected_route
     message = @routes
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
@@ -181,6 +182,16 @@ class Railway
     puts "\n\nindex: #{index}"
     @selected_route = @routes[index]
     puts "Selected route: #{@selected_route}"
+  end
+  
+  # Метод add_station может добавлять промежуточную станцию в маршрут.
+  def add_station
+    p 'Введите номер маршрута в который хотите добавить станцию:'
+    selected_route
+    p 'Введите название станции:'
+    input = Station.new(gets.chomp)
+    @stations.insert(-2, input) unless @stations.include? input
+    @selected_route.midway(input)
   end
 
   # Метод selected принимает параметр из пользовательского ввода
@@ -207,6 +218,8 @@ class Railway
       detach_wagon
     when '9'
       create_route
+    when '10'
+      add_station
     else
       puts 'Повторите ввод!'
     end
