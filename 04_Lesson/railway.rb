@@ -193,7 +193,8 @@ class Railway
     @stations.insert(-2, input) unless @stations.include? input
     @selected_route.midway(input)
   end
-
+  
+  # Метод delete_midway может удалять промежуточную станцию.
   def delete_midway
     p 'Введите номер маршрута из котороко нужно удалить станцию:'
     selected_route
