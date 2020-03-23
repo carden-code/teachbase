@@ -261,7 +261,9 @@ class Railway
     when '12'
       add_route_train
     when '13'
-
+      move_forwards
+    when '14'
+      move_backwards
     else
       puts 'Повторите ввод!'
     end
