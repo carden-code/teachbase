@@ -28,9 +28,9 @@ class Railway
                 ' 4 - Создать пассажирский вагон.',
                 ' 5 - Создать грузовой вагон.',
                 ' 6 - Посмотреть список вагонов.',
-                ' 7 - Прицепить вагон к поезду',
-                ' 8 - Отцепить вагон от поезда',
-                ' 9 - ',
+                ' 7 - Прицепить вагон к поезду.',
+                ' 8 - Отцепить вагон от поезда.',
+                ' 9 - Создать маршрут.',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -149,6 +149,23 @@ class Railway
     @wagons.push(@selected_train.detach_wagon)
   end
 
+  def selected_station_route
+    message = @stations
+    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    index = data_input(message).first.to_i - 1
+    puts "\n\nindex: #{index}"
+    @selected_station = @stations[index]
+    puts "Selected station: #{@selected_station}"
+  end
+  
+  def create_route
+    selected_station_route
+    first = @selected_station
+    selected_station_route
+    last = @selected_station
+    @routes << Route.new(first, last) if first != last
+  end
+
   # Метод selected принимает параметр из пользовательского ввода
   # и исполняет соответствующий метод.
   def selected(menu_item)
@@ -171,6 +188,8 @@ class Railway
       attach_wagon
     when '8'
       detach_wagon
+    when '9'
+      create_route
     else
       puts 'Повторите ввод!'
     end
