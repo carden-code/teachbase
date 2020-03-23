@@ -183,7 +183,7 @@ class Railway
     @selected_route = @routes[index]
     puts "Selected route: #{@selected_route}"
   end
-  
+
   # Метод add_station может добавлять промежуточную станцию в маршрут.
   def add_station
     p 'Введите номер маршрута в который хотите добавить станцию:'
@@ -192,6 +192,15 @@ class Railway
     input = Station.new(gets.chomp)
     @stations.insert(-2, input) unless @stations.include? input
     @selected_route.midway(input)
+  end
+
+  def delete_midway
+    p 'Введите номер маршрута из котороко нужно удалить станцию:'
+    selected_route
+    p 'Введите номер станции которую хотите удалить из маршрута:'
+    selected_station_route
+    @selected_route.delete_midway(@selected_station)
+    #@stations.delete(@selected_station) под вопросом.....
   end
 
   # Метод selected принимает параметр из пользовательского ввода
@@ -220,6 +229,8 @@ class Railway
       create_route
     when '10'
       add_station
+    when '11'
+      delete_midway
     else
       puts 'Повторите ввод!'
     end
