@@ -31,6 +31,9 @@ class Railway
                 ' 7 - Прицепить вагон к поезду.',
                 ' 8 - Отцепить вагон от поезда.',
                 ' 9 - Создать маршрут.',
+                ' 10 - Добавить промежуточную станцию в маршрут.',
+                ' 11 - Удалить промежуточную станцию из маршрута.',
+                ' 12 - Назначить маршрут поезду.',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -159,7 +162,7 @@ class Railway
     @selected_station = @stations[index]
     puts "Selected station: #{@selected_station}"
   end
-  
+
   # Метод create_route может создавать маршрут из двух выбранных станций.
   def create_route
     p 'Выберете начальную станцию для маршрута:'
@@ -169,6 +172,15 @@ class Railway
     selected_station_route
     last = @selected_station
     @routes << Route.new(first, last) if first != last
+  end
+
+  def selected_route
+    message = @routes
+    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    index = data_input(message).first.to_i - 1
+    puts "\n\nindex: #{index}"
+    @selected_route = @routes[index]
+    puts "Selected route: #{@selected_route}"
   end
 
   # Метод selected принимает параметр из пользовательского ввода
