@@ -118,6 +118,7 @@ class Railway
     selected_train = @trains[index]
     puts "Selected train: #{selected_train}"
   end
+  
   # Метод selected_wagon может выбирать вагон из списка.
   def selected_wagon
     message = @wagons
@@ -127,8 +128,9 @@ class Railway
     selected_wagon = @wagons[index]
     puts "Selected wagon: #{selected_wagon}"
   end
+
   # Метод attach_wagon добавляет выбранный вагон к выбранному поезду.
-  def attach_wagon
+  def attach_wag
     selected_train
     selected_wagon
     selected_train.attach_wagon(selected_wagon)
@@ -153,7 +155,7 @@ class Railway
     when '6'
       list_wagons
     when '7'
-      attach_wagon
+      attach_wag
     else
       puts 'Повторите ввод!'
     end
