@@ -30,6 +30,7 @@ class Railway
                 ' 6 - Посмотреть список вагонов.',
                 ' 7 - Прицепить вагон к поезду',
                 ' 8 - Отцепить вагон от поезда',
+                ' 9 - ',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -137,12 +138,13 @@ class Railway
     p 'Выберете вагон из списка для прицепки к поезду (Должен совпадать Type ):'
     selected_wagon
     @selected_train.attach_wagon(@selected_wagon)
+    @wagons.delete(@selected_wagon)
   end
 
   def detach_wagon
     p 'Введите номер поезда у которого нужно отцепить вагон:'
     selected_train
-    @selected_train.detach_wagon
+    @wagons.push(@selected_train.detach_wagon)
   end
 
   # Метод selected принимает параметр из пользовательского ввода
