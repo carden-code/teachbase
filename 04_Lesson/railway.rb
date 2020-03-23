@@ -131,7 +131,8 @@ class Railway
     puts "Selected wagon: #{@selected_wagon}"
   end
 
-  # Метод attach_wagon добавляет выбранный вагон к выбранному поезду.
+  # Метод attach_wagon добавляет выбранный вагон к выбранному поезду
+  # и удаляет вагон из @wagons.
   def attach_wagon
     p 'Введите соответствующий номер для выбора поезда:'
     selected_train
@@ -141,6 +142,7 @@ class Railway
     @wagons.delete(@selected_wagon)
   end
 
+  # Метод detach_wagon отцепляет вагон от поезда и добавляет в @wagons.
   def detach_wagon
     p 'Введите номер поезда у которого нужно отцепить вагон:'
     selected_train
