@@ -23,6 +23,7 @@ loop do
   puts "stations: #{railway.stations}\n\n"
   puts "trains: #{railway.trains}\n\n"
   puts "wagons: #{railway.wagons}\n\n"
+  puts "routes: #{railway.routes}\n\n"
   puts NEWLINE
   railway.menu_items
 
