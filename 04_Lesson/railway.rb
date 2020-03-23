@@ -193,7 +193,7 @@ class Railway
     @stations.insert(-2, input) unless @stations.include? input
     @selected_route.midway(input)
   end
-  
+
   # Метод delete_midway может удалять промежуточную станцию.
   def delete_midway
     p 'Введите номер маршрута из котороко нужно удалить станцию:'
@@ -202,6 +202,14 @@ class Railway
     selected_station_route
     @selected_route.delete_midway(@selected_station)
     #@stations.delete(@selected_station) под вопросом.....
+  end
+
+  def add_route_train
+    p 'Введите номер поезда для которого нужно назначить маршрут:'
+    selected_train
+    p 'Введите номер маршрута который хотите назначить поезду:'
+    selected_route
+    @selected_train.route(@selected_route)
   end
 
   # Метод selected принимает параметр из пользовательского ввода
