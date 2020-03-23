@@ -1,3 +1,13 @@
+# Класс Railway (Железная дорога) может:
+# Выводить меню
+# Создавать станции
+# Создавать поезда
+# Создавать маршруты и управлять станциями в нем (добавлять, удалять)
+# Назначать маршрут поезду
+# Добавлять вагоны к поезду
+# Отцеплять вагоны от поезда
+# Перемещать поезд по маршруту вперед и назад
+# Просматривать список станций и список поездов на станции
 class Railway
   attr_reader :routes, :trains, :wagons, :stations
   def initialize
@@ -7,7 +17,8 @@ class Railway
     @stations = []
   end
 
-  #
+  # Метод menu_items выводит элементы массива,
+  # которые являются пользовательским меню.
   def menu_items
     messages = ['Выберите действие, введя номер из списка: ',
                 BORDERLINE,
@@ -23,21 +34,21 @@ class Railway
     messages.each { |item| puts item }
   end
 
-  #
-
+  # Метод data_input принимает параметр печатает его.
+  # и запрашивает ввод пользователя, результат сохранят в @args.
   def data_input(message)
     @args = []
     message.each { |mess| print mess }
     @args << gets.chomp
   end
 
-  #
+  # Метод dublicate_name? проверяет на наличие дубликатов имен.
   def dublicate_name?(arr, name)
     arr.each { |elem| return true if elem.name == name.to_s }
     false
   end
 
-  #
+  # Метод create_station создаёт станцию.
   def create_station
     message = ['Введите название станции:']
     name = data_input(message).first
@@ -47,13 +58,13 @@ class Railway
     @stations << Station.new(name)
   end
 
-  #
+  # Метод dublicate_name? проверяет на наличие дубликатов номера.
   def dublicate_number?(arr, number)
     arr.each { |elem| return true if elem.number == number.to_s }
     false
   end
 
-  #
+  # Метод create_train_pass может создавать пассажирский поезд.
   def create_train_pass
     message = ['Введите номер поезда:']
     number = data_input(message).first
@@ -63,7 +74,7 @@ class Railway
     @trains << PassengerTrain.new(number)
   end
 
-  #
+  # Метод create_train_cargo может создавать грузовой поезд.
   def create_train_cargo
     message = ['Введите номер поезда:']
     number = data_input(message).first
@@ -73,17 +84,17 @@ class Railway
     @trains << CargoTrain.new(number)
   end
 
-  #
+  # Метод create_wagon_pass может создавать пассажирский вагон.
   def create_wagon_pass
     @wagons << PassengerWagon.new
   end
 
-  #
+  # Метод create_wagon_cargo может создавать грузовой вагон.
   def create_wagon_cargo
     @wagons << CargoWagon.new
   end
 
-  #
+  # Метод list_wagons может выводить список вагонов.
   def list_wagons
     @wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
   end
@@ -97,6 +108,8 @@ class Railway
   #  puts "Selected train: #{selected_train}"
   #  selected_train.attach_wagon(@wagons.first)
   #end
+
+  # Метод selected_train может выбирать поезд из списка.
   def selected_train
     message = @trains
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
@@ -105,7 +118,7 @@ class Railway
     selected_train = @trains[index]
     puts "Selected train: #{selected_train}"
   end
-
+  # Метод selected_wagon может выбирать вагон из списка.
   def selected_wagon
     message = @wagons
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
@@ -114,16 +127,15 @@ class Railway
     selected_wagon = @wagons[index]
     puts "Selected wagon: #{selected_wagon}"
   end
-
+  # Метод attach_wagon добавляет выбранный вагон к выбранному поезду.
   def attach_wagon
     selected_train
     selected_wagon
     selected_train.attach_wagon(selected_wagon)
   end
 
-
-
-
+  # Метод selected принимает параметр из пользовательского ввода
+  # и исполняет соответствующий метод.
   def selected(menu_item)
     puts "Your choice: #{menu_item}" if menu_item != ''
 
