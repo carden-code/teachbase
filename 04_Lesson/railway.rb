@@ -36,6 +36,8 @@ class Railway
                 ' 12 - Назначить маршрут поезду.',
                 ' 13 - Переместить поезд по маршруту вперед.',
                 ' 14 - Переместить поезд по маршруту назад.',
+                ' 15 - Посмотреть список станций.',
+                ' 16 - Посмотреть список поездов на станции.',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -229,6 +231,17 @@ class Railway
     @selected_train.move_backwards
   end
 
+  def list_stations
+    @stations.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+  end
+
+  def list_trains_station
+    p 'Введите номер станции на которой хотит посмотреть список поездов'
+    selected_station_route
+    p 'Введите тип поезда ("cargo", "pass"):'
+    @selected_station.return_type(gets.chomp)
+  end
+
 
   # Метод selected принимает параметр из пользовательского ввода
   # и исполняет соответствующий метод.
@@ -264,6 +277,10 @@ class Railway
       move_forwards
     when '14'
       move_backwards
+    when '15'
+      list_stations
+    when '16'
+      list_trains_station
     else
       puts 'Повторите ввод!'
     end
