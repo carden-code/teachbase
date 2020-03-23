@@ -149,6 +149,8 @@ class Railway
     @wagons.push(@selected_train.detach_wagon)
   end
 
+  # Метод selected_station_route может выводить список станций
+  # и запрашивает ввод пользователя для выбора станции.
   def selected_station_route
     message = @stations
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
@@ -157,10 +159,12 @@ class Railway
     @selected_station = @stations[index]
     puts "Selected station: #{@selected_station}"
   end
-  
+  # Метод create_route может создавать маршрут из двух выбранных станций.
   def create_route
+    p 'Выберете начальную станцию для маршрута:'
     selected_station_route
     first = @selected_station
+    p 'Выберете конечную станцию для маршрута:'
     selected_station_route
     last = @selected_station
     @routes << Route.new(first, last) if first != last
