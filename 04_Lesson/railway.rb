@@ -159,6 +159,7 @@ class Railway
     @selected_station = @stations[index]
     puts "Selected station: #{@selected_station}"
   end
+  
   # Метод create_route может создавать маршрут из двух выбранных станций.
   def create_route
     p 'Выберете начальную станцию для маршрута:'
