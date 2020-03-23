@@ -34,6 +34,8 @@ class Railway
                 ' 10 - Добавить промежуточную станцию в маршрут.',
                 ' 11 - Удалить промежуточную станцию из маршрута.',
                 ' 12 - Назначить маршрут поезду.',
+                ' 13 - Переместить поезд по маршруту вперед.',
+                ' 14 - Переместить поезд по маршруту назад.',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -64,29 +66,29 @@ class Railway
   end
 
   # Метод dublicate_name? проверяет на наличие дубликатов номера.
-  #def dublicate_number?(arr, number)
-  #  arr.each { |elem| return true if elem.number == number.to_s }
-  #  false
-#  end
+  def dublicate_number?(arr, number)
+    arr.each { |elem| return true if elem.number == number.to_s }
+    false
+  end
 
   # Метод create_train_pass может создавать пассажирский поезд.
   def create_train_pass
     message = ['Введите номер поезда:']
-    name = data_input(message).first
+    number = data_input(message).first
 
-    return unless name != '' && !dublicate_name?(@trains, name)
+    return unless number != '' && !dublicate_number?(@trains, number)
 
-    @trains << PassengerTrain.new(name)
+    @trains << PassengerTrain.new(number)
   end
 
   # Метод create_train_cargo может создавать грузовой поезд.
   def create_train_cargo
     message = ['Введите номер поезда:']
-    name = data_input(message).first
+    number = data_input(message).first
 
-    return unless name != '' && !dublicate_name?(@trains, name)
+    return unless number != '' && !dublicate_number?(@trains, number)
 
-    @trains << CargoTrain.new(name)
+    @trains << CargoTrain.new(number)
   end
 
   # Метод create_wagon_pass может создавать пассажирский вагон.
@@ -204,6 +206,7 @@ class Railway
     #@stations.delete(@selected_station) под вопросом.....
   end
 
+  # Метод add_route_train может назначать маршрут поезду.
   def add_route_train
     p 'Введите номер поезда для которого нужно назначить маршрут:'
     selected_train
@@ -211,6 +214,15 @@ class Railway
     selected_route
     @selected_train.route(@selected_route)
   end
+
+  # Метод move_forwards может перемещать поезд вперед на одну станцию.
+  def move_forwards
+    p 'Введите номер поезда который нужно переместить на станцию вперед:'
+    selected_train
+    @selected_train.move_forwards
+  end
+
+
 
   # Метод selected принимает параметр из пользовательского ввода
   # и исполняет соответствующий метод.
@@ -240,6 +252,10 @@ class Railway
       add_station
     when '11'
       delete_midway
+    when '12'
+      add_route_train
+    when '13'
+
     else
       puts 'Повторите ввод!'
     end
