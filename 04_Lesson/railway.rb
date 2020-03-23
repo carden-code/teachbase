@@ -28,7 +28,8 @@ class Railway
                 ' 4 - Создать пассажирский вагон.',
                 ' 5 - Создать грузовой вагон.',
                 ' 6 - Посмотреть список вагонов.',
-                ' 7 - attach_wagon.',
+                ' 7 - Прицепить вагон к поезду',
+                ' 8 - Отцепить вагон от поезда',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -131,11 +132,17 @@ class Railway
 
   # Метод attach_wagon добавляет выбранный вагон к выбранному поезду.
   def attach_wagon
-    p 'Выберите поезд из списка. Введите соответствующий номер:'
+    p 'Введите соответствующий номер для выбора поезда:'
     selected_train
     p 'Выберете вагон из списка для прицепки к поезду (Должен совпадать Type ):'
     selected_wagon
     @selected_train.attach_wagon(@selected_wagon)
+  end
+
+  def detach_wagon
+    p 'Введите номер поезда у которого нужно отцепить вагон:'
+    selected_train
+    @selected_train.detach_wagon
   end
 
   # Метод selected принимает параметр из пользовательского ввода
@@ -158,6 +165,8 @@ class Railway
       list_wagons
     when '7'
       attach_wagon
+    when '8'
+      detach_wagon
     else
       puts 'Повторите ввод!'
     end
