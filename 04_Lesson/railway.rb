@@ -59,29 +59,29 @@ class Railway
   end
 
   # Метод dublicate_name? проверяет на наличие дубликатов номера.
-  def dublicate_number?(arr, number)
-    arr.each { |elem| return true if elem.number == number.to_s }
-    false
-  end
+  #def dublicate_number?(arr, number)
+  #  arr.each { |elem| return true if elem.number == number.to_s }
+  #  false
+#  end
 
   # Метод create_train_pass может создавать пассажирский поезд.
   def create_train_pass
     message = ['Введите номер поезда:']
-    number = data_input(message).first
+    name = data_input(message).first
 
-    return unless number != '' && !dublicate_number?(@trains, number)
+    return unless name != '' && !dublicate_name?(@trains, name)
 
-    @trains << PassengerTrain.new(number)
+    @trains << PassengerTrain.new(name)
   end
 
   # Метод create_train_cargo может создавать грузовой поезд.
   def create_train_cargo
     message = ['Введите номер поезда:']
-    number = data_input(message).first
+    name = data_input(message).first
 
-    return unless number != '' && !dublicate_number?(@trains, number)
+    return unless name != '' && !dublicate_name?(@trains, name)
 
-    @trains << CargoTrain.new(number)
+    @trains << CargoTrain.new(name)
   end
 
   # Метод create_wagon_pass может создавать пассажирский вагон.
