@@ -114,6 +114,8 @@ class Railway
 
   # Метод attach_wagon прицепляет вагон к поезду и удаляет из @wagons.
   def attach_wagon
+    return if @trains.size.zero? || @wagons.size.zero?
+
     train = choose_a_train
 
     suitable_wagon = @wagons.select { |wagon| wagon.type == train.type }.first
@@ -126,6 +128,8 @@ class Railway
 
   # Метод detach_wagon отцепляет вагон от поезда и добавляет в @wagons.
   def detach_wagon
+    return if @trains.size.zero? || @wagons.size.zero?
+
     train = choose_a_train
 
     return if train.wagons.size.zero?
@@ -167,6 +171,7 @@ class Railway
 
   # Метод add_station может добавлять промежуточную станцию в маршрут.
   def add_station
+    return if @routes.size.zero?
     p 'Введите номер маршрута в который хотите добавить станцию:'
     route = selected_route
 
@@ -178,6 +183,8 @@ class Railway
 
   # Метод delete_midway может удалять промежуточную станцию.
   def delete_midway
+    return if @routes.size.zero?
+
     p 'Введите номер маршрута из котороко нужно удалить станцию:'
     route = selected_route
 
@@ -223,6 +230,7 @@ class Railway
 
   # Метод list_trains_station может выводить список поездов на станции.
   def list_trains_station
+    return if @stations.size.zero?
     p 'Введите номер станции на которой хотите посмотреть список поездов.'
     station = selected_station_route
     p "Список поездов на станции: #{station.trains}"
