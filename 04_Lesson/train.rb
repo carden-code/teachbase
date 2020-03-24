@@ -21,7 +21,7 @@ class Train
   # Метод current_station может возвращать текущую станцию.
   # Метод current_speed может возвращать текущую скорость.
   attr_reader :name, :type, :wagons, :current_station, :current_speed
-  def initialize(number, type)
+  def initialize(name, type)
     @name = name.to_s
     @type = type
     @wagons = []
