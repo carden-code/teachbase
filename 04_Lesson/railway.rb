@@ -191,35 +191,41 @@ class Railway
 
   # Метод add_route_train может назначать маршрут поезду.
   def add_route_train
+    return if @trains.size.zero?
     p 'Введите номер поезда для которого нужно назначить маршрут:'
-    selected_train
+    train = choose_a_train
     p 'Введите номер маршрута который хотите назначить поезду:'
-    selected_route
-    @selected_train.route(@selected_route)
+    return if @routes.size.zero?
+    route = selected_route
+    train.route(route)
   end
 
   # Метод move_forwards может перемещать поезд вперед на одну станцию.
   def move_forwards
     p 'Введите номер поезда который нужно переместить на станцию вперед:'
-    selected_train
-    @selected_train.move_forwards
+    train = choose_a_train
+    train.move_forwards
+    puts train.current_station
   end
 
   # Метод move_backwards может перемещать поезд назад на одну станцию.
   def move_backwards
     p 'Введите номер поезда который нужно переместить на станцию назад:'
-    selected_train
-    @selected_train.move_backwards
+    train = choose_a_train
+    train.move_backwards
+    puts train.current_station
   end
 
+  # Метод list_stations может выводить список станций.
   def list_stations
     @stations.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
   end
 
+  # Метод list_trains_station может выводить список поездов на станции.
   def list_trains_station
     p 'Введите номер станции на которой хотит посмотреть список поездов'
-    selected_station_route
-    p "Список поездов на станции: #{@selected_station.trains}"
+    station = selected_station_route
+    p "Список поездов на станции: #{station.trains}"
   end
 
 
