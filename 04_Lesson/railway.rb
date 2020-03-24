@@ -175,11 +175,9 @@ class Railway
   # Метод delete_midway может удалять промежуточную станцию.
   def delete_midway
     p 'Введите номер маршрута из котороко нужно удалить станцию:'
-    selected_route
+    route = selected_route
     p 'Введите номер станции которую хотите удалить из маршрута:'
-    selected_station_route
-    @selected_route.delete_midway(@selected_station)
-    #@stations.delete(@selected_station) под вопросом.....
+    route.delete_midway(selected_station_route)
   end
 
   # Метод add_route_train может назначать маршрут поезду.
