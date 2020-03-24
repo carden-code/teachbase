@@ -138,7 +138,7 @@ class Railway
   end
 
   # Метод selected_station_route может выводить список станций
-  # и запрашивает ввод пользователя для выбора станции.
+  # и запрашивает ввод пользователя для выбора станции..
   def selected_station_route
     message = @stations
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
