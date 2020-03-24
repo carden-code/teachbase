@@ -102,60 +102,17 @@ class Railway
     @wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
   end
 
-  #def attach_wagon
-  #  message = @trains
-  #  message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
-  #  index = data_input(message).first.to_i - 1
-  #  puts "\n\nindex: #{index}"
-  #  selected_train = @trains[index]
-  #  puts "Selected train: #{selected_train}"
-  #  selected_train.attach_wagon(@wagons.first)
-  #end
-
-  # Метод selected_train может выбирать поезд из списка.
-  #def selected_train
-  #  message = @trains
-  #  message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
-  #  index = data_input(message).first.to_i - 1
-  #  puts "\n\nindex: #{index}"
-  #  @selected_train = @trains[index]
-  #  puts "Selected train: #{@selected_train}"
-  #end
-
-  # Метод selected_wagon может выбирать вагон из списка.
-  #def selected_wagon
-  #  message = @wagons
-  #  message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
-  #  index = data_input(message).first.to_i - 1
-  #  puts "\n\nindex: #{index}"
-  #  @selected_wagon = @wagons[index]
-  #  puts "Selected wagon: #{@selected_wagon}"
-#  end
-
-  # Метод attach_wagon добавляет выбранный вагон к выбранному поезду
-  # и удаляет вагон из @wagons.
-  #def attach_wagon
-  #  p 'Введите соответствующий номер для выбора поезда:'
-  #  selected_train
-  #  p 'Выберете вагон из списка для прицепки к поезду (Должен совпадать Type):'
-  #  selected_wagon
-  #  return if @selected_train.type != @selected_wagon.type
-  #  @selected_train.attach_wagon(@selected_wagon)
-  #  @wagons.delete(@selected_wagon)
-#  end
-
-  # Метод detach_wagon отцепляет вагон от поезда и добавляет в @wagons.
-#  def detach_wagon
-  #  p 'Введите номер поезда у которого нужно отцепить вагон:'
-  #  selected_train
-  #  @wagons.push(@selected_train.detach_wagon)
-#  end
-  def attach_wagon
+  def choose_a_train
     message = @trains
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
 
+    message = ['Выбрать поезд: ']
     index = data_input(message).first.to_i - 1
-    train = @trains[index]
+    @trains[index]
+  end
+
+  def attach_wagon
+    train = choose_a_train
 
     suitable_wagon = @wagons.select { |wagon| wagon.type == train.type }.first
 
@@ -165,13 +122,9 @@ class Railway
     @wagons.delete(suitable_wagon)
   end
 
- # detach_wagon
+  # detach_wagon
   def detach_wagon
-    message = @trains
-    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
-
-    index = data_input(message).first.to_i - 1
-    train = @trains[index]
+    train = choose_a_train
 
     return if train.wagons.size.zero?
 
@@ -183,20 +136,21 @@ class Railway
   def selected_station_route
     message = @stations
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+
+    message = ['Выбрать станцию: ']
     index = data_input(message).first.to_i - 1
-    puts "\n\nindex: #{index}"
-    @selected_station = @stations[index]
-    puts "Selected station: #{@selected_station}"
+    @stations[index]
   end
 
   # Метод create_route может создавать маршрут из двух выбранных станций.
   def create_route
+    return if @stations.size < 2
+
     p 'Выберете начальную станцию для маршрута:'
-    selected_station_route
-    first = @selected_station
+    first = selected_station_route
     p 'Выберете конечную станцию для маршрута:'
-    selected_station_route
-    last = @selected_station
+    last = selected_station_route
+
     @routes << Route.new(first, last) if first != last
   end
 
@@ -204,20 +158,18 @@ class Railway
   def selected_route
     message = @routes
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+
+    message = ['Выбрать маршрут: ']
     index = data_input(message).first.to_i - 1
-    puts "\n\nindex: #{index}"
-    @selected_route = @routes[index]
-    puts "Selected route: #{@selected_route}"
+    @routes[index]
   end
 
   # Метод add_station может добавлять промежуточную станцию в маршрут.
   def add_station
     p 'Введите номер маршрута в который хотите добавить станцию:'
-    selected_route
+    route = selected_route
     p 'Введите название станции:'
-    input = Station.new(gets.chomp)
-    @stations.insert(-2, input) unless @stations.include? input
-    @selected_route.midway(input)
+    route.midway(selected_station_route)
   end
 
   # Метод delete_midway может удалять промежуточную станцию.
