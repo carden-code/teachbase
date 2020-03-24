@@ -43,7 +43,7 @@ class Railway
     messages.each { |item| puts item }
   end
 
-  # Метод data_input принимает параметр печатает его.
+  # Метод data_input принимает параметр печатает его
   # и запрашивает ввод пользователя, результат сохранят в @args.
   def data_input(message)
     @args = []
@@ -102,6 +102,7 @@ class Railway
     @wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
   end
 
+  # Метод choose_a_train возвращает выбранный пользователем поезд.
   def choose_a_train
     message = @trains
     message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
@@ -111,6 +112,7 @@ class Railway
     @trains[index]
   end
 
+  # Метод attach_wagon прицепляет вагон к поезду и удаляет из @wagons.
   def attach_wagon
     train = choose_a_train
 
@@ -122,7 +124,7 @@ class Railway
     @wagons.delete(suitable_wagon)
   end
 
-  # detach_wagon
+  # Метод detach_wagon отцепляет вагон от поезда и добавляет в @wagons.
   def detach_wagon
     train = choose_a_train
 
@@ -191,29 +193,27 @@ class Railway
 
   # Метод add_route_train может назначать маршрут поезду.
   def add_route_train
-    return if @trains.size.zero?
+    return if @trains.size.zero? || @routes.size.zero?
+
     p 'Введите номер поезда для которого нужно назначить маршрут:'
     train = choose_a_train
     p 'Введите номер маршрута который хотите назначить поезду:'
-    return if @routes.size.zero?
     route = selected_route
     train.route(route)
   end
 
   # Метод move_forwards может перемещать поезд вперед на одну станцию.
   def move_forwards
+    return if @trains.size.zero?
     p 'Введите номер поезда который нужно переместить на станцию вперед:'
-    train = choose_a_train
-    train.move_forwards
-    puts train.current_station
+    choose_a_train.move_forwards
   end
 
   # Метод move_backwards может перемещать поезд назад на одну станцию.
   def move_backwards
+    return if @trains.size.zero?
     p 'Введите номер поезда который нужно переместить на станцию назад:'
-    train = choose_a_train
-    train.move_backwards
-    puts train.current_station
+    choose_a_train.move_backwards
   end
 
   # Метод list_stations может выводить список станций.
