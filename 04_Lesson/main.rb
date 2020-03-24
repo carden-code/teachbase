@@ -1,4 +1,5 @@
-# Подгруженные файлы (Классы)(модули)
+require "pry"
+# Подгруженные файлы (Классы)(модули)sssssдсСsssss
 require_relative 'train'
 require_relative 'route'
 require_relative 'wagon'
