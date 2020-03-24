@@ -1,4 +1,4 @@
-# Подгруженные файлы (Классы)(модули)sssssдсСsssss
+# Подгруженные файлы (Классы)(модули)
 require_relative 'train'
 require_relative 'route'
 require_relative 'wagon'
@@ -18,7 +18,7 @@ puts NEWLINE
 puts "Добро пожаловать в программу 'Железная дорога'"
 puts NEWLINE
 # Запуск меню (Цикл). С запросом ввода нужного пользователю пункта
-# и передаёт результат в класс.
+# и передаёт результат в виде параметра методу selected.
 loop do
   puts "stations: #{railway.stations}\n\n"
   puts "trains: #{railway.trains}\n\n"
