@@ -20,9 +20,9 @@ class Train
   # Метод wagons возвращает колличество вагоно поезда.
   # Метод current_station может возвращать текущую станцию.
   # Метод current_speed может возвращать текущую скорость.
-  attr_reader :number, :type, :wagons, :current_station, :current_speed
+  attr_reader :name, :type, :wagons, :current_station, :current_speed
   def initialize(number, type)
-    @number = number.to_s
+    @name = name.to_s
     @type = type
     @wagons = []
     @current_speed = 0
