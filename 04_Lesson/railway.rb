@@ -150,7 +150,6 @@ class Railway
     first = selected_station_route
     p 'Выберете конечную станцию для маршрута:'
     last = selected_station_route
-
     @routes << Route.new(first, last) if first != last
   end
 
@@ -168,6 +167,9 @@ class Railway
   def add_station
     p 'Введите номер маршрута в который хотите добавить станцию:'
     route = selected_route
+
+    return if route.nil?
+
     p 'Введите название станции:'
     route.midway(selected_station_route)
   end
@@ -176,8 +178,15 @@ class Railway
   def delete_midway
     p 'Введите номер маршрута из котороко нужно удалить станцию:'
     route = selected_route
+
+    return if route.nil?
+
     p 'Введите номер станции которую хотите удалить из маршрута:'
-    route.delete_midway(selected_station_route)
+    station = selected_station_route
+
+    return if station == (route.stations.first && route.stations.last)
+
+    route.delete_midway(station)
   end
 
   # Метод add_route_train может назначать маршрут поезду.
