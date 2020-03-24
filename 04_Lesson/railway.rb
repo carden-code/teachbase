@@ -113,42 +113,69 @@ class Railway
   #end
 
   # Метод selected_train может выбирать поезд из списка.
-  def selected_train
-    message = @trains
-    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
-    index = data_input(message).first.to_i - 1
-    puts "\n\nindex: #{index}"
-    @selected_train = @trains[index]
-    puts "Selected train: #{@selected_train}"
-  end
+  #def selected_train
+  #  message = @trains
+  #  message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+  #  index = data_input(message).first.to_i - 1
+  #  puts "\n\nindex: #{index}"
+  #  @selected_train = @trains[index]
+  #  puts "Selected train: #{@selected_train}"
+  #end
 
   # Метод selected_wagon может выбирать вагон из списка.
-  def selected_wagon
-    message = @wagons
-    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
-    index = data_input(message).first.to_i - 1
-    puts "\n\nindex: #{index}"
-    @selected_wagon = @wagons[index]
-    puts "Selected wagon: #{@selected_wagon}"
-  end
+  #def selected_wagon
+  #  message = @wagons
+  #  message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+  #  index = data_input(message).first.to_i - 1
+  #  puts "\n\nindex: #{index}"
+  #  @selected_wagon = @wagons[index]
+  #  puts "Selected wagon: #{@selected_wagon}"
+#  end
 
   # Метод attach_wagon добавляет выбранный вагон к выбранному поезду
   # и удаляет вагон из @wagons.
-  def attach_wagon
-    p 'Введите соответствующий номер для выбора поезда:'
-    selected_train
-    p 'Выберете вагон из списка для прицепки к поезду (Должен совпадать Type ):'
-    selected_wagon
-    return if @selected_train.type != @selected_wagon.type
-    @selected_train.attach_wagon(@selected_wagon)
-    @wagons.delete(@selected_wagon)
-  end
+  #def attach_wagon
+  #  p 'Введите соответствующий номер для выбора поезда:'
+  #  selected_train
+  #  p 'Выберете вагон из списка для прицепки к поезду (Должен совпадать Type):'
+  #  selected_wagon
+  #  return if @selected_train.type != @selected_wagon.type
+  #  @selected_train.attach_wagon(@selected_wagon)
+  #  @wagons.delete(@selected_wagon)
+#  end
 
   # Метод detach_wagon отцепляет вагон от поезда и добавляет в @wagons.
+#  def detach_wagon
+  #  p 'Введите номер поезда у которого нужно отцепить вагон:'
+  #  selected_train
+  #  @wagons.push(@selected_train.detach_wagon)
+#  end
+  def attach_wagon
+    message = @trains
+    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+
+    index = data_input(message).first.to_i - 1
+    train = @trains[index]
+
+    suitable_wagon = @wagons.select { |wagon| wagon.type == train.type }.first
+
+    return if suitable_wagon.nil?
+
+    train.attach_wagon(suitable_wagon)
+    @wagons.delete(suitable_wagon)
+  end
+
+ # detach_wagon
   def detach_wagon
-    p 'Введите номер поезда у которого нужно отцепить вагон:'
-    selected_train
-    @wagons.push(@selected_train.detach_wagon)
+    message = @trains
+    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+
+    index = data_input(message).first.to_i - 1
+    train = @trains[index]
+
+    return if train.wagons.size.zero?
+
+    @wagons << train.detach_wagon
   end
 
   # Метод selected_station_route может выводить список станций
