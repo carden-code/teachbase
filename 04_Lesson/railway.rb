@@ -236,7 +236,6 @@ class Railway
     p "Список поездов на станции: #{station.trains}"
   end
 
-
   # Метод selected принимает параметр из пользовательского ввода
   # и исполняет соответствующий метод.
   def selected(menu_item)
