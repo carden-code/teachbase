@@ -139,6 +139,7 @@ class Railway
     selected_train
     p 'Выберете вагон из списка для прицепки к поезду (Должен совпадать Type ):'
     selected_wagon
+    return if @selected_train.type != @selected_wagon.type
     @selected_train.attach_wagon(@selected_wagon)
     @wagons.delete(@selected_wagon)
   end
