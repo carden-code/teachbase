@@ -223,7 +223,7 @@ class Railway
 
   # Метод list_trains_station может выводить список поездов на станции.
   def list_trains_station
-    p 'Введите номер станции на которой хотит посмотреть список поездов'
+    p 'Введите номер станции на которой хотите посмотреть список поездов.'
     station = selected_station_route
     p "Список поездов на станции: #{station.trains}"
   end
