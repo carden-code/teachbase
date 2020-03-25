@@ -174,8 +174,6 @@ class Railway
     p 'Введите номер маршрута в который хотите добавить станцию:'
     route = selected_route
 
-    return if route.nil?
-
     p 'Введите название станции:'
     route.midway(selected_station_route)
   end
@@ -184,10 +182,8 @@ class Railway
   def delete_midway
     return if @routes.size.zero?
 
-    p 'Введите номер маршрута из котороко нужно удалить станцию:'
+    p 'Введите номер маршрута из которого нужно удалить станцию:'
     route = selected_route
-
-    return if route.nil?
 
     p 'Введите номер станции которую хотите удалить из маршрута:'
     station = selected_station_route
