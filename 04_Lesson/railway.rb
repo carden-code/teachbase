@@ -161,7 +161,7 @@ class Railway
   # Метод selected_route может выбирать из списка маршрут.
   def selected_route
     message = @routes
-    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem.stations}" }
+    message.each_with_index { |elem, ind| puts "#{ind + 1}. #{elem.stations}" }
 
     message = ['Выбрать маршрут: ']
     index = data_input(message).first.to_i - 1
@@ -220,7 +220,7 @@ class Railway
 
   # Метод list_stations может выводить список станций.
   def list_stations
-    @stations.each_with_index { |elem, index| puts "#{index + 1}. #{elem.name}" }
+    @stations.each_with_index { |elem, index| puts "#{index + 1}.#{elem.name}" }
   end
 
   # Метод list_trains_station может выводить список поездов на станции.
