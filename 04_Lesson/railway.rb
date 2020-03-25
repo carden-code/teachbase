@@ -104,7 +104,7 @@ class Railway
   # Метод choose_a_train возвращает выбранный пользователем поезд.
   def choose_a_train
     message = @trains
-    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem.name}" }
 
     message = ['Выбрать поезд: ']
     index = data_input(message).first.to_i - 1
@@ -140,7 +140,7 @@ class Railway
   # и запрашивает ввод пользователя для выбора станции.
   def selected_station_route
     message = @stations
-    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem.name}" }
 
     message = ['Выбрать станцию: ']
     index = data_input(message).first.to_i - 1
@@ -161,7 +161,7 @@ class Railway
   # Метод selected_route может выбирать из списка маршрут.
   def selected_route
     message = @routes
-    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    message.each_with_index { |elem, index| puts "#{index + 1}. #{elem.stations}" }
 
     message = ['Выбрать маршрут: ']
     index = data_input(message).first.to_i - 1
@@ -170,7 +170,7 @@ class Railway
 
   # Метод add_station может добавлять промежуточную станцию в маршрут.
   def add_station
-    return if @routes.size.zero?
+    return if @routes.size.zero? || @stations.size < 3
     p 'Введите номер маршрута в который хотите добавить станцию:'
     route = selected_route
 
@@ -180,7 +180,7 @@ class Railway
 
   # Метод delete_midway может удалять промежуточную станцию.
   def delete_midway
-    return if @routes.size.zero?
+    return if @routes.size.zero? || @stations.size < 3
 
     p 'Введите номер маршрута из которого нужно удалить станцию:'
     route = selected_route
@@ -220,7 +220,7 @@ class Railway
 
   # Метод list_stations может выводить список станций.
   def list_stations
-    @stations.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    @stations.each_with_index { |elem, index| puts "#{index + 1}. #{elem.name}" }
   end
 
   # Метод list_trains_station может выводить список поездов на станции.
@@ -228,7 +228,7 @@ class Railway
     return if @stations.size.zero?
     p 'Введите номер станции на которой хотите посмотреть список поездов.'
     station = selected_station_route
-    p "Список поездов на станции: #{station.trains}"
+    p "Список поездов на станции #{station.name}: #{station.trains}"
   end
 
   # Метод selected принимает параметр из пользовательского ввода
