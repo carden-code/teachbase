@@ -53,8 +53,7 @@ class Railway
 
   # Метод dublicate_name? проверяет на наличие дубликатов имен.
   def dublicate_name?(arr, name)
-    arr.each { |elem| return true if elem.name == name.to_s }
-    false
+    arr.any? { |elem| elem.name == name.to_s }
   end
 
   # Метод create_station создаёт станцию.
