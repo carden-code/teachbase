@@ -28,6 +28,10 @@ class Train
     @current_speed = 0
   end
 
+  def self.find(name)
+
+  end
+
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
   # за операцию) В качестве параметра принимает объекты класса (PassengerWagon и
   # CargoWagon).
