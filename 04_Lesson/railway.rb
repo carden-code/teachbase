@@ -270,7 +270,7 @@ class Railway
     when '16'
       list_trains_station
     else
-      puts 'Повторите ввод!'
+      puts 'Повторите ввод.'
     end
   end
 end
