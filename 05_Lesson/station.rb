@@ -7,10 +7,10 @@
 #  Может отправлять поезда (по одному за раз, при этом, поезд удаляется из
 # списка поездов, находящихся на станции).
 class Station
-  @@all = []
+  @@all_stations = []
 
   def self.all
-    @@all
+    @@all_stations
   end
 
   # Метод trains может возвращать список всех поездов на станции, находящиеся в
@@ -18,7 +18,7 @@ class Station
   # Метод name может возвращать название станции
   attr_reader :trains, :name
   def initialize(name)
-    @@all += 1
+    @@all_stations << self
     @name = name
     @trains = []
   end
