@@ -9,6 +9,7 @@
 class Station
   @@all_stations = []
 
+  # Метод self.all возвращает все станции(объекты), созданные на данный момент.
   def self.all
     @@all_stations
   end
