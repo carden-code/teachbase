@@ -5,6 +5,7 @@ module Company
   def name_company(name)
     @name_company = name
   end
+
   # Возвращает название компании.
   def return_company
     @name_company
