@@ -1,5 +1,9 @@
 #
 module InstanceCounter
+  def self.icluded(base)
+    base.extend ClassMethods
+    base.send :include, InstanceMethods
+  end
 
   #
   module ClassMethods
@@ -10,7 +14,11 @@ module InstanceCounter
 
   #
   module InstanceMethods
+
+    protected
+
     def register_instance
+      @@instances += 1
     end
   end
 end
