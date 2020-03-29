@@ -9,6 +9,10 @@
 class Station
   @@all = 0
 
+  def self.all
+    @@all
+  end
+
   # Метод trains может возвращать список всех поездов на станции, находящиеся в
   # текущий момент.
   # Метод name может возвращать название станции
@@ -17,10 +21,6 @@ class Station
     @@all += 1
     @name = name
     @trains = []
-  end
-
-  def self.all
-    @@all
   end
 
   # Метод arrive принимает  параметр в виде объекта train.
