@@ -17,16 +17,12 @@ require_relative 'module_company'
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class Train
   @@trains = []
+
   # Метод класса find, принимает номер поезда (указанный при его создании)
   # и возвращает объект поезда по номеру или nil,
   # если поезд с таким номером не найден.
-
-  def self.return_train
-    @@trains
-  end
-
   def self.find(name)
-    @@trains.any? { self.name == name }
+    @@trains.any? { |elem| return elem if elem.name == name } || nil
   end
 
   # Метод number возвращает номер поезда.
