@@ -16,10 +16,17 @@ require_relative 'module_company'
 # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class Train
+  @@trains = []
   # Метод класса find, принимает номер поезда (указанный при его создании)
   # и возвращает объект поезда по номеру или nil,
   # если поезд с таким номером не найден.
+
+  def self.return_train
+    @@trains
+  end
+
   def self.find(name)
+    @@trains.any? { self.name == name }
   end
 
   # Метод number возвращает номер поезда.
@@ -29,6 +36,7 @@ class Train
   # Метод current_speed может возвращать текущую скорость.
   attr_reader :name, :type, :wagons, :current_station, :current_speed
   def initialize(name, type)
+    @@trains << self
     @name = name.to_s
     @type = type
     @wagons = []
