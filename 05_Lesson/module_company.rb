@@ -1,9 +1,4 @@
 #
 module Company
-  class CompanyName
-    attr_reader :name
-    def initialize(name)
-      @name = name
-    end
-  end
+  attr_reader :name
 end
