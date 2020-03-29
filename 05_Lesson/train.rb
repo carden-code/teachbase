@@ -1,4 +1,5 @@
 require_relative 'module_company'
+require_relative 'instance_counter'
 # Класс Train (Поезд):
 # Имеет номер (произвольная строка) и тип (грузовой, пассажирский)
 # и количество вагонов, эти данные указываются при создании экземпляра класса
@@ -18,6 +19,7 @@ require_relative 'module_company'
 class Train
   # Подключенный Модуль.
   include Company
+  include InstanceCounter
   # @@trains содержит всё созданные на данный момент объекты класса Train.
   @@trains = []
 
@@ -40,6 +42,7 @@ class Train
     @type = type
     @wagons = []
     @current_speed = 0
+    register_instance
   end
 
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
