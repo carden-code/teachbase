@@ -22,7 +22,7 @@ class Train
   # и возвращает объект поезда по номеру или nil,
   # если поезд с таким номером не найден.
   def self.find(name)
-    @@trains.any? { |elem| return elem if elem.name == name.to_s } || nil
+    @@trains.any? { |elem| return elem if elem.name == name } || nil
   end
 
   # Метод number возвращает номер поезда.
