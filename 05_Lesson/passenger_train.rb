@@ -16,8 +16,8 @@
 # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class PassengerTrain < Train
-  def initialize(number)
-    super number, 'pass'
+  def initialize(name)
+    super name, 'pass'
   end
 
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
