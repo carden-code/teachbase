@@ -16,6 +16,7 @@ module InstanceCounter
     def register_count
       @@instances += 1
     end
+    private :instances
   end
 
   #
