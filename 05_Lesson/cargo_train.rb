@@ -18,7 +18,6 @@
 class CargoTrain < Train
   def initialize(number)
     super number, 'cargo'
-    instance_register
   end
 
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
