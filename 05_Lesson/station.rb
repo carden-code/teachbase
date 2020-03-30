@@ -1,3 +1,4 @@
+require_relative 'instance_counter'
 # Класс Station (Станция):
 #  Имеет название, которое указывается при ее создании.
 #  Может принимать поезда (по одному за раз).
@@ -7,6 +8,8 @@
 #  Может отправлять поезда (по одному за раз, при этом, поезд удаляется из
 # списка поездов, находящихся на станции).
 class Station
+  include InstanceCounter
+
   @@all_stations = []
 
   # Метод self.all возвращает все станции(объекты), созданные на данный момент.
@@ -22,6 +25,7 @@ class Station
     @@all_stations << self
     @name = name
     @trains = []
+    register_instance
   end
 
   # Метод arrive принимает  параметр в виде объекта train.
