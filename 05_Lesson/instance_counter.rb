@@ -10,11 +10,12 @@ module InstanceCounter
   module ClassMethods
     # Метод instances возвращает кол-во экземпляров данного класса.
     def instances
-      @instances
+      @instances ||= 0
     end
 
     # Метод register_count прибавляет к инстанс переменно +1.
     def register_count
+      @instances ||= 0
       @instances += 1
     end
   end
