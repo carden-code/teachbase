@@ -22,13 +22,13 @@ class Train
   # Описание находится в модуле.
   include InstanceCounter
   # @@trains содержит всё созданные на данный момент объекты класса Train.
-  @@trains = []
+  @@trains = {}
 
   # Метод класса find, принимает номер поезда (указанный при его создании)
   # и возвращает объект поезда по номеру или nil,
   # если поезд с таким номером не найден.
   def self.find(name)
-    @@trains.any? { |elem| return elem if elem.name == name } || nil
+    @@trains[name]
   end
 
   # Метод number возвращает номер поезда.
@@ -38,7 +38,7 @@ class Train
   # Метод current_speed может возвращать текущую скорость.
   attr_reader :name, :type, :wagons, :current_station, :current_speed
   def initialize(name, type)
-    @@trains << self
+    @@trains[name] = self
     @name = name.to_s
     @type = type
     @wagons = []
