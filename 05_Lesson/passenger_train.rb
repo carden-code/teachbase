@@ -16,7 +16,6 @@
 # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class PassengerTrain < Train
-  @instances ||= 0
   def initialize(name)
     super name, 'pass'
   end
