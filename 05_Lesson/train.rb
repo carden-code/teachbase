@@ -23,7 +23,6 @@ class Train
   include InstanceCounter
   # @@trains содержит всё созданные на данный момент объекты класса Train.
   @@trains = []
-  @instances ||= 0
 
   # Метод класса find, принимает номер поезда (указанный при его создании)
   # и возвращает объект поезда по номеру или nil,
@@ -44,6 +43,7 @@ class Train
     @type = type
     @wagons = []
     @current_speed = 0
+    # Метод register_instance модуля InstanceCounter (Описание в модуле).
     register_instance
   end
 
