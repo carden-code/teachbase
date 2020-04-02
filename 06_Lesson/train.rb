@@ -22,6 +22,8 @@ class Train
   include Company
   # Описание находится в модуле.
   include InstanceCounter
+
+  NUMBER_FORMAT = /^[a-z\d]{3}-*[a-z\d]{2}$/i
   # @@trains содержит всё созданные на данный момент объекты класса Train.
   @@trains = {}
 
