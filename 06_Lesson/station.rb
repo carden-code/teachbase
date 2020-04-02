@@ -28,6 +28,7 @@ class Station
     @name = name
     @trains = []
     register_instance
+    validate!
   end
 
   # Метод arrive принимает  параметр в виде объекта train.
@@ -48,5 +49,20 @@ class Station
   # поезд удаляется из списка поездов(@trains), находящихся на станции).
   def delete(train)
     @trains.delete(train)
+  end
+
+  def valid?
+    validate!
+    true
+  rescue Rubtime
+    false
+  end
+
+  private
+
+  # Приватный метод validate! выбрасывает исключение
+  # если есть несоответствие условию.
+  def validate!
+    raise 'Ошибка! Название станции отсутствует.' if @name.nil? || @name.empty?
   end
 end
