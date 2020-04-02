@@ -8,6 +8,7 @@ require_relative 'instance_counter'
 # Может удалять промежуточную станцию из списка
 # Может выводить список всех станций по-порядку от начальной до конечной
 class Route
+  # Подключение модуля InstanceCounter.
   include InstanceCounter
   # Метод stations возвращает все станции в маршруте
   attr_reader :stations
