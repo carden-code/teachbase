@@ -42,7 +42,7 @@ class Route
   def valid?
     validate!
     true
-  rescue StandardError
+  rescue RuntimeError
     false
   end
 
@@ -52,7 +52,6 @@ class Route
   # если есть несоответствие условию.
   def validate!
     raise 'Количество станций не может быть меньше двух!' if @stations.size < 2
-    #raise 'Маршрут может состоять только из станций!' if @stations.first != station.name
-    raise 'Начальная и конечная станции должны различаться!' if @stations.first == @stations.last
+    raise 'Станции должны отличаться!' if @stations.first == @stations.last
   end
 end
