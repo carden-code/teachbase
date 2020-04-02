@@ -54,7 +54,7 @@ class Station
   def valid?
     validate!
     true
-  rescue Rubtime
+  rescue ArgumentError
     false
   end
 
