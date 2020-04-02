@@ -50,19 +50,4 @@ class Station
   def delete(train)
     @trains.delete(train)
   end
-
-  def valid?
-    validate!
-    true
-  rescue ArgumentError
-    false
-  end
-
-  private
-
-  # Приватный метод validate! выбрасывает исключение
-  # если есть несоответствие условию.
-  def validate!
-    raise 'Ошибка! Название станции отсутствует.' if @name.nil? || @name.empty?
-  end
 end
