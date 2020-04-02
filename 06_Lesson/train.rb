@@ -43,11 +43,24 @@ class Train
   def initialize(name, type)
     @@trains[name] = self
     @name = name.to_s
+    validate!
     @type = type
     @wagons = []
     @current_speed = 0
     # Метод register_instance модуля InstanceCounter (Описание в модуле).
     register_instance
+  end
+
+  def validate!
+    raise 'Номер не правильного формата' if name !~ NUMBER_FORMAT
+  end
+
+  # Метод valid? проверяет валидность объекта.
+  def valid?
+    validate!
+    true
+  rescue StandardError
+    false
   end
 
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
