@@ -1,4 +1,5 @@
 require_relative 'instance_counter'
+
 # Класс Station (Станция):
 #  Имеет название, которое указывается при ее создании.
 #  Может принимать поезда (по одному за раз).
@@ -8,6 +9,7 @@ require_relative 'instance_counter'
 #  Может отправлять поезда (по одному за раз, при этом, поезд удаляется из
 # списка поездов, находящихся на станции).
 class Station
+  # Подключение модуля InstanceCounter.
   include InstanceCounter
 
   @@all_stations = []
