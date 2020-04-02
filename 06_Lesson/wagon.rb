@@ -19,6 +19,6 @@ class Wagon
   end
 
   def validate!
-    raise 'Введен не правильны формат' if type != 'pass' && type != 'cargo'
+    raise 'Не формат! Введите:(pass,cargo)' if type != 'pass' && type != 'cargo'
   end
 end
