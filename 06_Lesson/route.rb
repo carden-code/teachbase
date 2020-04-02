@@ -42,7 +42,7 @@ class Route
   def valid?
     validate!
     true
-  rescue RuntimeError
+  rescue StandardError
     false
   end
 
