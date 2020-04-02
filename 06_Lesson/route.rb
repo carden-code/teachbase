@@ -14,8 +14,8 @@ class Route
   attr_reader :stations
   def initialize(first, last)
     @stations = [first, last]
-    register_instance
     validate!
+    register_instance
   end
 
   # Метод midway может добавлять промежуточную станцию в список.
