@@ -18,7 +18,9 @@ class Wagon
     false
   end
 
+  private
+
   def validate!
-    raise 'Не формат! Введите:(pass,cargo)' if type != 'pass' && type != 'cargo'
+    raise 'Ошибка! Тип не указан!' if @type.nil? || @type.empty?
   end
 end
