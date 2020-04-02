@@ -43,6 +43,49 @@ class Railway
     messages.each { |item| puts item }
   end
 
+  # Метод selected принимает параметр из пользовательского ввода
+  # и исполняет соответствующий метод.
+  def selected(menu_item)
+    puts "Your choice: #{menu_item}" if menu_item != ''
+
+    case menu_item
+    when '1'
+      create_station
+    when '2'
+      create_train_pass
+    when '3'
+      create_train_cargo
+    when '4'
+      create_wagon_pass
+    when '5'
+      create_wagon_cargo
+    when '6'
+      list_wagons
+    when '7'
+      attach_wagon
+    when '8'
+      detach_wagon
+    when '9'
+      create_route
+    when '10'
+      add_station
+    when '11'
+      delete_midway
+    when '12'
+      add_route_train
+    when '13'
+      move_forwards
+    when '14'
+      move_backwards
+    when '15'
+      list_stations
+    when '16'
+      list_trains_station
+    else
+      puts 'Повторите ввод.'
+    end
+  end
+
   # Метод data_input принимает параметр печатает его
   # и запрашивает ввод пользователя, результат сохранят в @args.
   def data_input(message)
@@ -229,48 +272,5 @@ class Railway
     puts 'Введите номер станции на которой хотите посмотреть список поездов.'
     station = selected_station_route
     puts "Список поездов на станции #{station.name}: #{station.trains}"
-  end
-
-  # Метод selected принимает параметр из пользовательского ввода
-  # и исполняет соответствующий метод.
-  def selected(menu_item)
-    puts "Your choice: #{menu_item}" if menu_item != ''
-
-    case menu_item
-    when '1'
-      create_station
-    when '2'
-      create_train_pass
-    when '3'
-      create_train_cargo
-    when '4'
-      create_wagon_pass
-    when '5'
-      create_wagon_cargo
-    when '6'
-      list_wagons
-    when '7'
-      attach_wagon
-    when '8'
-      detach_wagon
-    when '9'
-      create_route
-    when '10'
-      add_station
-    when '11'
-      delete_midway
-    when '12'
-      add_route_train
-    when '13'
-      move_forwards
-    when '14'
-      move_backwards
-    when '15'
-      list_stations
-    when '16'
-      list_trains_station
-    else
-      puts 'Повторите ввод.'
-    end
   end
 end
