@@ -26,9 +26,9 @@ class Station
   def initialize(name)
     @@all_stations << self
     @name = name
+    validate!
     @trains = []
     register_instance
-    validate!
   end
 
   # Метод arrive принимает  параметр в виде объекта train.
