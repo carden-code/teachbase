@@ -51,7 +51,6 @@ class Route
   # Приватный метод validate! выбрасывает исключение
   # если есть несоответствие условию.
   def validate!
-    #raise 'Количество станций не может быть меньше двух!' if @stations.size < 2
-    raise 'Станции одинаковые!' if @stations.first.name == @stations.last.name
+    raise 'Станции одинаковые!' if @stations.first == @stations.last
   end
 end
