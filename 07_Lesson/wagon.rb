@@ -7,8 +7,10 @@ class Wagon
   # Подключение модуля Company.
   include Company
   # метод type возвращает type объекта.
-  attr_reader :type
-  def initialize(type)
+  # Метод capacity возвращает доступную вместимость.
+  attr_reader :type, :capacity
+  def initialize(type, capacity)
+    @capacity = capacity
     @type = type
     validate!
   end
@@ -21,11 +23,12 @@ class Wagon
     false
   end
 
-  private
+  protected
 
   # Приватный метод validate! выбрасывает исключение
   # если есть несоответствие условию.
   def validate!
     raise 'Ошибка! Тип не указан!' if @type.nil? || @type.empty?
+    raise 'Ошибка! Вместимость должна быть больше 0' unless @capacity.positive?
   end
 end
