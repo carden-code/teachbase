@@ -52,7 +52,7 @@ class Train
   end
 
   def validate!
-    raise 'Номер не правильного формата' if name !~ NUMBER_FORMAT
+    raise 'Ошибка! Не правильный формат номера!' if name !~ NUMBER_FORMAT
   end
 
   # Метод valid? проверяет валидность объекта.
