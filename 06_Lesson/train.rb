@@ -52,10 +52,6 @@ class Train
     register_instance
   end
 
-  def validate!
-    raise 'Ошибка! Не правильный формат номера!' if name !~ NUMBER_FORMAT
-  end
-
   # Метод valid? проверяет валидность объекта.
   def valid?
     validate!
@@ -178,5 +174,11 @@ class Train
 
     # Возвращает предыдущую станцию маршрута.
     @route.stations[current_index - 1]
+  end
+
+  private
+
+  def validate!
+    raise 'Ошибка! Не правильный формат номера!' if name !~ NUMBER_FORMAT
   end
 end
