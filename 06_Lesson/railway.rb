@@ -109,12 +109,14 @@ class Railway
     @stations << Station.new(name)
   end
 
+  # Метод info_train_created выводит сообщение.
   def info_train_created
-    puts "Поезд успешно создан."
+    puts 'Поезд успешно создан.'
   end
 
+  # Метод error_message выводит аргумент.
   def error_message(e)
-    puts "#{e}"
+    puts e
   end
 
   # Метод create_train_pass может создавать пассажирский поезд.
