@@ -109,31 +109,39 @@ class Railway
     @stations << Station.new(name)
   end
 
+  def info_train_created
+    puts "Поезд успешно создан."
+  end
+
+  def error_message(e)
+    puts "#{e}"
+  end
+
   # Метод create_train_pass может создавать пассажирский поезд.
   def create_train_pass
-    message = ['Введите номер поезда:(3 буквы/цыфры,дефис(+/-),2 буквы/цыфры)']
+    message = ['Введите номер поезда: Пример(12345; 123-AA; ccc-99; 1af-0a)']
     name = data_input(message).first
 
     return unless name != '' && !dublicate_name?(@trains, name)
 
     @trains << PassengerTrain.new(name)
-    puts "Поезд с номером #{name} успешно создан."
-  rescue StandardError
-    puts 'Не правильный формат номера поезда! Повторите ввод! (123-DU; 12345)'
+    info_train_created
+  rescue StandardError => e
+    error_message(e)
     retry
   end
 
   # Метод create_train_cargo может создавать грузовой поезд.
   def create_train_cargo
-    message = ['Введите номер поезда:']
+    message = ['Введите номер поезда: Пример(12345; 123-AA; ccc-99; 1af-0a)']
     name = data_input(message).first
 
     return unless name != '' && !dublicate_name?(@trains, name)
 
     @trains << CargoTrain.new(name)
-    puts "Поезд с номером #{name} успешно создан."
-  rescue StandardError
-    puts 'Не правильный формат номера поезда! Повторите ввод! (123-AA; 12345)'
+    info_train_created
+  rescue StandardError => e
+    error_message(e)
     retry
   end
 
