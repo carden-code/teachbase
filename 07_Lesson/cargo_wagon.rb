@@ -4,18 +4,18 @@
 # Имеет тип при создании экземпляра (cargow - грузовой вагон).
 # Может возвращать тип (type).
 class CargoWagon < Wagon
-  # Метод volume возвращает оставшийся (доступный) объем.
   # Метод takes возвращает занятый объем.
-  attr_reader :volume, :takes
-  def initialize(volume)
-    super 'cargo'
-    @volume = volume
+  attr_reader :takes
+  def initialize(capacity)
+    super 'cargo', capacity
+    validate!
     @takes = 0
   end
 
   # Метод takes_volume "занимает объем" в вагоне.
-  def takes_volume(volume)
-    @volume -= volume
-    @takes += volume
+  def takes_volume(capacity)
+    return if @capacity <= 0 || @capacity < capacity
+    @capacity -= capacity
+    @takes += capacity
   end
 end
