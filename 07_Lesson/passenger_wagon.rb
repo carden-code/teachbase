@@ -4,18 +4,17 @@
 # Имеет тип при создании экземпляра (passw - пасажирский вагон).
 # Может возвращать тип (type).
 class PassengerWagon < Wagon
-  # Метод seat возвращает колличество свободных мест.
   # Метод occupied возвращает кол-во занятых мест в вагоне.
-  attr_reader :seat, :occupied
-  def initialize(seat)
-    super 'pass'
-    @seat = seat
+  attr_reader :occupied
+  def initialize(capacity)
+    super 'pass', capacity
     @occupied = 0
   end
 
   # Метод take_seat "занимает места" в вагоне (по одному за раз).
   def take_seat
-    @seat -= 1
+    return if @capacity <= 0
+    @capacity -= 1
     @occupied += 1
   end
 end
