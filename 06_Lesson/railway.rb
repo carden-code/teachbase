@@ -110,8 +110,8 @@ class Railway
   end
 
   # Метод info_train_created выводит сообщение.
-  def info_train_created
-    puts 'Поезд успешно создан.'
+  def info_created
+    puts 'Успешное создание.'
   end
 
   # Метод error_message выводит аргумент.
@@ -208,15 +208,27 @@ class Railway
     @stations[index]
   end
 
+  def choose_first_station
+    puts 'Выберете начальную станцию для маршрута:'
+  end
+
+  def choose_last_station
+    puts 'Выберете конечную станцию для маршрута:'
+  end
+
   # Метод create_route может создавать маршрут из двух выбранных станций.
   def create_route
     return if @stations.size < 2
 
-    puts 'Выберете начальную станцию для маршрута:'
+    choose_first_station
     first = selected_station_route
-    puts 'Выберете конечную станцию для маршрута:'
+    choose_last_station
     last = selected_station_route
-    @routes << Route.new(first, last) if first != last
+    @routes << Route.new(first, last)
+    info_created
+  rescue StandardError => e
+    error_message(e)
+    retry
   end
 
   # Метод selected_route может выбирать из списка маршрут.
