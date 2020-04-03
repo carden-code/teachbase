@@ -118,10 +118,8 @@ class Railway
 
     @trains << PassengerTrain.new(name)
     puts "Поезд с номером #{name} успешно создан."
-    sleep 2
   rescue StandardError
     puts 'Не правильный формат номера поезда! Повторите ввод! (123-DU; 12345)'
-    sleep 2
     retry
   end
 
@@ -134,10 +132,8 @@ class Railway
 
     @trains << CargoTrain.new(name)
     puts "Поезд с номером #{name} успешно создан."
-    sleep 2
   rescue StandardError
     puts 'Не правильный формат номера поезда! Повторите ввод! (123-AA; 12345)'
-    sleep 2
     retry
   end
 
