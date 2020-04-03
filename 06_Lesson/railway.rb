@@ -111,12 +111,18 @@ class Railway
 
   # Метод create_train_pass может создавать пассажирский поезд.
   def create_train_pass
-    message = ['Введите номер поезда:']
+    message = ['Введите номер поезда:(3 буквы/цыфры,дефис(+/-),2 буквы/цыфры)']
     name = data_input(message).first
 
     return unless name != '' && !dublicate_name?(@trains, name)
 
     @trains << PassengerTrain.new(name)
+    puts "Поезд с номером #{name} успешно создан."
+    sleep 2
+  rescue StandardError
+    puts 'Не правильный формат номера поезда! Повторите ввод! (123-DU; 12345)'
+    sleep 2
+    retry
   end
 
   # Метод create_train_cargo может создавать грузовой поезд.
@@ -127,6 +133,12 @@ class Railway
     return unless name != '' && !dublicate_name?(@trains, name)
 
     @trains << CargoTrain.new(name)
+    puts "Поезд с номером #{name} успешно создан."
+    sleep 2
+  rescue StandardError
+    puts 'Не правильный формат номера поезда! Повторите ввод! (123-AA; 12345)'
+    sleep 2
+    retry
   end
 
   # Метод create_wagon_pass может создавать пассажирский вагон.
