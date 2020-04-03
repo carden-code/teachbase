@@ -23,6 +23,7 @@ class Train
   # Описание находится в модуле.
   include InstanceCounter
 
+  # Константа NUMBER_FORMAT - содержит шаблон(регулярное выражение).
   NUMBER_FORMAT = /^[a-z\d]{3}-*[a-z\d]{2}$/i
   # @@trains содержит всё созданные на данный момент объекты класса Train.
   @@trains = {}
