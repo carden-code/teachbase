@@ -104,9 +104,13 @@ class Railway
     message = ['Введите название станции:']
     name = data_input(message).first
 
-    return unless name != '' && !dublicate_name?(@stations, name)
+    return if dublicate_name?(@stations, name)
 
     @stations << Station.new(name)
+    info_created
+  rescue StandardError => e
+    error_message(e)
+    retry
   end
 
   # Метод info_train_created выводит сообщение.
@@ -127,7 +131,7 @@ class Railway
     return unless name != '' && !dublicate_name?(@trains, name)
 
     @trains << PassengerTrain.new(name)
-    info_train_created
+    info_created
   rescue StandardError => e
     error_message(e)
     retry
