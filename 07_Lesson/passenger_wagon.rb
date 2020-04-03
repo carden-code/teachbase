@@ -5,7 +5,8 @@
 # Может возвращать тип (type).
 class PassengerWagon < Wagon
   # Метод seat возвращает колличество свободных мест.
-  attr_reader :seat
+  # Метод occupied возвращает кол-во занятых мест в вагоне.
+  attr_reader :seat, :occupied
   def initialize(seat)
     super 'pass'
     @seat = seat
@@ -16,10 +17,5 @@ class PassengerWagon < Wagon
   def take_seat
     @seat -= 1
     @occupied += 1
-  end
-
-  # Метод number_occupied_seats возвращает кол-во занятых мест в вагоне
-  def number_occupied_seats
-    @occupied
   end
 end
