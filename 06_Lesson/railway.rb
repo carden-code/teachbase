@@ -243,24 +243,40 @@ class Railway
     @routes[index]
   end
 
+  def message_number_route_add_station
+    puts 'Введите номер маршрута в который хотите добавить станцию:'
+  end
+
+  def message_name_station
+    puts 'Введите название станции:'
+  end
+
   # Метод add_station может добавлять промежуточную станцию в маршрут.
   def add_station
     return if @routes.size.zero? || @stations.size < 3
-    puts 'Введите номер маршрута в который хотите добавить станцию:'
+    message_number_route_add_station
     route = selected_route
 
-    puts 'Введите название станции:'
+    message_name_station
     route.midway(selected_station_route)
+  end
+
+  def message_number_route_delete_station
+    puts 'Введите номер маршрута из которого нужно удалить станцию:'
+  end
+
+  def message_number_station_delete
+    puts 'Введите номер станции которую хотите удалить из маршрута:'
   end
 
   # Метод delete_midway может удалять промежуточную станцию.
   def delete_midway
     return if @routes.size.zero? || @stations.size < 3
 
-    puts 'Введите номер маршрута из которого нужно удалить станцию:'
+    message_number_route_delete_station
     route = selected_route
 
-    puts 'Введите номер станции которую хотите удалить из маршрута:'
+    message_number_station_delete
     station = selected_station_route
 
     return if station == (route.stations.first && route.stations.last)
@@ -268,28 +284,44 @@ class Railway
     route.delete_midway(station)
   end
 
+  def message_number_add_route
+    puts 'Введите номер поезда для которого нужно назначить маршрут:'
+  end
+
+  def message_number_route_train
+    puts 'Введите номер маршрута который хотите назначить поезду:'
+  end
+
   # Метод add_route_train может назначать маршрут поезду.
   def add_route_train
     return if @trains.size.zero? || @routes.size.zero?
 
-    puts 'Введите номер поезда для которого нужно назначить маршрут:'
+    message_number_add_route
     train = choose_a_train
-    puts 'Введите номер маршрута который хотите назначить поезду:'
+    message_number_route_train
     route = selected_route
     train.route(route)
+  end
+
+  def message_number_train_move_forwards
+    puts 'Введите номер поезда который нужно переместить на станцию вперед:'
   end
 
   # Метод move_forwards может перемещать поезд вперед на одну станцию.
   def move_forwards
     return if @trains.size.zero?
-    puts 'Введите номер поезда который нужно переместить на станцию вперед:'
+    message_number_train_move_forwards
     choose_a_train.move_forwards
+  end
+
+  def message_number_train_move_backwards
+    puts 'Введите номер поезда который нужно переместить на станцию назад:'
   end
 
   # Метод move_backwards может перемещать поезд назад на одну станцию.
   def move_backwards
     return if @trains.size.zero?
-    puts 'Введите номер поезда который нужно переместить на станцию назад:'
+    message_number_train_move_backwards
     choose_a_train.move_backwards
   end
 
@@ -297,11 +329,15 @@ class Railway
   def list_stations
     @stations.each_with_index { |elem, index| puts "#{index + 1}.#{elem.name}" }
   end
+  
+  def message_number_station_list_trains
+    puts 'Введите номер станции на которой хотите посмотреть список поездов.'
+  end
 
   # Метод list_trains_station может выводить список поездов на станции.
   def list_trains_station
     return if @stations.size.zero?
-    puts 'Введите номер станции на которой хотите посмотреть список поездов.'
+    message_number_station_list_trains
     station = selected_station_route
     puts "Список поездов на станции #{station.name}: #{station.trains}"
   end
