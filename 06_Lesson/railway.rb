@@ -208,10 +208,12 @@ class Railway
     @stations[index]
   end
 
+  # Метод choose_first_station выводит сообщение.
   def choose_first_station
     puts 'Выберете начальную станцию для маршрута:'
   end
 
+  # Метод choose_last_station выводит сообщение.
   def choose_last_station
     puts 'Выберете конечную станцию для маршрута:'
   end
