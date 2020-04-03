@@ -243,10 +243,12 @@ class Railway
     @routes[index]
   end
 
+  # Метод message_number_route_add_station выводит сообщение.
   def message_number_route_add_station
     puts 'Введите номер маршрута в который хотите добавить станцию:'
   end
 
+  # Метод message_name_station_trains выводит сообщение.
   def message_name_station
     puts 'Введите название станции:'
   end
@@ -261,10 +263,12 @@ class Railway
     route.midway(selected_station_route)
   end
 
+  # Метод message_number_route_delete_station выводит сообщение.
   def message_number_route_delete_station
     puts 'Введите номер маршрута из которого нужно удалить станцию:'
   end
 
+ # Метод message_number_station_delete выводит сообщение.
   def message_number_station_delete
     puts 'Введите номер станции которую хотите удалить из маршрута:'
   end
@@ -284,10 +288,12 @@ class Railway
     route.delete_midway(station)
   end
 
+  # Метод message_number_add_route выводит сообщение.
   def message_number_add_route
     puts 'Введите номер поезда для которого нужно назначить маршрут:'
   end
 
+  # Метод message_number_route_train выводит сообщение.
   def message_number_route_train
     puts 'Введите номер маршрута который хотите назначить поезду:'
   end
@@ -303,6 +309,7 @@ class Railway
     train.route(route)
   end
 
+  # Метод message_number_train_move_forwards выводит сообщение.
   def message_number_train_move_forwards
     puts 'Введите номер поезда который нужно переместить на станцию вперед:'
   end
@@ -314,6 +321,7 @@ class Railway
     choose_a_train.move_forwards
   end
 
+  # Метод message_number_train_move_backwards выводит сообщение.
   def message_number_train_move_backwards
     puts 'Введите номер поезда который нужно переместить на станцию назад:'
   end
@@ -329,7 +337,8 @@ class Railway
   def list_stations
     @stations.each_with_index { |elem, index| puts "#{index + 1}.#{elem.name}" }
   end
-  
+
+  # Метод message_number_station_list_trains выводит сообщение.
   def message_number_station_list_trains
     puts 'Введите номер станции на которой хотите посмотреть список поездов.'
   end
