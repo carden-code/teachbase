@@ -26,6 +26,7 @@ class Station
   def initialize(name)
     @@all_stations << self
     @name = name
+    validate!
     @trains = []
     register_instance
   end
@@ -48,5 +49,21 @@ class Station
   # поезд удаляется из списка поездов(@trains), находящихся на станции).
   def delete(train)
     @trains.delete(train)
+  end
+
+  # Метод valid? проверяет валидность объекта.
+  def valid?
+    validate!
+    true
+  rescue StandardError
+    false
+  end
+
+  private
+
+  # Приватный метод validate! выбрасывает исключение
+  # если есть несоответствие условию.
+  def validate!
+    raise 'Ошибка! Отсутствует название станции.' if @name.nil? || @name.empty?
   end
 end
