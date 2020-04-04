@@ -128,7 +128,7 @@ class Railway
     message = ['Введите номер поезда: Пример(12345; 123-AA; ccc-99; 1af-0a)']
     name = data_input(message).first
 
-    return unless name != '' && !dublicate_name?(@trains, name)
+    return if dublicate_name?(@trains, name)
 
     @trains << PassengerTrain.new(name)
     info_created
@@ -142,7 +142,7 @@ class Railway
     message = ['Введите номер поезда: Пример(12345; 123-AA; ccc-99; 1af-0a)']
     name = data_input(message).first
 
-    return unless name != '' && !dublicate_name?(@trains, name)
+    return if dublicate_name?(@trains, name)
 
     @trains << CargoTrain.new(name)
     info_created
