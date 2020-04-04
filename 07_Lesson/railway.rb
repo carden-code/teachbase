@@ -169,6 +169,7 @@ class Railway
     name = data_input(message).first
 
     @wagons << CargoWagon.new(name)
+    info_created
   rescue StandardError => e
     error_message(e)
     retry
