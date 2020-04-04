@@ -145,7 +145,7 @@ class Railway
     return unless name != '' && !dublicate_name?(@trains, name)
 
     @trains << CargoTrain.new(name)
-    info_train_created
+    info_created
   rescue StandardError => e
     error_message(e)
     retry
@@ -153,12 +153,25 @@ class Railway
 
   # Метод create_wagon_pass может создавать пассажирский вагон.
   def create_wagon_pass
-    @wagons << PassengerWagon.new
+    message = ['Введите количество мест в вагоне:']
+    name = data_input(message).first
+
+    @wagons << PassengerWagon.new(name)
+    info_created
+  rescue StandardError => e
+    error_message(e)
+    retry
   end
 
   # Метод create_wagon_cargo может создавать грузовой вагон.
   def create_wagon_cargo
-    @wagons << CargoWagon.new
+    message = ['Введите объем грузового вагона:']
+    name = data_input(message).first
+
+    @wagons << CargoWagon.new(name)
+  rescue StandardError => e
+    error_message(e)
+    retry
   end
 
   # Метод list_wagons может выводить список вагонов.
