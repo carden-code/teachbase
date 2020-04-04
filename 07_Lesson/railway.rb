@@ -178,10 +178,22 @@ class Railway
     retry
   end
 
-  #
+  # Метод message_list_wagons_train выводит сообщение.
+  def message_list_wagons_train
+    puts 'Выберете поезд для просмотра вагонов:'
+  end
+
+  # Метод list_wagons_train выводит список вагонов у поезда и
+  # показывает тип вагона, вместимость и сколько места занято.
   def list_wagons_train
-    puts 'Выберете поезд для просмотра вагонов'
-    choose_a_train.list_wagons { |wagon| puts "Номер:, Тип:#{wagon.type} Вместимость: #{wagon.capacity}" }
+    message_list_wagons_train
+    train = choose_a_train
+    train.list_wagons do |wagon, index|
+      puts "Номер вагона: #{index + 1},
+      Тип: #{wagon.type}
+      Вместимость: #{wagon.capacity},
+      Занято: #{wagon.occupied}"
+    end
   end
 
   # Метод list_wagons может выводить список вагонов.
@@ -215,7 +227,7 @@ class Railway
 
   # Метод detach_wagon отцепляет вагон от поезда и добавляет в @wagons.
   def detach_wagon
-    return if @trains.size.zero? || @wagons.size.zero?
+    return if @trains.size.zero?
 
     train = choose_a_train
 
