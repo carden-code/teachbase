@@ -10,7 +10,7 @@ class Wagon
   # Метод capacity возвращает доступную вместимость.
   attr_reader :type, :capacity
   def initialize(type, capacity)
-    @capacity = capacity
+    @capacity = capacity.to_i
     @type = type
     validate!
   end
@@ -29,6 +29,6 @@ class Wagon
   # если есть несоответствие условию.
   def validate!
     raise 'Ошибка! Тип не указан!' if @type.nil? || @type.empty?
-    raise 'Ошибка! Вместимость должна быть больше 0' unless @capacity.positive?
+    raise 'Ошибка! Вместимость должна быть больше 0!' unless @capacity.positive?
   end
 end
