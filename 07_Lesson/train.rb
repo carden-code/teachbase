@@ -187,6 +187,6 @@ class Train
   # Приватный метод validate! выбрасывает исключение
   # если есть несоответствие условию.
   def validate!
-    raise 'Ошибка! Не правильный формат номера!' if name !~ NUMBER_FORMAT
+    raise 'Ошибка! Не правильный формат номера!' if name !~ NUMBER_FORMAT 
   end
 end
