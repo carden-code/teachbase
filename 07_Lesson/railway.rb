@@ -39,6 +39,7 @@ class Railway
                 ' 15 - Посмотреть список станций.',
                 ' 16 - Посмотреть список поездов на станции.',
                 ' 17 - Посмотреть список вагонов у поезда.',
+                ' 18 - Наполнить вагон.',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -84,6 +85,8 @@ class Railway
       list_trains_station
     when '17'
       list_wagons_train
+    when '18'
+      take_the_place_wagon
     else
       puts 'Повторите ввод.'
     end
@@ -176,6 +179,20 @@ class Railway
   rescue StandardError => e
     error_message(e)
     retry
+  end
+
+  # Метод take_the_place_wagon может занимать место или объем в вагоне.
+  def take_the_place_wagon
+    train = choose_a_train
+    train.wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    message = ['Выбрать вагон: ']
+    index = data_input(message).first.to_i - 1
+    if train.type == 'pass'
+      train.wagons[index].take_seat
+    elsif train.type == 'cargo'
+      puts "Свободный объем: #{train.wagons[index].capacity}. Введите объем:"
+      train.wagons[index].takes_volume(gets.chomp.to_i)
+    end
   end
 
   # Метод message_list_wagons_train выводит сообщение.
