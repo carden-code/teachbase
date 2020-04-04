@@ -1,5 +1,4 @@
 require_relative 'module_company'
-require_relative 'instance_counter'
 
 # Класс Wagon (Вагон):
 # Имеет тип (указывается при создании экземпляра)
