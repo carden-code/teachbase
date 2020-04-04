@@ -55,7 +55,7 @@ class Train
   # Метод list_wagons принимает блок и проходит по всем вагонам поезда,
   # передавая каждый объект вагона в блок.
   def list_wagons
-    wagons.each { |wagon| yield(wagon) }
+    wagons.each_with_index { |wagon, index| yield(wagon, index) }
   end
 
   # Метод valid? проверяет валидность объекта.
