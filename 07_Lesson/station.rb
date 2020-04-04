@@ -28,6 +28,7 @@ class Station
     @name = name
     validate!
     @trains = []
+    # Метод register_instance - описание в модуле InstanceCounter.
     register_instance
   end
 
@@ -37,6 +38,12 @@ class Station
   # происходит добавление в массив @trains полученного параметра (Объект train).
   def arrive(train)
     @trains << train unless trains.include?(train)
+  end
+
+  # Метод list_trains принимает блок и проходит по всем поездам на станции,
+  # передавая каждый поезд в блок.
+  def list_trains
+    trains.each { |train| yield(train) }
   end
 
   # Метод return_type может возвращать список поездов на станции по типу:
