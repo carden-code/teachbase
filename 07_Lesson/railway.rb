@@ -38,6 +38,7 @@ class Railway
                 ' 14 - Переместить поезд по маршруту назад.',
                 ' 15 - Посмотреть список станций.',
                 ' 16 - Посмотреть список поездов на станции.',
+                ' 17 - Посмотреть список вагонов у поезда.',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -81,6 +82,8 @@ class Railway
       list_stations
     when '16'
       list_trains_station
+    when '17'
+      list_wagons_train
     else
       puts 'Повторите ввод.'
     end
@@ -173,6 +176,12 @@ class Railway
   rescue StandardError => e
     error_message(e)
     retry
+  end
+
+  #
+  def list_wagons_train
+    puts 'Выберете поезд для просмотра вагонов'
+    choose_a_train.list_wagons { |wagon| puts "Номер:, Тип:#{wagon.type} Вместимость: #{wagon.capacity}" }
   end
 
   # Метод list_wagons может выводить список вагонов.
@@ -286,7 +295,7 @@ class Railway
     puts 'Введите номер маршрута из которого нужно удалить станцию:'
   end
 
- # Метод message_number_station_delete выводит сообщение.
+  # Метод message_number_station_delete выводит сообщение.
   def message_number_station_delete
     puts 'Введите номер станции которую хотите удалить из маршрута:'
   end
@@ -366,6 +375,8 @@ class Railway
     return if @stations.size.zero?
     message_number_station_list_trains
     station = selected_station_route
-    puts "Список поездов на станции #{station.name}: #{station.trains}"
+    station.list_trains do |train|
+      puts "Номер:#{train.name},Тип:#{train.type},Вагонов:#{train.wagons.size}"
+    end
   end
 end
