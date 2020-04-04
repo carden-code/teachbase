@@ -121,7 +121,7 @@ class Railway
 
   # Метод info_train_created выводит сообщение.
   def info_created
-    puts 'Успешное создание.'
+    puts 'Успешно!'
   end
 
   # Метод error_message выводит аргумент.
@@ -179,38 +179,6 @@ class Railway
   rescue StandardError => e
     error_message(e)
     retry
-  end
-
-  # Метод take_the_place_wagon может занимать место или объем в вагоне.
-  def take_the_place_wagon
-    train = choose_a_train
-    train.wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
-    message = ['Выбрать вагон: ']
-    index = data_input(message).first.to_i - 1
-    if train.type == 'pass'
-      train.wagons[index].take_seat
-    elsif train.type == 'cargo'
-      puts "Свободный объем: #{train.wagons[index].capacity}. Введите объем:"
-      train.wagons[index].takes_volume(gets.chomp.to_i)
-    end
-  end
-
-  # Метод message_list_wagons_train выводит сообщение.
-  def message_list_wagons_train
-    puts 'Выберете поезд для просмотра вагонов:'
-  end
-
-  # Метод list_wagons_train выводит список вагонов у поезда и
-  # показывает тип вагона, вместимость и сколько места занято.
-  def list_wagons_train
-    message_list_wagons_train
-    train = choose_a_train
-    train.list_wagons do |wagon, index|
-      puts "Номер вагона: #{index + 1},
-      Тип: #{wagon.type}
-      Вместимость: #{wagon.capacity},
-      Занято: #{wagon.occupied}"
-    end
   end
 
   # Метод list_wagons может выводить список вагонов.
@@ -394,6 +362,44 @@ class Railway
     @stations.each_with_index { |elem, index| puts "#{index + 1}.#{elem.name}" }
   end
 
+  # Метод take_the_place_wagon может занимать место или объем в вагоне.
+  def take_the_place_wagon
+    return if @trains.size.zero?
+
+    train = choose_a_train
+    train.wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    message = ['Выбрать вагон: ']
+    index = data_input(message).first.to_i - 1
+
+    if train.type == 'pass'
+      train.wagons[index].take_seat
+    elsif train.type == 'cargo'
+      puts "Свободный объем: #{train.wagons[index].capacity}. Введите объем:"
+      train.wagons[index].takes_volume(gets.chomp.to_i)
+    end
+  end
+
+  # Метод message_list_wagons_train выводит сообщение.
+  def message_list_wagons_train
+    puts 'Выберете поезд для просмотра вагонов:'
+  end
+
+  # Метод list_wagons_train выводит список вагонов у поезда и
+  # показывает тип вагона, вместимость и сколько места занято.
+  def list_wagons_train
+    return if @trains.size.zero?
+
+    message_list_wagons_train
+
+    train = choose_a_train
+    train.list_wagons do |wagon, index|
+      puts "Номер вагона: #{index + 1},
+      Тип: #{wagon.type}
+      Вместимость: #{wagon.capacity},
+      Занято: #{wagon.occupied}"
+    end
+  end
+
   # Метод message_number_station_list_trains выводит сообщение.
   def message_number_station_list_trains
     puts 'Введите номер станции на которой хотите посмотреть список поездов.'
@@ -403,6 +409,7 @@ class Railway
   def list_trains_station
     return if @stations.size.zero?
     message_number_station_list_trains
+
     station = selected_station_route
     station.list_trains do |train|
       puts "Номер:#{train.name},Тип:#{train.type},Вагонов:#{train.wagons.size}"
