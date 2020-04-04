@@ -52,6 +52,12 @@ class Train
     register_instance
   end
 
+  # Метод list_wagons принимает блок и проходит по всем вагонам поезда,
+  # передавая каждый объект вагона в блок.
+  def list_wagons
+    wagons.each { |wagon| yield(wagon) }
+  end
+
   # Метод valid? проверяет валидность объекта.
   def valid?
     validate!
