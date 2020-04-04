@@ -6,8 +6,10 @@ require_relative 'station'
 require_relative 'railway'
 require_relative 'cargo_train'
 require_relative 'cargo_wagon'
+require_relative 'module_company'
 require_relative 'passenger_train'
 require_relative 'passenger_wagon'
+require_relative 'instance_counter'
 
 BORDERLINE = '-' * 50
 NEWLINE = "\n" * 2
