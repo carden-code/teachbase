@@ -63,7 +63,6 @@ class Railway
   # Метод selected принимает параметр из пользовательского ввода
   # и исполняет соответствующий метод.
   def selected(menu_item)
-    puts "Вы выбрали: #{menu_item}" if menu_item != ''
     send HASH[menu_item]
   rescue StandardError
     message_re_enter
@@ -342,6 +341,11 @@ class Railway
     @stations.each_with_index { |elem, index| puts "#{index + 1}.#{elem.name}" }
   end
 
+  # Метод message_volume выводит сообщение.
+  def message_volume
+    puts 'Введите число (объем) на который хотите занять вагон:'
+  end
+
   # Метод take_the_place_wagon может занимать место или объем в вагоне.
   def take_the_place_wagon
     return if @trains.size.zero?
@@ -354,7 +358,7 @@ class Railway
     if train.type == 'pass'
       train.wagons[index].take_seat
     elsif train.type == 'cargo'
-      puts "Свободный объем: #{train.wagons[index].capacity}. Введите объем:"
+      message_volume
       train.wagons[index].takes_volume(gets.chomp.to_i)
     end
   end
