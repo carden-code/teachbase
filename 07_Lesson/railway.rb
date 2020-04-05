@@ -280,6 +280,7 @@ class Railway
   # Метод add_station может добавлять промежуточную станцию в маршрут.
   def add_station
     return if @routes.size.zero? || @stations.size < 3
+    
     message_number_route_add_station
     route = selected_route
 
@@ -341,6 +342,7 @@ class Railway
   # Метод move_forwards может перемещать поезд вперед на одну станцию.
   def move_forwards
     return if @trains.size.zero?
+
     message_number_train_move_forwards
     choose_a_train.move_forwards
   end
@@ -353,6 +355,7 @@ class Railway
   # Метод move_backwards может перемещать поезд назад на одну станцию.
   def move_backwards
     return if @trains.size.zero?
+
     message_number_train_move_backwards
     choose_a_train.move_backwards
   end
@@ -408,6 +411,7 @@ class Railway
   # Метод list_trains_station может выводить список поездов на станции.
   def list_trains_station
     return if @stations.size.zero?
+
     message_number_station_list_trains
 
     station = selected_station_route
