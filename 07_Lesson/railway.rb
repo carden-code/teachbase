@@ -280,7 +280,7 @@ class Railway
   # Метод add_station может добавлять промежуточную станцию в маршрут.
   def add_station
     return if @routes.size.zero? || @stations.size < 3
-    
+
     message_number_route_add_station
     route = selected_route
 
