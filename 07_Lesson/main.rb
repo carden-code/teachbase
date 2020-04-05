@@ -30,7 +30,7 @@ loop do
   railway.menu_items
 
   menu_item = gets.chomp
-  break if menu_item == '0'
+  break unless menu_item != '0'
 
   railway.selected(menu_item)
 end
