@@ -9,12 +9,12 @@ class Wagon
   # метод type возвращает type объекта.
   # Метод capacity возвращает доступную вместимость.
   # Метод occupied возвращает кол-во занятого места в вагоне.
-  attr_reader :type, :capacity, :occupied
+  attr_reader :type, :capacity, :free_capacity
   def initialize(type, capacity)
     @capacity = capacity.to_i
     @type = type
     validate!
-    @occupied = 0
+    @free_capacity = @capacity
   end
 
   # Метод valid? проверяет валидность объекта.
@@ -23,6 +23,10 @@ class Wagon
     true
   rescue StandardError
     false
+  end
+
+  def loaded_capacity
+    @capacity - @free_capacity
   end
 
   protected
