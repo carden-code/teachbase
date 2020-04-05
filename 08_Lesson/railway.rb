@@ -64,7 +64,7 @@ class Railway
   # и исполняет соответствующий метод.
   def selected(menu_item)
     send HASH[menu_item]
-  rescue StandardError
+  rescue TypeError
     message_re_enter
   end
 
