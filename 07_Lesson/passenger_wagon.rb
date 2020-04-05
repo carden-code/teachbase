@@ -11,6 +11,7 @@ class PassengerWagon < Wagon
   # Метод take_seat "занимает места" в вагоне (по одному за раз).
   def take_seat
     return if @capacity.zero?
+
     @capacity -= 1
     @occupied += 1
   end
