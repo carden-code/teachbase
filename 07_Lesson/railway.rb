@@ -9,6 +9,16 @@
 # Перемещать поезд по маршруту вперед и назад
 # Просматривать список станций и список поездов на станции
 class Railway
+  HASH = { '1' => :create_station, '2' => :create_train_pass,
+           '3' => :create_train_cargo, '4' => :create_wagon_pass,
+           '5' => :create_wagon_cargo, '6' => :list_wagons,
+           '7' => :attach_wagon, '8' => :detach_wagon, '9' => :create_route,
+           '10' => :add_station, '11' => :delete_midway,
+           '12' => :add_route_train, '13' => :move_forwards,
+           '14' => :move_backwards, '15' => :list_stations,
+           '16' => :ist_trains_station, '17' => :list_wagons_train,
+           '18' => :take_the_place_wagon }
+
   attr_reader :routes, :trains, :wagons, :stations
   def initialize
     @routes = []
@@ -45,51 +55,18 @@ class Railway
     messages.each { |item| puts item }
   end
 
+  # Метод message_re_enter выводит сообщение.
+  def message_re_enter
+    puts 'Повторите ввод!'
+  end
+
   # Метод selected принимает параметр из пользовательского ввода
   # и исполняет соответствующий метод.
   def selected(menu_item)
-    puts "Your choice: #{menu_item}" if menu_item != ''
-
-    case menu_item
-    when '1'
-      create_station
-    when '2'
-      create_train_pass
-    when '3'
-      create_train_cargo
-    when '4'
-      create_wagon_pass
-    when '5'
-      create_wagon_cargo
-    when '6'
-      list_wagons
-    when '7'
-      attach_wagon
-    when '8'
-      detach_wagon
-    when '9'
-      create_route
-    when '10'
-      add_station
-    when '11'
-      delete_midway
-    when '12'
-      add_route_train
-    when '13'
-      move_forwards
-    when '14'
-      move_backwards
-    when '15'
-      list_stations
-    when '16'
-      list_trains_station
-    when '17'
-      list_wagons_train
-    when '18'
-      take_the_place_wagon
-    else
-      puts 'Повторите ввод.'
-    end
+    puts "Вы выбрали: #{menu_item}" if menu_item != ''
+    send HASH[menu_item]
+  rescue StandardError
+    message_re_enter
   end
 
   # Метод data_input принимает параметр печатает его
@@ -364,6 +341,8 @@ class Railway
   def list_stations
     @stations.each_with_index { |elem, index| puts "#{index + 1}.#{elem.name}" }
   end
+
+
 
   # Метод take_the_place_wagon может занимать место или объем в вагоне.
   def take_the_place_wagon
