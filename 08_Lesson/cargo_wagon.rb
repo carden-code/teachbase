@@ -10,7 +10,7 @@ class CargoWagon < Wagon
 
   # Метод takes_volume "занимает объем" в вагоне.
   def takes_volume(capacity)
-    return if capacity <= 0 || capacity > @capacity
+    return unless capacity.positive? && capacity < @free_capacity
 
     @free_capacity -= capacity
   end
