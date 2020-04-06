@@ -17,7 +17,7 @@ class Railway
            '12' => :add_route_train, '13' => :move_forwards,
            '14' => :move_backwards, '15' => :list_stations,
            '16' => :ist_trains_station, '17' => :list_wagons_train,
-           '18' => :take_the_place_wagon }
+           '18' => :take_the_place_wagon }.freeze
 
   attr_reader :routes, :trains, :wagons, :stations
   def initialize
@@ -27,6 +27,7 @@ class Railway
     @stations = []
   end
 
+  # rubocop:disable Metrics/MethodLength
   # Метод menu_items выводит элементы массива,
   # которые являются пользовательским меню.
   def menu_items
@@ -54,6 +55,7 @@ class Railway
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
   end
+  # rubocop:enable Metrics/MethodLength
 
   # Метод message_re_enter выводит сообщение.
   def message_re_enter
