@@ -1,5 +1,6 @@
 require_relative 'instance_counter'
 require_relative 'module_company'
+require_relative 'module_validation'
 
 # Класс Train (Поезд):
 # Имеет номер (произвольная строка) и тип (грузовой, пассажирский)
@@ -18,6 +19,7 @@ require_relative 'module_company'
 # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class Train
+  include Validation
   # Описание находится в модуле.
   include Company
   # Описание находится в модуле.
@@ -44,7 +46,9 @@ class Train
   def initialize(name, type)
     @@trains[name] = self
     @name = name.to_s
-    validate!
+    validate :name, :presence
+    validate :name, :format, /^[a-z\d]{3}-*[a-z\d]{2}$/i
+    validate :name, :type, String
     @type = type
     @wagons = []
     @current_speed = 0
@@ -58,13 +62,13 @@ class Train
     wagons.each_with_index { |wagon, index| yield(wagon, index) }
   end
 
-  # Метод valid? проверяет валидность объекта.
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
-  end
+  # # Метод valid? проверяет валидность объекта.
+  # def valid?
+  #   validate!
+  #   true
+  # rescue StandardError
+  #   false
+  # end
 
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
   # за операцию) В качестве параметра принимает объекты класса (PassengerWagon и
@@ -183,11 +187,11 @@ class Train
     @route.stations[current_index - 1]
   end
 
-  private
-
-  # Приватный метод validate! выбрасывает исключение
-  # если есть несоответствие условию.
-  def validate!
-    raise 'Ошибка! Не правильный формат номера!' if name !~ NUMBER_FORMAT
-  end
+  # private
+  #
+  # # Приватный метод validate! выбрасывает исключение
+  # # если есть несоответствие условию.
+  # def validate!
+  #   raise 'Ошибка! Не правильный формат номера!' if name !~ NUMBER_FORMAT
+  # end
 end
