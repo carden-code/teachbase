@@ -16,7 +16,7 @@ class Railway
            '10' => :add_station, '11' => :delete_midway,
            '12' => :add_route_train, '13' => :move_forwards,
            '14' => :move_backwards, '15' => :list_stations,
-           '16' => :ist_trains_station, '17' => :list_wagons_train,
+           '16' => :list_trains_station, '17' => :list_wagons_train,
            '18' => :take_the_place_wagon }.freeze
 
   attr_reader :routes, :trains, :wagons, :stations
