@@ -1,6 +1,7 @@
 require_relative 'instance_counter'
 require_relative 'module_company'
 require_relative 'module_validation'
+require 'pry'
 
 # Класс Train (Поезд):
 # Имеет номер (произвольная строка) и тип (грузовой, пассажирский)
@@ -19,18 +20,17 @@ require_relative 'module_validation'
 # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class Train
-  include Validation
   # Описание находится в модуле.
   include Company
-  # Описание находится в модуле.
+  # Описание находиoaтся в модуле.
   include InstanceCounter
+  # Описание находиoaтся в модуле.
+  include Validation
 
-  # Константа NUMBER_FORMAT - содержит шаблон(регулярное выражение).
-  NUMBER_FORMAT = /^[a-z\d]{3}-*[a-z\d]{2}$/i
   # @@trains содержит всё созданные на данный момент объекты класса Train.
   @@trains = {}
 
-  # Метод класса find, принимает номер поезда (указанный при его создании)
+  # Метод кла/сса find, принимает номер поезда (указанный при его создании)
   # и возвращает объект поезда по номеру или nil,
   # если поезд с таким номером не найден.
   def self.find(name)
@@ -43,15 +43,19 @@ class Train
   # Метод current_station может возвращать текущую станцию.
   # Метод current_speed может возвращать текущую скорость.
   attr_reader :name, :type, :wagons, :current_station, :current_speed
+
+  validate :name, :type, String
+  validate :name, :presence
+  validate :name, :format, /^[a-z\d]{3}-*[a-z\d]{2}$/i # 'XXX-XX or XXXXX'
+
   def initialize(name, type)
-    @@trains[name] = self
     @name = name.to_s
-    validate :name, :presence
-    validate :name, :format, /^[a-z\d]{3}-*[a-z\d]{2}$/i
-    validate :name, :type, String
     @type = type
+    validate!
+
     @wagons = []
     @current_speed = 0
+    @@trains[name] = self
     # Метод register_instance модуля InstanceCounter (Описание в модуле).
     register_instance
   end
@@ -61,14 +65,6 @@ class Train
   def list_wagons
     wagons.each_with_index { |wagon, index| yield(wagon, index) }
   end
-
-  # # Метод valid? проверяет валидность объекта.
-  # def valid?
-  #   validate!
-  #   true
-  # rescue StandardError
-  #   false
-  # end
 
   # Метод attach_wagon может прицеплять вагоны (по одному вагону
   # за операцию) В качестве параметра принимает объекты класса (PassengerWagon и
@@ -186,12 +182,4 @@ class Train
     # Возвращает предыдущую станцию маршрута.
     @route.stations[current_index - 1]
   end
-
-  # private
-  #
-  # # Приватный метод validate! выбрасывает исключение
-  # # если есть несоответствие условию.
-  # def validate!
-  #   raise 'Ошибка! Не правильный формат номера!' if name !~ NUMBER_FORMAT
-  # end
 end
