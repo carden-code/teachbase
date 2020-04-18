@@ -12,6 +12,7 @@ module Validation
     attr_reader :checks
 
     def validate(attr, kind, *params)
+
       @checks ||= {}
       @checks[attr] ||= []
       @checks[attr] << { kind: kind, params: params }
@@ -24,13 +25,22 @@ module Validation
       validate!
       true
     rescue StandardError
+
       false
     end
 
     private
 
+    def time_now
+      Time.now.min
+    end
+
+    def validate_time(name, value, _parms)
+      raise "#{name} - #{value} Можно создать только в чётные минуты!!!'" if time_now.odd?
+    end
+
     def validate_presence(name, value, _params)
-      raise "'#{name}' is nil or empty!" if value.nil? || value == ''
+      raise "'#{name}' is nil or empty!" if value.nil? || value.eql?('')
     end
 
     def validate_type(name, value, params)
@@ -53,50 +63,15 @@ module Validation
       end
     end
 
-    def validate!
+    def validate
       self.class.checks.each do |attr_name, attr_validations|
         value = instance_variable_get("@#{attr_name}".to_sym)
+
         attr_validations.each do |attributes|
           send("validate_#{attributes[:kind]}", attr_name, value, attributes[:params])
         end
+
       end
     end
   end
 end
-
-
-
-
-# #
-# module Validation
-#   def self.included(base)
-#     base.extend ClassMethods
-#     base.send :include, InstanceMethods
-#   end
-#
-#   #
-#   module ClassMethods
-#     attr_reader :validatons
-#
-#     def validate(name, check, *args)
-#       @validations ||= []
-#       @validations << { name: name, check: check, args: args }
-#     end
-#   end
-#
-#   #
-#   module InstanceMethods
-#     def validate!
-#       self.class.instance_variable_get(:@validations).each do |validation|
-#         name = validation[:name]
-#         argument = validation[:args].first
-#         value = instance_variable_get("@#{name}".to_sym)
-#         send "validate_#{validation[:check]}".to_sym, name, value, argument
-#       end
-#     end
-#
-#     def validate_presence(name, value, _arg)
-#       raise "#{name} Не может быть пустой!" if value.nil? || value.eql?('')
-#     end
-#   end
-# end
