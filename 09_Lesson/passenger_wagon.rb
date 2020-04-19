@@ -4,7 +4,6 @@
 # Имеет тип при создании экземпляра.
 # Может возвращать тип (type).
 class PassengerWagon < Wagon
-
   validate :capacity, :range
 
   def initialize(capacity)
