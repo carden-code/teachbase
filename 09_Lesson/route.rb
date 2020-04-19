@@ -37,20 +37,4 @@ class Route
   def list_stations
     @stations.each { |item| puts "#{item.name}, #{item}" }
   end
-
-  # Метод valid? проверяет валидность объекта.
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
-  end
-
-  private
-
-  # Приватный метод validate! выбрасывает исключение
-  # если есть несоответствие условию.
-  def validate!
-    raise 'Станции одинаковые!' if @stations.first == @stations.last
-  end
 end
