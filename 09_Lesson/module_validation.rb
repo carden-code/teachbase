@@ -12,7 +12,6 @@ module Validation
     attr_reader :checks
 
     def validate(attr, kind, *params)
-
       @checks ||= {}
       @checks[attr] ||= []
       @checks[attr] << { kind: kind, params: params }
@@ -25,7 +24,6 @@ module Validation
       validate!
       true
     rescue StandardError
-
       false
     end
 
@@ -35,12 +33,16 @@ module Validation
       Time.now.min
     end
 
-    def validate_time(name, value, _parms)
+    def validate_time(name, value, _params)
       raise "#{name} - #{value} Можно создать только в чётные минуты!!!'" if time_now.odd?
     end
 
     def validate_presence(name, value, _params)
-      raise "'#{name}' is nil or empty!" if value.nil? || value.eql?('')
+      raise "'#{name}' nil или пустая строка!" if value.nil? || value.eql?('')
+    end
+
+    def validate_capitalize(name, value, _params)
+      raise "#{name} Введите с большой буквы!" unless value == value.capitalize
     end
 
     def validate_type(name, value, params)
@@ -48,7 +50,7 @@ module Validation
     end
 
     def validate_format(name, value, params)
-      raise "'#{name}' have wrong format '#{params[1]}'" if value !~ params[0]
+      raise "'#{name}' Неверный формат! '#{params[1]}'" if value !~ params[0]
     end
 
     def validate_range(name, value, _params)
@@ -59,18 +61,17 @@ module Validation
 
     def validate_doubling(name, value, _params)
       self.class.class_variable_get(:@@all_stations).each do |station|
-        raise "'#{name}' is already exists! Re-enter." if value == station.name
+        raise "'#{name} ' Уже существует! Введите повторно!" if value == station.name
       end
     end
 
-    def validate
+    def validate!
       self.class.checks.each do |attr_name, attr_validations|
         value = instance_variable_get("@#{attr_name}".to_sym)
 
         attr_validations.each do |attributes|
           send("validate_#{attributes[:kind]}", attr_name, value, attributes[:params])
         end
-
       end
     end
   end
