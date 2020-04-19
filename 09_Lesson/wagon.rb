@@ -8,6 +8,8 @@ require_relative 'module_validation'
 class Wagon
   # Подключение модуля Company.
   include Company
+  # Подключение модуля Company.
+  include Accessor
   # Описание находиoaтся в модуле.
   include Validation
 
@@ -15,6 +17,11 @@ class Wagon
   # Метод capacity возвращает доступную вместимость.
   # Метод occupied возвращает кол-во занятого места в вагоне.
   attr_reader :type, :capacity, :free_capacity
+
+  attr_accessor_with_history :color
+
+  strong_attr_accessor :class, Integer
+
   def initialize(type, capacity)
     @capacity = capacity.to_i
     @type = type
