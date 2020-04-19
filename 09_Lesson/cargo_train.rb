@@ -16,6 +16,12 @@
 # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class CargoTrain < Train
+
+  validate :name, :type, String
+  validate :name, :presence
+  validate :name, :format, /^[a-z\d]{3}-*[a-z\d]{2}$/i
+  validate :name, :time
+
   def initialize(name)
     super name, 'cargo'
   end
