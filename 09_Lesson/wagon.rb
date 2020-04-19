@@ -7,9 +7,9 @@ require_relative 'module_validation'
 # Может возвращать тип
 class Wagon
   # Подключение модуля Company.
-  include Company
-  # Подключение модуля Company.
   include Accessor
+  # Подключение модуля Company.
+  include Company
   # Описание находиoaтся в модуле.
   include Validation
 
@@ -20,7 +20,7 @@ class Wagon
 
   attr_accessor_with_history :color
 
-  strong_attr_accessor :class, Integer
+  strong_attr_accessor :carriage, Integer
 
   def initialize(type, capacity)
     @capacity = capacity.to_i
