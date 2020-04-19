@@ -1,4 +1,5 @@
 require_relative 'instance_counter'
+require_relative 'module_validation'
 
 # Класс Station (Станция):
 #  Имеет название, которое указывается при ее создании.
@@ -11,6 +12,8 @@ require_relative 'instance_counter'
 class Station
   # Подключение модуля InstanceCounter.
   include InstanceCounter
+  # Описание находиoaтся в модуле.
+  include Validation
 
   @@all_stations = []
 
@@ -19,14 +22,20 @@ class Station
     @@all_stations
   end
 
+
+
   # Метод trains может возвращать список всех поездов на станции, находящиеся в
   # текущий момент.
   # Метод name может возвращать название станции
   attr_reader :trains, :name
+
+  validate :name, :presence
+  validate :name, :doubling
+  validate :name, :capitalize
   def initialize(name)
-    @@all_stations << self
     @name = name
     validate!
+    @@all_stations << self
     @trains = []
     # Метод register_instance - описание в модуле InstanceCounter.
     register_instance
@@ -56,21 +65,5 @@ class Station
   # поезд удаляется из списка поездов(@trains), находящихся на станции).
   def delete(train)
     @trains.delete(train)
-  end
-
-  # Метод valid? проверяет валидность объекта.
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
-  end
-
-  private
-
-  # Приватный метод validate! выбрасывает исключение
-  # если есть несоответствие условию.
-  def validate!
-    raise 'Ошибка! Отсутствует название станции.' if @name.nil? || @name.empty?
   end
 end
