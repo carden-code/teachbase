@@ -1,4 +1,5 @@
 require_relative 'instance_counter'
+require_relative 'module_accessors'
 require_relative 'module_validation'
 
 # Класс Station (Станция):

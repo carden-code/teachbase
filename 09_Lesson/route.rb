@@ -1,4 +1,5 @@
 require_relative 'instance_counter'
+require_relative 'module_accessors'
 
 # Класс Route (Маршрут):
 # Имеет начальную и конечную станцию, а также список промежуточных станций.

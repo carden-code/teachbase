@@ -1,4 +1,5 @@
 require_relative 'module_company'
+require_relative 'module_accessors'
 require_relative 'module_validation'
 
 # Класс Wagon (Вагон):

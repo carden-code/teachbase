@@ -1,5 +1,6 @@
 require_relative 'instance_counter'
 require_relative 'module_company'
+require_relative 'module_accessors'
 require_relative 'module_validation'
 
 # Класс Train (Поезд):
@@ -19,6 +20,8 @@ require_relative 'module_validation'
 # Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # Может возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class Train
+  # Описание находится в модуле.
+  include Accessor
   # Описание находится в модуле.
   include Company
   # Описание находиoaтся в модуле.
