@@ -8,6 +8,7 @@ class CargoWagon < Wagon
 
   def initialize(capacity)
     super 'cargo', capacity
+    validate!
   end
 
   # Метод takes_volume "занимает объем" в вагоне.
