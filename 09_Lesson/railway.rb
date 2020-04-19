@@ -17,7 +17,7 @@ class Railway
            '12' => :add_route_train, '13' => :move_forwards,
            '14' => :move_backwards, '15' => :list_stations,
            '16' => :list_trains_station, '17' => :list_wagons_train,
-           '18' => :take_the_place_wagon }.freeze
+           '18' => :take_the_place_wagon, '19' => :paint_the_wagon }.freeze
 
   attr_reader :routes, :trains, :wagons, :stations
   def initialize
@@ -51,6 +51,9 @@ class Railway
                 ' 16 - Посмотреть список поездов на станции.',
                 ' 17 - Посмотреть список вагонов у поезда.',
                 ' 18 - Наполнить вагон.',
+                ' 19 - Покрасить вагон.',
+                ' 20 - Текущий цвет вагона.',
+                ' 21 - История перекраски вагона.',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -363,6 +366,20 @@ class Railway
       message_volume
       train.wagons[index].takes_volume(gets.chomp.to_i)
     end
+  end
+
+  def message_color
+    puts 'Введите цвет:'
+  end
+
+  def paint_the_wagon
+    train = choose_a_train
+    train.wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+    message = ['Выбрать вагон: ']
+    index = data_input(message).first.to_i - 1
+    message_color
+    color = gets.chomp
+    train.wagons[index].color = color
   end
 
   # Метод message_list_wagons_train выводит сообщение.
