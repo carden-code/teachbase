@@ -22,8 +22,6 @@ class Station
     @@all_stations
   end
 
-
-
   # Метод trains может возвращать список всех поездов на станции, находящиеся в
   # текущий момент.
   # Метод name может возвращать название станции
@@ -32,6 +30,7 @@ class Station
   validate :name, :presence
   validate :name, :doubling
   validate :name, :capitalize
+
   def initialize(name)
     @name = name
     validate!

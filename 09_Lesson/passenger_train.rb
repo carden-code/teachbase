@@ -20,7 +20,7 @@ class PassengerTrain < Train
   validate :name, :type, String
   validate :name, :presence
   validate :name, :format, /^[a-z\d]{3}-*[a-z\d]{2}$/i
-  validate :name, :time
+  # validate :name, :time
 
   def initialize(name)
     super name, 'pass'

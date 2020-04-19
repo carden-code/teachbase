@@ -29,13 +29,13 @@ module Validation
 
     private
 
-    def time_now
-      Time.now.min
-    end
-
-    def validate_time(name, value, _params)
-      raise "#{name} - #{value} Можно создать только в чётные минуты!!!'" if time_now.odd?
-    end
+    # def time_now
+    #   Time.now.min
+    # end
+    #
+    # def validate_time(name, value, _params)
+    #   raise "#{name} - #{value} Можно создать только в чётные минуты!!!'" if time_now.odd?
+    # end
 
     def validate_presence(name, value, _params)
       raise "'#{name}' nil или пустая строка!" if value.nil? || value.eql?('')
