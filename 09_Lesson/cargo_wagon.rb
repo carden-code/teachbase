@@ -4,6 +4,9 @@
 # Имеет тип при создании экземпляра.
 # Может возвращать тип (type).
 class CargoWagon < Wagon
+
+  validate :capacity, :range
+
   def initialize(capacity)
     super 'cargo', capacity
   end

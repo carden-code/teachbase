@@ -38,7 +38,7 @@ module Validation
     # end
 
     def validate_presence(name, value, _params)
-      raise "'#{name}' nil или пустая строка!" if value.nil? || value.eql?('')
+      raise "'#{name}'Пустая строка! Повторите!" if value.nil? || value.eql?('')
     end
 
     def validate_capitalize(name, value, _params)
@@ -54,14 +54,12 @@ module Validation
     end
 
     def validate_range(name, value, _params)
-      value = value.to_i
-      raise "'#{name}' is not a digit! Re-enter a digital value!" if value.zero?
-      raise "Out of '#{name}', please try again!" if value.negative?
+      raise "'#{name}' - должна быть положительным числом!" unless value.positive? && value.to_i
     end
 
     def validate_doubling(name, value, _params)
       self.class.class_variable_get(:@@all_stations).each do |station|
-        raise "'#{name} ' Уже существует! Введите повторно!" if value == station.name
+        raise "'#{name}' Уже существует! Введите повторно!" if value == station.name
       end
     end
 

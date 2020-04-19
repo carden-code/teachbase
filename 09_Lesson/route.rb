@@ -14,7 +14,6 @@ class Route
   attr_reader :stations
   def initialize(first, last)
     @stations = [first, last]
-    validate!
     register_instance
   end
 

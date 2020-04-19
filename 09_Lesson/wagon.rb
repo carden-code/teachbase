@@ -1,4 +1,5 @@
 require_relative 'module_company'
+require_relative 'module_validation'
 
 # Класс Wagon (Вагон):
 # Имеет тип (указывается при создании экземпляра)
@@ -6,6 +7,9 @@ require_relative 'module_company'
 class Wagon
   # Подключение модуля Company.
   include Company
+  # Описание находиoaтся в модуле.
+  include Validation
+
   # метод type возвращает type объекта.
   # Метод capacity возвращает доступную вместимость.
   # Метод occupied возвращает кол-во занятого места в вагоне.
@@ -17,24 +21,7 @@ class Wagon
     @free_capacity = @capacity
   end
 
-  # Метод valid? проверяет валидность объекта.
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
-  end
-
   def loaded_capacity
     @capacity - @free_capacity
-  end
-
-  protected
-
-  # Приватный метод validate! выбрасывает исключение
-  # если есть несоответствие условию.
-  def validate!
-    raise 'Ошибка! Тип не указан!' if @type.nil? || @type.empty?
-    raise 'Ошибка! Вместимость должна быть больше 0!' unless @capacity.positive?
   end
 end
