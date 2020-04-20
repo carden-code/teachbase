@@ -20,8 +20,6 @@ class Wagon
 
   attr_accessor_with_history :color
 
-  strong_attr_accessor :carriage, Integer
-
   def initialize(type, capacity)
     @capacity = capacity.to_i
     @type = type
