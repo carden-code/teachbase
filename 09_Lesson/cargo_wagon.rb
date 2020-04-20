@@ -4,6 +4,8 @@
 # Имеет тип при создании экземпляра.
 # Может возвращать тип (type).
 class CargoWagon < Wagon
+  strong_attr_accessor :carriage_type, String
+
   validate :capacity, :range
 
   def initialize(capacity)
