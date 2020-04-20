@@ -18,7 +18,8 @@ class Railway
            '14' => :move_backwards, '15' => :list_stations,
            '16' => :list_trains_station, '17' => :list_wagons_train,
            '18' => :take_the_place_wagon, '19' => :paint_the_wagon,
-           '20' => :current_color_wagon, '21' => :history_colors_wagon }.freeze
+           '20' => :current_color_wagon, '21' => :history_colors_wagon,
+           '22' => :add_class_wagon }.freeze
 
   attr_reader :routes, :trains, :wagons, :stations
   def initialize
@@ -55,6 +56,7 @@ class Railway
                 ' 19 - Покрасить вагон.',
                 ' 20 - Текущий цвет вагона.',
                 ' 21 - История перекраски вагона.',
+                ' 22 - Классифицировать вагон',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -415,6 +417,35 @@ class Railway
     return unless @wagons.include? wagon
 
     puts "Исторя цветов вагона: #{wagon} - #{wagon.history_color}"
+  end
+
+  # Метод message_class_pass_wagon выводит сообщение.
+  def message_class_pass_wagon
+    puts "Введите класс вагона (1 - первый класс, 2 - второй или 3 - третий)"
+  end
+
+  # Метод message_class_cargo_wagon выводит сообщение.
+  def message_class_cargo_wagon
+    puts "Введите тип вагона (Открытый, Крытый, Платформа(для трансфпорта))"
+  end
+
+  # Метод add_class_wagon добавляет классификацию вагонов.
+  def add_class_wagon
+    return unless @wagons.size.positive?
+
+    wagon = choice_wagon
+
+    return unless @wagons.include? wagon
+
+    if wagon.type.eql? 'pass'
+      message_class_pass_wagon
+      classifier = gets.chomp.to_i
+      wagon.carriage_class = classifier
+    else
+      message_class_cargo_wagon
+      classifier = gets.chomp.to_s
+      wagon.carriage_type = classifier
+    end
   end
 
   # Метод message_list_wagons_train выводит сообщение.
