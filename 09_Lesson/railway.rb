@@ -17,7 +17,8 @@ class Railway
            '12' => :add_route_train, '13' => :move_forwards,
            '14' => :move_backwards, '15' => :list_stations,
            '16' => :list_trains_station, '17' => :list_wagons_train,
-           '18' => :take_the_place_wagon, '19' => :paint_the_wagon }.freeze
+           '18' => :take_the_place_wagon, '19' => :paint_the_wagon,
+           '20' => :current_color_wagon, '21' => :history_colors_wagon }.freeze
 
   attr_reader :routes, :trains, :wagons, :stations
   def initialize
@@ -368,18 +369,52 @@ class Railway
     end
   end
 
+  # Метод message_color выводит сообщение.
   def message_color
     puts 'Введите цвет:'
   end
 
-  def paint_the_wagon
-    train = choose_a_train
-    train.wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
+  # Метод choice_wagon выводит список вагонов и возвращает выбранный вагон.
+  def choice_wagon
+    @wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
     message = ['Выбрать вагон: ']
     index = data_input(message).first.to_i - 1
+    @wagons[index]
+  end
+
+  # Метод paint_the_wagon может покрасить вагон.
+  def paint_the_wagon
+    return if @wagons.size.zero?
+
+    wagon = choice_wagon
+
+    return unless @wagons.include? wagon
+
     message_color
     color = gets.chomp
-    train.wagons[index].color = color
+    wagon.color = color
+  end
+
+  # Метод current_color_wagon выводит текущий цвет вагона.
+  def current_color_wagon
+    return unless @wagons.size.positive?
+
+    wagon = choice_wagon
+
+    return unless @wagons.include? wagon
+
+    puts "Текущий цвет вагона: #{wagon} - #{wagon.color}"
+  end
+
+  # Метод history_colors_wagon выводит историю цветов вагона.
+  def history_colors_wagon
+    return unless @wagons.size.positive?
+
+    wagon = choice_wagon
+
+    return unless @wagons.include? wagon
+
+    puts "Исторя цветов вагона: #{wagon} - #{wagon.history_color}"
   end
 
   # Метод message_list_wagons_train выводит сообщение.
