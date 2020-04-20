@@ -436,6 +436,7 @@ class Railway
     wagon = choice_wagon
 
     return unless @wagons.include? wagon
+    return unless wagon.carriage_class.nil?
 
     if wagon.type.eql? 'pass'
       message_class_pass_wagon
