@@ -19,7 +19,9 @@ class Railway
            '16' => :list_trains_station, '17' => :list_wagons_train,
            '18' => :take_the_place_wagon, '19' => :paint_the_wagon,
            '20' => :current_color_wagon, '21' => :history_colors_wagon,
-           '22' => :add_class_wagon }.freeze
+           '22' => :add_class_wagon, '23' => :paint_the_train,
+           '24' => :current_color_train, '25' => :history_colors_train,
+           '26' => :add_engine_type }.freeze
 
   attr_reader :routes, :trains, :wagons, :stations
   def initialize
@@ -55,8 +57,12 @@ class Railway
                 ' 18 - Наполнить вагон.',
                 ' 19 - Покрасить вагон.',
                 ' 20 - Текущий цвет вагона.',
-                ' 21 - История перекраски вагона.',
-                ' 22 - Классифицировать вагон',
+                ' 21 - История изменения цвета вагона.',
+                ' 22 - Классифицировать вагон.',
+                ' 23 - Покрасить поезд.',
+                ' 24 - Текущий цвет поезда.',
+                ' 25 - История изменения цвета поезда.',
+                ' 26 - Указать тип двигателя поезда.',
                 BORDERLINE,
                 '  0 - Для выхода из программы.']
     messages.each { |item| puts item }
@@ -430,7 +436,7 @@ class Railway
     puts 'Выберите тип вагона: '
   end
 
-  # Метод add_class_wagon добавляет классификацию вагонов.
+  # Метод add_class_wagon добавляет классификацию вагона.
   def add_class_wagon
     return unless @wagons.size.positive?
 
@@ -439,6 +445,9 @@ class Railway
     return unless @wagons.include? wagon
 
     if wagon.type == 'pass'
+
+      return unless wagon.carriage_class.nil?
+
       message_class_pass_wagon
       classifier = gets.chomp.to_i
 
@@ -446,12 +455,64 @@ class Railway
 
       wagon.carriage_class = classifier
     else
+      return unless wagon.carriage_type.nil?
+
       message_class_cargo_wagon
       type = { '1' => 'Открытый', '2' => 'Крытый', '3' => 'Платформа' }
       type.each { |key, value| puts "Введите: #{key} -> #{value}" }
       classifier = type[gets.chomp.to_s]
       wagon.carriage_type = classifier
     end
+  end
+
+  # Метод paint_the_wagon может покрасить поезд.
+  def paint_the_train
+    return if @trains.size.zero?
+
+    train = choose_a_train
+
+    return unless @trains.include? train
+
+    message_color
+    colors = { '1' => 'Чёрный', '2' => 'Зелёный', '3' => 'Коричневый' }
+    colors.each { |key, value| puts "Введите: #{key} -> #{value}" }
+    train.color = colors[gets.chomp]
+  end
+
+  # Метод current_color_wagon выводит текущий цвет вагона.
+  def current_color_train
+    return unless @trains.size.positive?
+
+    train = choose_a_train
+
+    return unless @trains.include? train
+
+    puts "Текущий цвет поезда: #{train.name} - #{train.color}"
+  end
+
+  # Метод history_colors_wagon выводит историю цветов вагона.
+  def history_colors_train
+    return unless @trains.size.positive?
+
+    train = choose_a_train
+
+    return unless @trains.include? train
+
+    puts "Исторя цветов поезда: #{train.name} - #{train.color_history}"
+  end
+
+  # Метод add_engine_type определяет тип двигателя поезда.
+  def add_engine_type
+    return unless @trains.size.positive?
+
+    train = choose_a_train
+    return unless @trains.include? train
+
+    return unless train.engine_type.nil?
+
+    engine = { '1' => 'Паровой', '2' => 'Электро', '3' => 'Дизель' }
+    engine.each { |key, value| puts "Введите: #{key} -> #{value}" }
+    train.engine_type = engine[gets.chomp]
   end
 
   # Метод message_list_wagons_train выводит сообщение.
