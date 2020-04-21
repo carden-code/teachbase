@@ -234,12 +234,16 @@ class Railway
 
   # Метод create_route может создавать маршрут из двух выбранных станций.
   def create_route
-    return if @stations.size < 2
+    return unless @stations.size >= 2
 
     choose_first_station
     first = selected_station_route
+    return unless @stations.include? first
+
     choose_last_station
     last = selected_station_route
+    return unless @stations.include? last
+
     @routes << Route.new(first, last)
     info_created
   rescue StandardError => e
@@ -290,10 +294,11 @@ class Railway
 
   # Метод delete_midway может удалять промежуточную станцию.
   def delete_midway
-    return if @routes.size.zero? || @stations.size < 3
+    return unless @routes.size.positive? && @stations.size >= 3
 
     message_number_route_delete_station
     route = selected_route
+    return unless route.stations.size >= 3
 
     message_number_station_delete
     station = selected_station_route
@@ -315,7 +320,7 @@ class Railway
 
   # Метод add_route_train может назначать маршрут поезду.
   def add_route_train
-    return if @trains.size.zero? || @routes.size.zero?
+    return unless @trains.size.positive? || @routes.size.positive?
 
     message_number_add_route
     train = choose_a_train
@@ -331,7 +336,7 @@ class Railway
 
   # Метод move_forwards может перемещать поезд вперед на одну станцию.
   def move_forwards
-    return if @trains.size.zero?
+    return unless @trains.size.positive?
 
     message_number_train_move_forwards
     choose_a_train.move_forwards
@@ -344,7 +349,7 @@ class Railway
 
   # Метод move_backwards может перемещать поезд назад на одну станцию.
   def move_backwards
-    return if @trains.size.zero?
+    return unless @trains.size.positive?
 
     message_number_train_move_backwards
     choose_a_train.move_backwards
@@ -362,7 +367,7 @@ class Railway
 
   # Метод take_the_place_wagon может занимать место или объем в вагоне.
   def take_the_place_wagon
-    return if @trains.size.zero?
+    return unless @trains.size.positive?
 
     train = choose_a_train
     train.wagons.each_with_index { |elem, index| puts "#{index + 1}. #{elem}" }
@@ -392,7 +397,7 @@ class Railway
 
   # Метод paint_the_wagon может покрасить вагон.
   def paint_the_wagon
-    return if @wagons.size.zero?
+    return unless @wagons.size.positive?
 
     wagon = choice_wagon
     return unless @wagons.include? wagon
@@ -428,11 +433,6 @@ class Railway
     puts "Введите класс вагона ('1' - Первый класс, '2' - Второй, '3' - Третий)"
   end
 
-  # Метод message_class_cargo_wagon выводит сообщение.
-  def message_class_cargo_wagon
-    puts 'Выберите тип вагона: '
-  end
-
   # Метод add_class_wagon добавляет классификацию вагона.
   def add_class_wagon
     return unless @wagons.size.positive?
@@ -460,7 +460,7 @@ class Railway
 
   # Метод paint_the_wagon может покрасить поезд.
   def paint_the_train
-    return if @trains.size.zero?
+    return unless @trains.size.positive?
 
     train = choose_a_train
 
@@ -516,7 +516,7 @@ class Railway
   # Метод list_wagons_train выводит список вагонов у поезда и
   # показывает тип вагона, вместимость и сколько места занято.
   def list_wagons_train
-    return if @trains.size.zero?
+    return unless @trains.size.positive?
 
     message_list_wagons_train
 
@@ -536,7 +536,7 @@ class Railway
 
   # Метод list_trains_station может выводить список поездов на станции.
   def list_trains_station
-    return if @stations.size.zero?
+    return unless @stations.size.positive?
 
     message_number_station_list_trains
 
