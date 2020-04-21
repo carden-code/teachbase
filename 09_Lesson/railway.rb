@@ -373,7 +373,7 @@ class Railway
 
   # Метод message_color выводит сообщение.
   def message_color
-    puts 'Введите цвет:'
+    puts 'Выберите цвет:'
   end
 
   # Метод choice_wagon выводит список вагонов и возвращает выбранный вагон.
@@ -393,8 +393,9 @@ class Railway
     return unless @wagons.include? wagon
 
     message_color
-    color = gets.chomp
-    wagon.color = color
+    colors = { '1' => 'Чёрный', '2' => 'Зелёный', '3' => 'Коричневый' }
+    colors.each { |key, value| puts "Введите: #{key} -> #{value}" }
+    wagon.color = colors[gets.chomp]
   end
 
   # Метод current_color_wagon выводит текущий цвет вагона.
@@ -416,17 +417,17 @@ class Railway
 
     return unless @wagons.include? wagon
 
-    puts "Исторя цветов вагона: #{wagon} - #{wagon.history_color}"
+    puts "Исторя цветов вагона: #{wagon} - #{wagon.color_history}"
   end
 
   # Метод message_class_pass_wagon выводит сообщение.
   def message_class_pass_wagon
-    puts 'Введите класс вагона (1 - первый класс, 2 - второй или 3 - третий)'
+    puts "Введите класс вагона ('1' - Первый класс, '2' - Второй, '3' - Третий)"
   end
 
   # Метод message_class_cargo_wagon выводит сообщение.
   def message_class_cargo_wagon
-    puts 'Введите тип вагона (Открытый, Крытый, Платформа(для трансфпорта))'
+    puts 'Выберите тип вагона: '
   end
 
   # Метод add_class_wagon добавляет классификацию вагонов.
@@ -436,15 +437,19 @@ class Railway
     wagon = choice_wagon
 
     return unless @wagons.include? wagon
-    return unless wagon.carriage_class.nil?
 
-    if wagon.type.eql? 'pass'
+    if wagon.type == 'pass'
       message_class_pass_wagon
       classifier = gets.chomp.to_i
+
+      return unless classifier.positive? && classifier <= 3
+
       wagon.carriage_class = classifier
     else
       message_class_cargo_wagon
-      classifier = gets.chomp.to_s
+      type = { '1' => 'Открытый', '2' => 'Крытый', '3' => 'Платформа' }
+      type.each { |key, value| puts "Введите: #{key} -> #{value}" }
+      classifier = type[gets.chomp.to_s]
       wagon.carriage_type = classifier
     end
   end
