@@ -188,7 +188,7 @@ class Railway
 
   # Метод attach_wagon прицепляет вагон к поезду и удаляет из @wagons.
   def attach_wagon
-    return if @trains.size.zero? || @wagons.size.zero?
+    return unless @trains.size.positive? && @wagons.size.positive?
 
     train = choose_a_train
 
@@ -202,11 +202,11 @@ class Railway
 
   # Метод detach_wagon отцепляет вагон от поезда и добавляет в @wagons.
   def detach_wagon
-    return if @trains.size.zero?
+    return unless @trains.size.positive?
 
     train = choose_a_train
 
-    return if train.wagons.size.zero?
+    return unless train.wagons.size.positive?
 
     @wagons << train.detach_wagon
   end
