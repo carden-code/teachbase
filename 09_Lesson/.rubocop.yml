@@ -5,10 +5,16 @@ Metrics/ClassLength:
   Max: 400
 
 Metrics/MethodLength:
-  Max: 15
+  Max: 16
 
 Metrics/AbcSize:
   Max: 40
+
+Metrics/PerceivedComplexity:
+  Max: 10
+  
+Metrics/CyclomaticComplexity:
+  Max: 10
 
 Style/ClassVars:
   Enabled: false
