@@ -395,7 +395,6 @@ class Railway
     return if @wagons.size.zero?
 
     wagon = choice_wagon
-
     return unless @wagons.include? wagon
 
     message_color
@@ -409,7 +408,6 @@ class Railway
     return unless @wagons.size.positive?
 
     wagon = choice_wagon
-
     return unless @wagons.include? wagon
 
     puts "Текущий цвет вагона: #{wagon} - #{wagon.color}"
@@ -420,7 +418,6 @@ class Railway
     return unless @wagons.size.positive?
 
     wagon = choice_wagon
-
     return unless @wagons.include? wagon
 
     puts "Исторя цветов вагона: #{wagon} - #{wagon.color_history}"
@@ -441,25 +438,21 @@ class Railway
     return unless @wagons.size.positive?
 
     wagon = choice_wagon
-
     return unless @wagons.include? wagon
 
     if wagon.type == 'pass'
-
       return unless wagon.carriage_class.nil?
 
       message_class_pass_wagon
       classifier = gets.chomp.to_i
-
       return unless classifier.positive? && classifier <= 3
 
       wagon.carriage_class = classifier
     else
       return unless wagon.carriage_type.nil?
 
-      message_class_cargo_wagon
       type = { '1' => 'Открытый', '2' => 'Крытый', '3' => 'Платформа' }
-      type.each { |key, value| puts "Введите: #{key} -> #{value}" }
+      type.each { |key, value| puts "Выберите тип вагона: #{key} -> #{value}" }
       classifier = type[gets.chomp.to_s]
       wagon.carriage_type = classifier
     end
