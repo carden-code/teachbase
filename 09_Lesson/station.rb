@@ -27,9 +27,10 @@ class Station
   # Метод name может возвращать название станции
   attr_reader :trains, :name
 
+  validate :name, :doubling, :@@all_stations
   validate :name, :presence
-  validate :name, :doubling
   validate :name, :capitalize
+
 
   def initialize(name)
     @name = name
