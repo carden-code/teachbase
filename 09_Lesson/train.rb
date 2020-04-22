@@ -50,8 +50,6 @@ class Train
   validate :name, :presence
   validate :name, :format, /^[a-z\d]{3}-*[a-z\d]{2}$/i
 
-  attr_accessor_with_history :color
-
   strong_attr_accessor :engine_type, String
 
   def initialize(name, type)
