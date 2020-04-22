@@ -1,5 +1,5 @@
 require_relative 'instance_counter'
-require_relative 'module_validation'
+require_relative 'validation'
 
 # Класс Station (Станция):
 #  Имеет название, которое указывается при ее создании.

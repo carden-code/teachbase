@@ -1,7 +1,7 @@
 require_relative 'instance_counter'
 require_relative 'module_company'
 require_relative 'module_accessors'
-require_relative 'module_validation'
+require_relative 'validation'
 
 # Класс Train (Поезд):
 # Имеет номер (произвольная строка) и тип (грузовой, пассажирский)

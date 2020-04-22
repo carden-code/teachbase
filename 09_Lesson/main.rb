@@ -11,7 +11,7 @@ require_relative 'passenger_train'
 require_relative 'passenger_wagon'
 require_relative 'instance_counter'
 require_relative 'module_accessors'
-require_relative 'module_validation'
+require_relative 'validation'
 BORDERLINE = '-' * 50
 NEWLINE = "\n" * 2
 

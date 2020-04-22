@@ -1,6 +1,6 @@
 require_relative 'module_company'
 require_relative 'module_accessors'
-require_relative 'module_validation'
+require_relative 'validation'
 
 # Класс Wagon (Вагон):
 # Имеет тип (указывается при создании экземпляра)
