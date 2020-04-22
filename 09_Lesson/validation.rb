@@ -57,8 +57,8 @@ module Validation
       raise "'#{name}' - должна быть положительным числом!" unless value.positive? && value.to_i
     end
 
-    def validate_doubling(name, value, _params)
-      self.class.class_variable_get(:@@all_stations).each do |station|
+    def validate_doubling(name, value, params)
+      self.class.class_variable_get(params[0]).each do |station|
         raise "'#{name}' Уже существует! Введите повторно!" if value == station.name
       end
     end
