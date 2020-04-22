@@ -95,8 +95,6 @@ class Railway
     message = ['Введите название станции:']
     name = data_input(message).first
 
-    return if dublicate_name?(@stations, name)
-
     @stations << Station.new(name)
     info_created
   rescue StandardError => e
