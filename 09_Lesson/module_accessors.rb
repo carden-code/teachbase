@@ -28,7 +28,7 @@ module Accessor
           # history = значнию интсанс_гет или пустому массиву если значения нет.
           history = instance_variable_get("@#{name}_history") || []
           # В переменную "history" сохраняется значение переменной var_name.
-          history << instance_variable_get(var_name)
+          history << instance_variable_get(var_name) unless instance_variable_get(var_name).nil?
           # Этот метод присваивает значение переменной var_name.
           instance_variable_set(var_name, value)
           # Этот метод присваивает значение переменной var_history.
