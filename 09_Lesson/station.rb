@@ -31,7 +31,6 @@ class Station
   validate :name, :presence
   validate :name, :capitalize
 
-
   def initialize(name)
     @name = name
     validate!
