@@ -191,6 +191,7 @@ class Railway
 
     train.attach_wagon(suitable_wagon)
     @wagons.delete(suitable_wagon)
+    info_created
   end
 
   # Метод detach_wagon отцепляет вагон от поезда и добавляет в @wagons.
@@ -202,6 +203,7 @@ class Railway
     return unless train.wagons.size.positive?
 
     @wagons << train.detach_wagon
+    info_created
   end
 
   # Метод selected_station_route может выводить список станций
@@ -273,6 +275,7 @@ class Railway
 
     message_name_station
     route.midway(selected_station_route)
+    info_created
   end
 
   # Метод message_number_route_delete_station выводит сообщение.
@@ -299,27 +302,29 @@ class Railway
     return if station == (route.stations.first && route.stations.last)
 
     route.delete_midway(station)
+    info_created
   end
 
   # Метод message_number_add_route выводит сообщение.
   def message_number_add_route
-    puts 'Введите номер поезда для которого нужно назначить маршрут:'
+    puts 'Выберите поезд для которого нужно назначить маршрут:'
   end
 
   # Метод message_number_route_train выводит сообщение.
   def message_number_route_train
-    puts 'Введите номер маршрута который хотите назначить поезду:'
+    puts 'Выберите маршрут который хотите назначить поезду:'
   end
 
   # Метод add_route_train может назначать маршрут поезду.
   def add_route_train
-    return unless @trains.size.positive? || @routes.size.positive?
+    return unless @trains.size.positive? && @routes.size.positive?
 
     message_number_add_route
     train = choose_a_train
     message_number_route_train
     route = selected_route
     train.route(route)
+    info_created
   end
 
   # Метод message_number_train_move_forwards выводит сообщение.
@@ -333,6 +338,7 @@ class Railway
 
     message_number_train_move_forwards
     choose_a_train.move_forwards
+    info_created
   end
 
   # Метод message_number_train_move_backwards выводит сообщение.
@@ -346,6 +352,7 @@ class Railway
 
     message_number_train_move_backwards
     choose_a_train.move_backwards
+    info_created
   end
 
   # Метод list_stations может выводить список станций.
@@ -373,6 +380,7 @@ class Railway
       message_volume
       train.wagons[index].takes_volume(gets.chomp.to_i)
     end
+    info_created
   end
 
   # Метод message_color выводит сообщение.
@@ -399,6 +407,7 @@ class Railway
     colors = { '1' => 'Чёрный', '2' => 'Зелёный', '3' => 'Коричневый' }
     colors.each { |key, value| puts "Введите: #{key} -> #{value}" }
     wagon.color = colors[gets.chomp]
+    info_created
   end
 
   # Метод current_color_wagon выводит текущий цвет вагона.
@@ -449,6 +458,7 @@ class Railway
       classifier = type[gets.chomp.to_s]
       wagon.carriage_type = classifier
     end
+    info_created
   end
 
   # Метод add_engine_type определяет тип двигателя поезда.
@@ -463,6 +473,7 @@ class Railway
     engine = { '1' => 'Паровой', '2' => 'Электро', '3' => 'Дизель' }
     engine.each { |key, value| puts "Введите: #{key} -> #{value}" }
     train.engine_type = engine[gets.chomp]
+    info_created
   end
 
   # Метод message_list_wagons_train выводит сообщение.
